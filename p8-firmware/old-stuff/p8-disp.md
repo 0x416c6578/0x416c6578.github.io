@@ -1,5 +1,5 @@
 # Display
-## LCD
+## Writing Text To The Screen
 - Aaron Christophel used a rect based implementation for writing characters to the screen
   - This involved working through the font, writing rects (squares) everywhere there is a pixel
   - This was fast enough for most text displaying needs, however it was noticeably slow when writing a full screen of text
@@ -10,7 +10,7 @@
     - As an aside, writing a full 240\*240 rect to the display would take approximately (1/8000000\*16\*240\*240) seconds, or about 0.1 seconds
 - There are still further optimizations that could be made to this routine (and parameterising it for use with different fonts), however I am happy with the current implementation
 
-### Drawing A Character
+## Speeding It Up
 - ATCWatch's implementation was very inefficient in that it drew a rectangle for each pixel of the font
   - This meant the display RAM write window was moved FONT_WIDTH*FONT_HEIGHT times per character, so was quite slow  
 
@@ -66,8 +66,10 @@ void drawCharPixelToBuffer(int charColumn, int charRow, uint8_t pixelsPerPixel, 
 }
 ```
 - Writing a full page of size 2 font is as fast as clearing the display :)
-
+___
 ### Drawing Rectangle Outlines with Text
 
+- As part of the display driver, I implemented some helper functions which would draw unfilled rectangles to the display
+- I also added the functionality to put a character in the centre of that rectangle, so that you could have a sort of basic button
 <img src="../Images/rectOutline.png" alt=" " width=" 600" />
 <img src="../Images/charactersRect.png" alt=" " width=" 600" />
