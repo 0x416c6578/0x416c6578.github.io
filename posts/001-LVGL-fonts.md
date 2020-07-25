@@ -84,4 +84,25 @@ _____________
 
 ## LVGL Font Engine
 - So now that we know how LVGL fonts work, we must figure out how to implement them into `p8-firmware`
-- TODO: Finish this
+- To start off with, I implemented a very simple font viewer in c that allowed me to see any character of a font:
+```c
+void displayChar(char toWrite) {
+  int index = toWrite - 32;                                 //Get the offset relative to 0x20 (' ')
+  index = index + 1;                                        //Add 1 since id=0 is reserved
+  lv_font_fmt_txt_glyph_dsc_t charInfo = glyph_dsc[index];  //Get character info
+  //Start writing the character from the bounding box origin rather than the character origin
+  int byteNumber; //Current byte NUMBER of font
+  int byteOffset; //Current bit of the current byte
+  for (int y = 0; y < charInfo.box_h; y++) {
+    for (int x = 0; x < charInfo.box_w; x++) {
+      byteNumber = ((y * charInfo.box_w) + x) / 8;
+      byteOffset = ((y * charInfo.box_w) + x) % 8;
+      printf("%c ", ((font[charInfo.bitmap_index + byteNumber] << byteOffset) & 0x80) >> 7 ? '@' : '.'); //'@' if pixel there, else '.'
+    }
+    printf("\n"); //Move to next line
+  }
+}
+```
+- This code is a bit messy but it shows how you can get pixel data for any font
+  - This code will draw a character's bounding box only, meaning that the characters have variable widths and heights
+- This logic will of course be simplified and improved in `p8-firmware`
