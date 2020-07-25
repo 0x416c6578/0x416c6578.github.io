@@ -38,7 +38,7 @@ typedef struct {
 - The array looks like 
 ```c
 ...
-	{.bitmap_index = 0, .adv_w = 0, .box_h = 0, .box_w = 0, .ofs_x = 0, .ofs_y = 0}      /* id = 0 reserved */,
+    {.bitmap_index = 0, .adv_w = 0, .box_h = 0, .box_w = 0, .ofs_x = 0, .ofs_y = 0}      /* id = 0 reserved */,
     {.bitmap_index = 0, .adv_w = 128, .box_h = 0, .box_w = 0, .ofs_x = 0, .ofs_y = 0},   //Space
     {.bitmap_index = 0, .adv_w = 128, .box_h = 7, .box_w = 1, .ofs_x = 3, .ofs_y = -1},  //!
     {.bitmap_index = 1, .adv_w = 128, .box_h = 3, .box_w = 4, .ofs_x = 2, .ofs_y = 3},   //Backslash
@@ -65,7 +65,7 @@ ___
 ---
 ```
 - Data is read into the bounding box starting in the top-left and working down before accross
-- Another example is the pound (#), its data being 0x49, 0x2f, 0xd2, 0xfd, 0x24, 0x80, or 0b01001001|00101111|11010010|11111101|00100100|10(000000)
+- Another example is the pound (#), its data being 0x49, 0x2f, 0xd2, 0xfd, 0x24, 0x80, or 0b01001001\|00101111\|11010010\|11111101\|00100100\|10(000000)
 - This looks like:
 ```
 _____________
