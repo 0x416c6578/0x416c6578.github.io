@@ -1,2 +1,0 @@
-# `p8-firmware`
-
