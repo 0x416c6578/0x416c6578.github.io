@@ -71,5 +71,5 @@ ___
 
 - As part of the display driver, I implemented some helper functions which would draw unfilled rectangles to the display
 - I also added the functionality to put a character in the centre of that rectangle, so that you could have a sort of basic button
-<img src="../Images/rectOutline.png" alt=" " width=" 600" />
-<img src="../Images/charactersRect.png" alt=" " width=" 600" />
+<img src="../../Images/rectOutline.png" alt=" " width=" 600" />
+<img src="../../Images/charactersRect.png" alt=" " width=" 600" />
