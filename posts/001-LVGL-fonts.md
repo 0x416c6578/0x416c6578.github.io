@@ -82,6 +82,29 @@ _____________
   - So for example '#', the bounding box area is 7\*6=42, the next highest multiple of 8 is 48, which is 6\*8, meaning you should read indexes offset+0, offset+1,...,offset+5 of the bitmap array
   - This also means the last 6 bits of the last byte are unused
 
+## Bounding Box Offsets
+- Along with the bounding box width and height, there is also the bounding box's x and y offset inside the character window:
+```
+@---------------@
+|               |
+|...............|
+|   *------*    | Offset = (4,-1) 
+|   |      |    |
+|   |      |    |
+|   |      |    |
+|   *------*    |
+|               |
+|               |
+@---------------@
+```
+- So each character's bounding box (represented by the \*s) has an x and y offset inside the character box
+- To make life more difficult, the y offset is measured from the top of the text line, rather than the character to draw x,y position (represented by the dotted line)
+- Adding to the confusion, this offset is inverse to what you would think, with more negative values being a downwards push of the character bounding box
+- This means that logically, things like diacritics work as follows:
+  - For a 'ÿ', the bounding box y offset would be the negative of the height of the diacritics only, meaning that the top of the letter logically lines up with the top of the text line (NOT the character box (@s in the diagram))
+  - And so for 'y', the bounding box offset will be 0 since you want the top of the letter to line up with the top of other
+
+
 ## LVGL Font Engine
 - So now that we know how LVGL fonts work, we must figure out how to implement them into `p8-firmware`
 - To start off with, I implemented a very simple font viewer in c that allowed me to see any character of a font:
