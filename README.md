@@ -5,3 +5,5 @@
 ## Projects
 ### [p8-firmware](p8-firmware/p8-firmware.md)
 ### [~~sap-1~~](./README.md)
+## Links
+[Twitter](https://twitter.com/bootm_)  
