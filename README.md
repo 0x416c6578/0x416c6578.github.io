@@ -4,4 +4,4 @@
 [25.08.20 - XFCE4 Automatic Theme Switching](posts/003-Auto-Dark-Mode-XFCE.md)
 ## Projects
 ### [p8-firmware](p8-firmware/p8-firmware.md)
-### [~~sap-1~~](./README.md)
+### [sap-1](sap-1/overview.md)
