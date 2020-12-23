@@ -1,4 +1,5 @@
 <img src="../Images/sap1Finished.png" alt=" " width=""/>
+
 - This was a project I did for school
 - It was mostly based on the work of [Ben Eater](eater.net) and is amazing YouTube series on the work of A.P.Malvino in _Digital Computer Electronics_
 - All components were sourced off of Aliexpress over about 2 months, and the build process took about 4 months (delivery times could take up to a month)
