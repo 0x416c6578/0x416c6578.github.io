@@ -51,7 +51,7 @@ The data seemed to be repeating packets starting with `0xFA` which matched some 
 ## Debugging Woes
 As mentioned earlier, there is an SWD port exposed to the world next to the microcontroller. I wanted to try and get more information about, and potentially reverse engineer and patch the serial comms code, so dumping the flash was a necessity. Connecting it up to an ST-Link v2 clone, I tried interfacing with `openocd`. After an hour or so of debugging (and figuring out I had the connector orientation the wrong way round despite checking at least 5 times!), I finally got OpenOCD working, and I had a debug terminal open. For reference the command was:
 ```bash
-openocd -f /usr/share/openocd/scripts/interface/stlink.cfg -f /usr/share/openocd/scripts/target/stm32f1x.cfg`
+openocd -f /usr/share/openocd/scripts/interface/stlink.cfg -f /usr/share/openocd/scripts/target/stm32f1x.cfg
 # Then just telnet to localhost on port 4444
 ```
 I could halt the CPU, set breakpoints and so-forth, however for some reason I kept getting read errors when trying to read out the flash. I was 99% sure I was doing everything right, and after another hour or so of checking, I was 99.9% sure. I would get a `-4` return code and a `"Read error"` from OpenOCD, but there wasn't really any information online, and I also couldn't find much in a cursory look through the OpenOCD source. I then made the fatal mistake of trying to unlock the flash (even though it was already unlocked) to try and fix the weird read errors. This command worked fine, however I instantly knew I had f'd up when I saw the current draw dropped from 400mA to 1.8mA after a reset.
