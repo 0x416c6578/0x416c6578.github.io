@@ -5,14 +5,12 @@ The LDS-006 is a very cheap 360 degree Lidar module that you can buy on Aliexpre
 <figure>
 <img width="400" src="../Images/lidar.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
-The module
 </figcaption>
 </figure>
 
 <figure>
 <img width="400" src="../Images/lidarMotor.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
-The motor (missing the pulley)
 </figcaption>
 </figure>
 
@@ -26,7 +24,6 @@ The module is designed similarly to other Lidar modules, with the power being in
 <figure>
 <img width="600" src="../Images/lidarInternals.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
-Internals
 </figcaption>
 </figure>
 
@@ -37,7 +34,6 @@ There is an SWD debug port next to the microcontroller. The pinout is GND->SWCLK
 <figure>
 <img width="500" src="../Images/lidarSWD.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
-SWD port
 </figcaption>
 </figure>
 
@@ -47,7 +43,6 @@ After sussing out some of the internals, I decided to give it another try over s
 <figure>
 <img width="300" src="../Images/lidarData.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
-Data from the serial port
 </figcaption>
 </figure>
 
