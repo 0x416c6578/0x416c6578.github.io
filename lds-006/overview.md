@@ -28,7 +28,7 @@ The module has two distinct parts to it; first is the spinning assembly with las
 
 ## Spinning Assembly
 <figure>
-<img width="600" src="../Images/lidarSpinner.png" alt="" style="border:1px solid black;"/>
+<img width="300" src="../Images/lidarSpinner.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
@@ -39,7 +39,7 @@ Power is inductively coupled to the spinning part, and data is sent back via an 
 
 ## Controller Board and Motor Assembly
 <figure>
-<img width="600" src="../Images/lidarMainBoardZoomed.png" alt="" style="border:1px solid black;"/>
+<img width="300" src="../Images/lidarMainBoardZoomed.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
