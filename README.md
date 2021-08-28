@@ -15,6 +15,10 @@
 [Arduino EEPROM Dumper (TODO)](random-projects/eeprom-dumper.md)  
 - Code for Arduino based projects can be found [here](https://github.com/0x416c6578/arduino-projects)
 
-
 ## Other Stuff
 [XFCE Hacks and Tweaks](posts/004-Random-XFCE-Hacks.md)  
+
+___
+Questions or comments? Post an issue on:
+
+https://github.com/0x416c6578/0x416c6578.github.io
