@@ -19,6 +19,4 @@
 [XFCE Hacks and Tweaks](posts/004-Random-XFCE-Hacks.md)  
 
 ___
-Questions or comments? Post an issue on:
-
-https://github.com/0x416c6578/0x416c6578.github.io
+Questions or comments? Post an issue on the [repo](https://github.com/0x416c6578/0x416c6578.github.io) for these pages
