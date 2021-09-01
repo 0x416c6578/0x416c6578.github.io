@@ -38,7 +38,7 @@ There is an SWD debug port next to the microcontroller. The pinout is GND->SWCLK
 </figure>
 
 ## Data!
-After sussing out some of the internals, I decided to give it another try over serial. The serial setup is standard everything @ 115200 baud. After an hour or so of trying different settings, voltages, pullups and pulldowns etc, I had got nowhere. I tried spamming letters and symbols into my picocom prompt in frustration, and suddenly data started spewing out! It turns out it will start sending data upon receiving the character `$`. That was the only interaction I found you could do with the module. It would send back `!` upon receiving `$` but no amount of spamming (and `cat`ting `/dev/urandom` into it!) could cause any other behaviour. 
+After sussing out some of the internals, I decided to give it another try over serial. The serial setup is standard everything @ 115200 baud. After an hour or so of trying different settings, voltages, pullups and pulldowns etc, I had got nowhere. I tried spamming letters and symbols into my picocom prompt in frustration, and suddenly data started spewing out! It turns out it will start sending data upon receiving the character `$`. That was the only interaction I found you could do with the module. It would send back `!` upon receiving `$` but no amount of spamming (and `cat`ting `/dev/urandom` into it!) could cause any other behaviour.
 
 <figure>
 <img width="500" src="../Images/lidarData.png" alt="" style="border:1px solid black;"/>

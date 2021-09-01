@@ -1,3 +1,4 @@
+# 0x416c6578's Page
 ## Posts
 [25.07.20 - A Deep Dive into LVGL Fonts](posts/001-LVGL-fonts.md)  
 [21.08.20 - Various Snippets of Info From p8-firmware Sources](posts/002-P8-firmware-info.md)  
@@ -18,5 +19,7 @@
 ## Other Stuff
 [XFCE Hacks and Tweaks](posts/004-Random-XFCE-Hacks.md)  
 
+## About
+I'm 0x416c6578 (Alex in hexidecimal), I'm a CS student who enjoys embedded / electronics stuff. Some of my personal projects are documented here, although I have many different interests and projects that probably aren't here (yet).
 ___
 Questions or comments? Post an issue on the [repo](https://github.com/0x416c6578/0x416c6578.github.io) for these pages
