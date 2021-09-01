@@ -21,5 +21,7 @@
 
 ## About
 I'm 0x416c6578 (Alex in hexidecimal), I'm a CS student who enjoys embedded / electronics stuff. Some of my personal projects are documented here, although I have many different interests and projects that probably aren't here (yet).
+
 ___
+
 Questions or comments? Post an issue on the [repo](https://github.com/0x416c6578/0x416c6578.github.io) for these pages
