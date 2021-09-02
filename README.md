@@ -20,7 +20,7 @@
 [XFCE Hacks and Tweaks](posts/004-Random-XFCE-Hacks.md)  
 
 ## About
-I'm 0x416c6578 (Alex in hexidecimal), I'm a CS student who enjoys embedded / electronics stuff. Some of my personal projects are documented here, although I have many different interests and projects that probably aren't here (yet).
+I'm 0x416c6578 (Alex), I'm a CS student who enjoys embedded / electronics stuff. Some of my personal projects are documented here, although I have many different interests and projects that probably aren't here (yet).
 
 ___
 
