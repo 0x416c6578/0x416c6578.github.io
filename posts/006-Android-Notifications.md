@@ -88,7 +88,7 @@ You can see the settings is still locked (unable to change it), however the togg
 ___
 
 ### Links
-- https://cs.android.com/ - very nice tool to search quickly though the Android sources
-- https://developer.android.com/training/notify-user/channels - info about notification channels
-- https://cs.android.com/android/platform/superproject/+/master:frameworks/base/services/core/java/com/android/server/notification/NotificationManagerService.java and https://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/android/app/INotificationManager.aidl - files I found most useful to understand the internals of Android notifications
-- https://github.com/LineageOS/android_packages_apps_Messaging/blob/lineage-18.1/src/com/android/messaging/datamodel/BugleNotifications.java#L945 - offending line in `com.android.Messaging` that disabled heads up notifications
+- <https://cs.android.com/> - very nice tool to search quickly though the Android sources
+- <https://developer.android.com/training/notify-user/channels> - info about notification channels
+- <https://cs.android.com/android/platform/superproject/+/master:frameworks/base/services/core/java/com/android/server/notification/NotificationManagerService.java> and <https://cs.android.com/android/platform/superproject/+/master:frameworks/base/core/java/android/app/INotificationManager.aidl> - files I found most useful to understand the internals of Android notifications
+- <https://github.com/LineageOS/android_packages_apps_Messaging/blob/lineage-18.1/src/com/android/messaging/datamodel/BugleNotifications.java#L945> - offending line in `com.android.Messaging` that disabled heads up notifications
