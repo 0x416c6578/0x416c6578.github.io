@@ -6,23 +6,19 @@
 [25.08.21 - (Mis)adventures With the LDS-006 Lidar](posts/005-LDS-006-Hacking.md)  
 [03.09.21 - Fixing Android Messaging Heads Up Notifications](posts/006-Android-Notifications.md)  
 
-## Big Projects
+## Bigger Projects
 [p8-firmware](p8-firmware/p8-firmware.md)  
 [SAP-1](sap-1/overview.md)  
 [LDS-006 Lidar](lds-006/overview.md)  
 
-## Small Projects and Other Stuff
-[Arduino LED Strip Controller (TODO)](random-projects/led-strip-controller.md)  
-[ESP8266 Laser Turret (TODO)](random-projects/laser-turret.md)  
-[Arduino EEPROM Dumper (TODO)](random-projects/eeprom-dumper.md)  
+## Smaller Projects
+[Arduino LED Strip Controller](random-projects/led-strip-controller.md)  
+[ESP8266 Laser Turret](random-projects/laser-turret.md)  
+[Arduino EEPROM Dumper](random-projects/eeprom-dumper.md)  
 - Code for Arduino based projects can be found [here](https://github.com/0x416c6578/arduino-projects)
 
 ## Other Stuff
 [XFCE Hacks and Tweaks](posts/004-Random-XFCE-Hacks.md)  
 
 ## About
-I'm 0x416c6578 (Alex), I'm a CS student who enjoys embedded / electronics stuff. Some of my personal projects are documented here, although I have many different interests and projects that probably aren't here (yet).
-
-___
-
-Questions or comments? Post an issue on the [repo](https://github.com/0x416c6578/0x416c6578.github.io) for these pages
+I'm 0x416c6578 (Alex), I'm a CS student who enjoys embedded / electronics stuff. This blog is mainly a reference for me and anyone else who might be doing similar things. Questions or comments? Post an issue on the [repo](https://github.com/0x416c6578/0x416c6578.github.io) for these pages

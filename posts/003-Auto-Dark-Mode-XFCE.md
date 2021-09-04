@@ -30,4 +30,18 @@ The `DBUS_SESSION_BUS_ADDRESS` is needed because crontab scripts aren't run as a
 
 A problem with using `cron` is that the script won't update the theme if the device is powered off. This means that if you shutdown the laptop in dark mode, and turn it on after the cron trigger time, then it will be stuck in dark mode incorrectly. To fix this, the aforementioned script that checks the time and updates the theme is run at login so that the theme is switched if it is incorrect.
 
-The scripts are available [~~here~~]().
+___
+
+## Addendum 04.09.21
+I switched to using the `sunwait` program ([link](https://github.com/risacher/sunwait)) rather than hard coding times with `cron`. I also added a wrapper around Chromium to switch the webview dark mode preference based on the theme:
+
+```bash
+#!/usr/bin/env bash
+if [ $(cat ~/.config/THEME) == "dark" ]; then
+  chromium --flag-switches-begin --fingerprinting-canvas-image-data-noise --fingerprinting-canvas-measuretext-noise --fingerprinting-client-rects-noise --enable-features=WebContentsForceDark --flag-switches-end
+else
+  chromium --flag-switches-begin --fingerprinting-canvas-image-data-noise --fingerprinting-canvas-measuretext-noise --fingerprinting-client-rects-noise --flag-switches-end
+fi
+```
+
+For VSCode I use the [Sundial](https://marketplace.visualstudio.com/items?itemName=muuvmuuv.vscode-sundial) extension. Discord has GTK theme-based dark mode switching which thankfully works with [the GTK theme I use](https://github.com/shimmerproject/Greybird).
