@@ -32,5 +32,5 @@ CVE-2020-13468), however these seem very advanced (at least at the moment). I mi
 ___
 
 ### Links
-1. https://www.usenix.org/system/files/woot20-paper-obermaier.pdf - Paper on hardware exploits for stm32's and gd32's
-2. https://www.st.com/resource/en/application_note/dm00186528-proprietary-code-readout-protection-on-microcontrollers-of-the-stm32f4-series-stmicroelectronics.pdf - Info on flash protection on stm32's
+1. <https://www.usenix.org/system/files/woot20-paper-obermaier.pdf> - Paper on hardware exploits for stm32's and gd32's
+2. <https://www.st.com/resource/en/application_note/dm00186528-proprietary-code-readout-protection-on-microcontrollers-of-the-stm32f4-series-stmicroelectronics.pdf> - Info on flash protection on stm32's
