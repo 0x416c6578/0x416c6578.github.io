@@ -61,5 +61,3 @@ The thing was borked. I had cleared the flash in an attempt to unlock it (again 
 After more messing about, I realised I could actually read out all the data fine. It turns out it would randomly fail reading due to (perhaps) a bad connection via SWD, so my attempts to read the flash out before were just bad luck byzantine failures. Of course when I attempted to read the (now cleared) flash out, it eventually worked after about 20 attempts. So if I had just attempted to read the flash out a bunch of times __before__ wiping it, I would have had a successful dump.
 
 Now I am stuck with a fancy paperweight, a 32kb file of `0xff`s, and many regrets, until a new one arrives in about a months time and I can dump the flash from it and re-program the broken one...
-
-**More to come**

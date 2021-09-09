@@ -5,6 +5,7 @@
 [25.08.20 - XFCE4 Automatic Theme Switching](posts/003-Auto-Dark-Mode-XFCE.md)  
 [25.08.21 - (Mis)adventures With the LDS-006 Lidar](posts/005-LDS-006-Hacking.md)  
 [03.09.21 - Fixing Android Messaging Heads Up Notifications](posts/006-Android-Notifications.md)  
+[09.09.21 - Updates on the LDS-006 Lidar](posts/007-LDS-006-Is-Smelly.md)  
 
 ## Bigger Projects
 [p8-firmware](p8-firmware/p8-firmware.md)  
