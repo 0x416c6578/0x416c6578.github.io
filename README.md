@@ -6,6 +6,7 @@
 [25.08.21 - (Mis)adventures With the LDS-006 Lidar](posts/005-LDS-006-Hacking.md)  
 [03.09.21 - Fixing Android Messaging Heads Up Notifications](posts/006-Android-Notifications.md)  
 [09.09.21 - Updates on the LDS-006 Lidar](posts/007-LDS-006-Is-Smelly.md)  
+[10.09.21 - Messing With GD32F130F6P6](posts/008-GD32F130-Stuff.md)  
 
 ## Bigger Projects
 [p8-firmware](p8-firmware/p8-firmware.md)  
