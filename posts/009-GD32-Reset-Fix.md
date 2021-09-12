@@ -22,4 +22,18 @@ IT WORKS! - It turns out that the reset pin was the problem! After temporarily p
 As we can see the CPU now counts up indefinitely, and doesn't periodically reset. It turns out that it is connected via a resistor to pin 5 of the CPU (that pin is VDDA, from the datasheet: _"VSSA, VDDA range: 2.6 to 3.6 V, external analog power supplies for ADC, reset blocks,
 RCs and PLL. VDDA and VSSA must be connected to VDD and VSS, respectively."_). VDDA is indeed connected to VDD, the reset pin is connected through a resistor to VDDA. I think the resistor value is too high perhaps? Shorting out the resistor asserts enough of a voltage on the reset pin to stop the CPU resetting. The irony of the situation is I have had a comment in the bottom of `main.c` saying `TODO: Check reset pin` this whole time...
 
-I measured the resistor on the working LDS-006 and it read about 90k, which was the same as on my "development" LDS-006 board. Since bypassing that resistor seems to fix the reset problems, I decided just to desolder it and short the connections. Now that is the last teething problem I needed to fix, I can now start working on creating a new firmware for the device.
+I measured the resistor on the working LDS-006 and it read about 90k, which was the same as on my "development" LDS-006 board. I tried replacing it with a 10k resistor (pictured below with a grain of rice for scale), however the reset was still happening. Below is the logic analyzer trace for the `NRST` pin, we can see that it is for some reason pulled low periodically (causing the resets). But measuring the other side of the resistor (connected to `VCCA`), the trace is rock solid. As far as I can currently tell, `NRST` isn't connected to anything else, so I can't quite tell why it is being pulled low. I just decided to short over that resistor to properly keep that pin high.
+
+<figure>
+<img width="600" src="../Images/resetPin.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
+
+<figure>
+<img width="300" src="../Images/resistorReplacement.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
+
+Now the reset problem is fixed I can now hopefully move onto making a new firmware for the LDS-006.
