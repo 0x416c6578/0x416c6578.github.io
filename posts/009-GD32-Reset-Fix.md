@@ -37,3 +37,21 @@ I measured the resistor on the working LDS-006 and it read about 90k, which was 
 </figure>
 
 Now the reset problem is fixed I can now hopefully move onto making a new firmware for the LDS-006.
+
+___
+
+## Update Later Afternoon 12.9.21
+Turns out it isn't quite as simple; the internal resets generate a low pulse on the NRST pin, so clamping that pin high is actually quite bad since software resets (from things like the watchdog or low power) would never complete. The diagram below is from the STM32 reference, but that basically applies to the GD32 as well.
+
+<figure>
+<img width="600" src="../Images/resetsDiagram.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
+
+I replaced the short with another 100k resistor, now its back to trying to figure out where this reset is coming from. It must be an internal software reset pulling this pin low, and I would have figured that out if I had just read a few pages further in the reference document :/. 
+
+___
+
+## Links
+- <https://www.st.com/content/ccc/resource/training/technical/product_training/group0/c8/9e/ff/ac/7a/75/42/d1/STM32F7_System_RCC/files/STM32F7_System_RCC.pdf/jcr:content/translations/en.STM32F7_System_RCC.pdf> - info on stm32 reset circuitry
