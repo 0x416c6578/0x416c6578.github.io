@@ -93,6 +93,10 @@ void delay(uint32_t millis) {
 
 ___
 
+In hindsight, all of the problems I faced when trying to run code on the GD32 were _relatively_ simple to solve, however my lack of experience with STM32/GD32 platforms, and a lack of documentation on the latter, meant that it was a lot harder to solve problems than perhaps it should have been. It was definitely a good learning experience to start this project, and I'm now more confident in writing a full firmware for the module.
+
+___
+
 ## Links
 - <https://www.st.com/content/ccc/resource/training/technical/product_training/group0/c8/9e/ff/ac/7a/75/42/d1/STM32F7_System_RCC/files/STM32F7_System_RCC.pdf/jcr:content/translations/en.STM32F7_System_RCC.pdf> - info on stm32 reset circuitry
 - <https://stackoverflow.com/questions/53334571/disabling-stm32-hal-iwdg-or-wwdg-watchdog-before-stop-mode> - SO post on STM32 watchdog
