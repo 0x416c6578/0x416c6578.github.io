@@ -4,6 +4,7 @@ The blog posts are more related to some of the work that went into this page, as
 
 [(Mis)adventures With the LDS-006 Lidar](../posts/005-LDS-006-Hacking.md)  
 [Updates on the LDS-006 Lidar](../posts/007-LDS-006-Is-Smelly.md)  
+[Fixing Periodic Resets of LDS-006 CPU](posts/009-GD32-Reset-Fix.md)  
 
 ## General Overview
 The LDS-006 is a 360 degree lidar commonly found in the Ecovacs DeeBot line of robotic vacuums. Generally a part similar to the LDS-006 would cost over £50, with many higher end ones costing over £100 (see [here](https://www.aliexpress.com/wholesale?catId=0&SearchText=lidar) for reference). However this lidar could be found for as little as $7 (plus shipping and tax) on Aliexpress, listed as being salvaged / taken from Ecovacs vacuums.
