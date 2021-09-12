@@ -62,7 +62,7 @@ for (int i = 0; i < 10000; i++) {
 }
 ```
 
-In fact [this](https://stackoverflow.com/questions/53334571/disabling-stm32-hal-iwdg-or-wwdg-watchdog-before-stop-mode) SO post seems to hint that the `IWDG` (same as `FWDGT` for GD32) watchdog timer is _always running_. I guess that is a good solution to 100% keep the system safe, but because I have been working from the GD32 datasheet, I didn't know this (the GD32F130 datasheet is very scarce on details, from now on I will try to reference the STM32 datasheet first).
+In fact [this](https://stackoverflow.com/questions/53334571/disabling-stm32-hal-iwdg-or-wwdg-watchdog-before-stop-mode) SO post seems to hint that the `IWDG` (same as `FWDGT` - Free Watchfog Timer for GD32) watchdog timer is _always running_. I guess that is a good solution to 100% keep the system safe, but because I have been working from the GD32 datasheet, I didn't know this (the GD32F130 datasheet is very scarce on details, from now on I will try to reference the STM32 datasheet first). Some testing indicated that the `FWDGT` is automatically enabled at the lowest prescalar value, which equates to just over 400ms before a reset. Setting a delay of 400 doesn't cause a reset, but a delay over 450ms causes periodic resets.
 
 ___
 
