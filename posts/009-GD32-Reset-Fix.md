@@ -1,5 +1,5 @@
 # Fixing the Reset Problems of the GD32 on the LDS-006 Board
-## Update Morning 12.9.21
+## Morning 12.9.21 - Attempts to Fix
 After much probing with an oscilloscope and logic analyzer, digging through source code and experimentation, I am still unable to figure out the source of the periodic resets. As far as I can tell the power supply is solid (powering via SWD 3v3 still causes the periodic resets). I have disabled the RCU (Reset and Clock Unit) of the CPU (somewhat equivalent to the RCC in STM32's, see [here](https://www.st.com/content/ccc/resource/training/technical/product_training/group0/c8/9e/ff/ac/7a/75/42/d1/STM32F7_System_RCC/files/STM32F7_System_RCC.pdf/jcr:content/translations/en.STM32F7_System_RCC.pdf)), and still the resets happen. I have also attempted to read the reset status bits from the `RCU_RSTSCK` register, but I wasn't yet able to determine the source of the reset (this is with the RCU enabled). I only quickly messed with this register, so perhaps I'm doing something wrong.
 
 One observation that I made was that the external oscillator will stop for a short period of time every time the system resets. I think it stops _because_ of the system resetting, rather than the oscillator stopping causing the reset.
@@ -10,7 +10,7 @@ When I attach OpenOCD to the CPU, and try to `halt`, the CPU halts until the nex
 
 ___
 
-## Update Afternoon 12.9.21
+## Afternoon 12.9.21 - Thought I'd Fixed It
 IT WORKS! - It turns out that the reset pin was the problem! After temporarily pulling it high with a bit of wire the CPU now stays alive indefinitely.
 
 <figure>
@@ -36,11 +36,9 @@ I measured the resistor on the working LDS-006 and it read about 90k, which was 
 </figcaption>
 </figure>
 
-Now the reset problem is fixed I can now hopefully move onto making a new firmware for the LDS-006.
-
 ___
 
-## Update Later Afternoon 12.9.21
+## Later Afternoon 12.9.21 - But it Actually Wasn't Fixed
 Turns out it isn't quite as simple; the internal resets generate a low pulse on the NRST pin, so clamping that pin high is actually quite bad since software resets (from things like the watchdog or low power) would never complete. The diagram below is from the STM32 reference, but that basically applies to the GD32 as well.
 
 <figure>
@@ -49,9 +47,25 @@ Turns out it isn't quite as simple; the internal resets generate a low pulse on 
 </figcaption>
 </figure>
 
-I replaced the short with another 100k resistor, now its back to trying to figure out where this reset is coming from. It must be an internal software reset pulling this pin low, and I would have figured that out if I had just read a few pages further in the reference document :/. 
+I replaced the short with another 100k resistor, now its back to trying to figure out where this reset is coming from. It must be an internal software reset pulling this pin low, and I would have figured that out if I had just read a few pages further in the reference document :/.
+
+## Evening 12.9.21 - Finally Fixed Properly!!!
+I wrote a small program to pretty print the value of the reset source register, and it turns out the resets are being caused by the free watchdog timer. I now just enabled and fed the watchdog each loop of printing a number, and, now, finally, I can say the problem is fixed. I can now run the below code, and as long as I feed the watchdog, it will run indefinitely!
+
+```c
+char buf[20];
+for (int i = 0; i < 10000; i++) {
+  delay_1ms(100);
+  sprintf(buf, "%d ", i);
+  print_str(buf);
+  fwdgt_counter_reload();
+}
+```
+
+In fact [this](https://stackoverflow.com/questions/53334571/disabling-stm32-hal-iwdg-or-wwdg-watchdog-before-stop-mode) SO post seems to hint that the `IWDG` (same as `FWDGT` for GD32) watchdog timer is _always running_. I guess that is a good solution to 100% keep the system safe, but because I have been working from the GD32 datasheet, I didn't know this (the GD32F130 datasheet is very scarce on details, from now on I will try to reference the STM32 datasheet first).
 
 ___
 
 ## Links
 - <https://www.st.com/content/ccc/resource/training/technical/product_training/group0/c8/9e/ff/ac/7a/75/42/d1/STM32F7_System_RCC/files/STM32F7_System_RCC.pdf/jcr:content/translations/en.STM32F7_System_RCC.pdf> - info on stm32 reset circuitry
+- <https://stackoverflow.com/questions/53334571/disabling-stm32-hal-iwdg-or-wwdg-watchdog-before-stop-mode> - SO post on STM32 watchdog
