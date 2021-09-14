@@ -7,7 +7,8 @@
 [03.09.21 - Fixing Android Messaging Heads Up Notifications](posts/006-Android-Notifications.md)  
 [09.09.21 - Updates on the LDS-006 Lidar](posts/007-LDS-006-Is-Smelly.md)  
 [10.09.21 - Messing With GD32F130F6P6](posts/008-GD32F130-Stuff.md)  
-[12.09.21 - Fixing Periodic Resets of LDS-006 CPU](posts/009-GD32-Reset-Fix.md)
+[12.09.21 - Fixing Periodic Resets of LDS-006 CPU](posts/009-GD32-Reset-Fix.md)  
+[14.09.21 - Work on Decoding Serial Data from LIDAR](posts/010-Decoding-Serial-Data.md)  
 
 ## Bigger Projects
 [p8-firmware](p8-firmware/p8-firmware.md)  
