@@ -1,8 +1,32 @@
 # Attempts to Decode Lidar Serial Data
-This post is mainly just notes from my attempts to decode the data that comes from the stock LDS-006. I have a feeling the data that comes from the spinning part via the IR LED and receiver is identical to that which is sent out over serial. Thus I will have to try and figure out that before I start work on a custom firmware.
+This post is mainly just notes from my attempts to decode the data that comes from the stock LDS-006. I probed some test points which I think attached to the IR receiver, and the data that comes from it seems to be identical to that which is sent out over serial. Thus I will have to try and figure out what the data being sent via serial means before I start work on a custom firmware.
 
 ## Current Setup for Stock LIDAR
-I have done a few things to try and make my life a bit easier with the stock LIDAR. For one, I have attached a small buck converter to 5v to power the motor. This means I get full speed control of the motor (and thus don't need to figure out how to start the motor via software). I have also attached some cardboard on a straw to hopefully keep distance readings the same no matter where the LIDAR is pointed. I am not 100% sure if this has worked as of yet.
+I have done a few things to try and make my life a bit easier with the stock LIDAR. For one, I have attached a small buck converter to 5v to power the motor. This means I get speed control of the motor (and thus don't need to figure out how to start the motor via software). I have also attached some cardboard on a straw to hopefully keep distance readings the same no matter where the LIDAR is pointed. I am not 100% sure if this has worked as of yet.
+
+<figure>
+<img width="200" src="../Images/cardboardMod.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
+
+- The cardboard on a straw mod
+
+<figure>
+<img width="400" src="../Images/buckConverter.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
+
+- The buck converter used to power the motor
+
+<figure>
+<img width="400" src="../Images/laserOnCardboard.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
+
+- The IR laser point on the cardboard extension
 
 ## Structure of the Data
 - When the LIDAR first starts spinning, some data is sent out that is different to the "standard" data
@@ -14,7 +38,7 @@ I have done a few things to try and make my life a bit easier with the stock LID
 </figcaption>
 </figure>
 
-- The new data that is sent is some packets starting `FA`, with the second byte monotonically increasing from `A0` to `FE`. I think this might be calibration data
+- The new data that is sent is some packets starting `FA`, with the second byte monotonically increasing from `A0` to `FF`. I think this might be calibration data
 
 <figure>
 <img width="500" src="../Images/secondData.png" alt="" style="border:1px solid black;"/>
@@ -41,4 +65,18 @@ I have done a few things to try and make my life a bit easier with the stock LID
 </figure>
 
 - As we can see, the 4th byte jumps up to `24`, when the other packets had it hovering around `13` to `15`
-- Byte 22 (the last byte) seems to always stay in the range `05` to `06`. To clarify, this is the same behaviour as when I didn't have the distance-locking cardboard extension in place
+
+<figure>
+<img width="300" src="../Images/lightBlockerThings.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
+
+- We can see the ring of 15 protrusions in the base
+- Byte 22 (the last byte) seems to always stay in the range `05` to `06`. To clarify, this is the same behaviour as when I didn't have the distance-locking cardboard extension in place, so I don't think this is distance data
+
+
+___
+
+- So now I am stuck with figuring out what bytes 3 and 21 are for
+- I did actually hook into the UART port exposed on the spinning assembly. I think this port was just shooting out distance data from the lidar, since I could see visible patterns when moving my hand closer and further away from the sensor - this is a future area which I would like to look more into
