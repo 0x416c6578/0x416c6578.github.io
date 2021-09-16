@@ -1,4 +1,9 @@
-# 0x416c6578's Page
+<figure>
+<img width="10000" src="Images/banner.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
+
 ## Posts
 [25.07.20 - A Deep Dive into LVGL Fonts](posts/001-LVGL-fonts.md)  
 [21.08.20 - Various Snippets of Info From p8-firmware Sources](posts/002-P8-firmware-info.md)  
