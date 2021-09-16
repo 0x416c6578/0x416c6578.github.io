@@ -62,7 +62,7 @@ for (int i = 0; i < 10000; i++) {
 }
 ```
 
-In fact [this](https://stackoverflow.com/questions/53334571/disabling-stm32-hal-iwdg-or-wwdg-watchdog-before-stop-mode) SO post seems to hint that the `IWDG` (same as `FWDGT` - Free Watchfog Timer for GD32) watchdog timer is _always running_. I guess that is a good solution to 100% keep the system safe, but because I have been working from the GD32 datasheet, I didn't know this (the GD32F130 datasheet is very scarce on details, from now on I will try to reference the STM32 datasheet first). Some testing indicated that the `FWDGT` is automatically enabled at the lowest prescalar value, which equates to just over 400ms before a reset. Setting a delay of 400 doesn't cause a reset, but a delay over 450ms causes periodic resets. As a victory lap of sorts I wrote the function below, allowing me to delay indefinitely.
+In fact [this](https://stackoverflow.com/questions/53334571/disabling-stm32-hal-iwdg-or-wwdg-watchdog-before-stop-mode) SO post seems to hint that the `IWDG` (same as `FWDGT` - Free Watchfog Timer for GD32) watchdog timer is _always running_. I guess that is a good solution to 100% keep the system safe, but because I have been working from the GD32 datasheet, I didn't know this (the GD32F130 datasheet is very scarce on details, from now on I will try to reference the STM32 datasheet first). Some testing indicated that the `FWDGT` is automatically enabled at the lowest prescaler value, which equates to just over 400ms before a reset. Setting a delay of 400 doesn't cause a reset, but a delay over 450ms causes periodic resets. As a victory lap of sorts I wrote the function below, allowing me to delay indefinitely.
 
 ```c
 /*
@@ -94,6 +94,8 @@ void delay(uint32_t millis) {
 ___
 
 In hindsight, all of the problems I faced when trying to run code on the GD32 were _relatively_ simple to solve, however my lack of experience with STM32/GD32 platforms, and a lack of documentation on the latter, meant that it was a lot harder to solve problems than perhaps it should have been. It was definitely a good learning experience to start this project, and I'm now more confident in writing a full firmware for the module.
+
+Also upon more thinking I realise I got my watchdog prescaler timings the wrong way round; a low division will make the timer count much quicker. So I could just get around my cludgy delay function by setting the prescaler value to the max of /128.
 
 ___
 
