@@ -129,3 +129,7 @@ void displayChar(char toWrite) {
 - This code is a bit messy but it shows how you can get pixel data for any font
   - This code will draw a character's bounding box only, meaning that the characters have variable widths and heights
 - This logic will of course be simplified and improved in `p8-firmware`
+
+___
+
+- All this information was gained only from the font files; I didn't look at the actual LVGL source code so there is a good change I am wrong with some parts
