@@ -65,6 +65,7 @@ I have done a few things to try and make my life a bit easier with the stock LID
 </figure>
 
 - As we can see, the 4th byte jumps up to `24`, when the other packets had it hovering around `13` to `15`
+- Some experimentation also indicated that the magnitude of that value is proportional to the speed of the spinning assembly; a faster speed results in a lower value
 
 <figure>
 <img width="300" src="../Images/lightBlockerThings.png" alt="" style="border:1px solid black;"/>
@@ -80,3 +81,5 @@ ___
 
 - So now I am stuck with figuring out what bytes 3 and 21 are for
 - I did actually hook into the UART port exposed on the spinning assembly. I think this port was just shooting out distance data from the lidar, since I could see visible patterns when moving my hand closer and further away from the sensor - this is a future area which I would like to look more into
+- My job now is to properly read the data coming from the IR receiver to see if it is the same as the data being sent over serial; if it is then I can be sure that these packets contain the distance data somehow
+  - I can confirm this because there is no base PCB to spinning part communication, thus any sort of synchronisation / configuration isn't possible
