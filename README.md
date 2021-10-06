@@ -14,6 +14,7 @@
 [10.09.21 - Messing With GD32F130F6P6](posts/008-GD32F130-Stuff.md)  
 [12.09.21 - Fixing Periodic Resets of LDS-006 CPU](posts/009-GD32-Reset-Fix.md)  
 [14.09.21 - Work on Decoding Serial Data from LIDAR](posts/010-Decoding-Serial-Data.md)  
+[06.10.21 - Messing with the Laser Assembly](posts/011-Attempts-Serial-Stuff.md)  
 
 ## Bigger Projects
 [p8-firmware](p8-firmware/p8-firmware.md)  
