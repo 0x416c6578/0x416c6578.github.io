@@ -25,4 +25,34 @@ For 1 revolution per second. 15 teeth, so 30 toggles. Each toggle would be 0.033
 
 The pin closest to the diode (that isn't ground) is the digital output of the sensor. It goes high when being blocked by a tooth, and else low. So we know during the "gap" time of the Arduino program we should pull low.
 
-**MORE TO ADD**
+___
+
+After desoldering the fork sensor from my working LIDAR, and some inspection of the circuit, there is a 4.7k pullup for the output, and a 100 ohm current limiting resistor for the IR LED. Below are pictures of my setup. I wanted to replace the internal plastic light shield around the laser / detector, and the top cover, to try and keep the working conditions the same as the unmodified version.
+
+<figure>
+<img width="300" src="../Images/arduinoSetup.jpg" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
+
+<figure>
+<img width="300" src="../Images/internalSensorWires.jpg" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
+
+Now using a (quite messy) setup, I can read serial data from the LIDAR as before, and the readings on byte 4 are much more consistent (since they are controlled by an Arduino rather than a physical spinning motor).
+
+<figure>
+<img width="700" src="../Images/newSetup.jpg" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
+
+<figure>
+<img width="60" src="../Images/cleanerData.jpg" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
+
+**MORE TO COME**
