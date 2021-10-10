@@ -25,7 +25,7 @@ For 1 revolution per second. 15 teeth, so 30 toggles. Each toggle would be 0.033
 
 The pin closest to the diode (that isn't ground) is the digital output of the sensor. It goes high when being blocked by a tooth, and else low. So we know during the "gap" time of the Arduino program we should pull low.
 
-___
+______
 
 After desoldering the fork sensor from my working LIDAR, and some inspection of the circuit, there is a 4.7k pullup for the output, and a 100 ohm current limiting resistor for the IR LED. Below are pictures of my setup. I wanted to replace the internal plastic light shield around the laser / detector, and the top cover, to try and keep the working conditions the same as the unmodified version.
 
@@ -67,3 +67,5 @@ Byte 3 seems to be some flag. It is `0x01` when valid data is being sent back, a
 </figure>
 
 A distance of ~30cm produces distance bytes in the range `0x4E` to `0x50`. Moving the "wall" closer causes byte 4 to decrease tp `0x00` until about 25cm, at which point that "valid data" flag switches to `0x00` and no valid data is sent.
+
+
