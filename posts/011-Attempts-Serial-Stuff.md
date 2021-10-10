@@ -55,4 +55,15 @@ Now using a (quite messy) setup, I can read serial data from the LIDAR as before
 </figcaption>
 </figure>
 
-**MORE TO COME**
+## Data Without Arduino Pulses - Some Success
+It turns out that the data being sent before the LIDAR assembly starts spinning isn't just a set sequence of bytes. Moving a perpendicular barrier towards and away from the LIDAR produces data that seems to change based on the distance. The packets seem to be 4 bytes long, sent 3 times, and byte 4 of the packets is directly related to the distance the LIDAR measures; closer causes a smaller value.
+
+Byte 3 seems to be some flag. It is `0x01` when valid data is being sent back, and `0x00` when invalid data is sent back. This invalid data seems to be sent when the "wall" is too close to the sensor. It also switches to `0x06` in some cases, although I can't figure out when. Data stops being sent when the angle of the wall to the LIDAR becomes too steep. Like most LIDAR systems, the LDS-006 only works with approximately perpendicular walls.
+
+<figure>
+<img width="500" src="../Images/noSpinDistanceData.jpg" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
+
+A distance of ~30cm produces distance bytes in the range `0x4E` to `0x50`. Moving the "wall" closer causes byte 4 to decrease tp `0x00` until about 25cm, at which point that "valid data" flag switches to `0x00` and no valid data is sent.
