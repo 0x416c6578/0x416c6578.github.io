@@ -68,4 +68,13 @@ Byte 3 seems to be some flag. It is `0x01` when valid data is being sent back, a
 
 A distance of ~30cm produces distance bytes in the range `0x4E` to `0x50`. Moving the "wall" closer causes byte 4 to decrease tp `0x00` until about 25cm, at which point that "valid data" flag switches to `0x00` and no valid data is sent.
 
+**MORE TO COME**
 
+## Notes to Self
+With big inductor at north of board, second top resistor in left hand 5 resistor network thing seemingly connects to the south most pin of the IR data receiver, through a 4.7k resistor. It connects through to pin 18 of the uC. Maybe the resistors near the unknown 8 pin IC that connect to the south-most pin of the IR receiver form a divider network that drops the output to 3v3?
+
+The south most pin of the IR receiver is connected through to the 5v input directly. The other pin of the IR receiver connects to pin 2? of the unknown IC. That will be our data signal I think. Online circuits seem to suggest putting the cathode output of the 2 pin photodiode through an op-amp.
+
+The IR photodiode looks like an SFH2701 from OSRAM, or a knockoff of such.
+
+AAAHHHH - finally deciphered markings on unknown IC - its an LM393. Power supply pins match up, pin 4 (that goes off to uC) is output 1.
