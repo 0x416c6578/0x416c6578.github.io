@@ -78,3 +78,5 @@ The south most pin of the IR receiver is connected through to the 5v input direc
 The IR photodiode looks like an SFH2701 from OSRAM, or a knockoff of such.
 
 AAAHHHH - finally deciphered markings on unknown IC - its an LM393. Power supply pins match up, pin 4 (that goes off to uC) is output 1.
+
+Data coming from output of LM393 is (I think) inverted - TODO: Try inverting back in Saleae
