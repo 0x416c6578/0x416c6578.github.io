@@ -29,10 +29,11 @@
 
 ## Other
 [XFCE Hacks and Tweaks](posts/004-Random-XFCE-Hacks.md)  
+[Tools / Equipment I Use / Recommend](posts/000-Tools-and-Stuff.md)
 
 ## About
 I'm 0x416c6578 (Alex), a CS student who enjoys embedded / electronics stuff. This blog is mainly a reference for me and anyone else who might be doing similar work.
 
 Questions or comments? Post an issue on the [repo](https://github.com/0x416c6578/0x416c6578.github.io) for these pages.
 
-[Stuff I Use / Recommend](posts/000-Tools-and-Stuff.md)
+
