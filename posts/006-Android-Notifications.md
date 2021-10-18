@@ -3,7 +3,7 @@
 For the most part Android is a great mobile OS. I have used deGoogled LineageOS for about the past year and a half, and have been very happy with it. However one major problem with it that I found is that you can't change the notification settings for system apps.
 
 <figure>
-<img width="300" src="../Images/messaging-locked-notif.png" alt="" style="border:1px solid black;"/>
+<img width="300" src="../Images/android-notif/messaging-locked-notif.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
@@ -11,7 +11,7 @@ For the most part Android is a great mobile OS. I have used deGoogled LineageOS 
 Unfortunately messaging notifications channels are setup with the default priority, meaning that by default they won't appear as a "heads up" notification (offending line `NotificationManager.IMPORTANCE_DEFAULT"` [here](https://github.com/LineageOS/android_packages_apps_Messaging/blob/07958b86402884895e2e19a9c9ded5f5944b3d58/src/com/android/messaging/datamodel/BugleNotifications.java#L945)):
 
 <figure>
-<img width="200" src="../Images/heads-up-notif.png" alt="" style="border:1px solid black;"/>
+<img width="200" src="../Images/android-notif/heads-up-notif.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
@@ -72,7 +72,7 @@ After flicking through `INotificationManager.aidl`, I found no method to set the
 It turns out the config file approach would work fine, the only problem was I was editing the file whilst in a fully running Android environment (so the changes to the file were rolled back). The solution was to boot into recovery and edit the file, then clear cache and ART cache (I'm not sure if this was needed or not), then after rebooting, the settings were read from the file successfully; thus heads up notifications were enabled!
 
 <figure>
-<img width="300" src="../Images/success-notif.png" alt="" style="border:1px solid black;"/>
+<img width="300" src="../Images/android-notif/success-notif.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
@@ -80,7 +80,7 @@ It turns out the config file approach would work fine, the only problem was I wa
 You can see the settings is still locked (unable to change it), however the toggle is enabled; and now `com.android.Messaging` has heads up notifications.
 
 <figure>
-<img width="300" src="../Images/heads-up-notif.png" alt="" style="border:1px solid black;"/>
+<img width="300" src="../Images/android-notif/heads-up-notif.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
