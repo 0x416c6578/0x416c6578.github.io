@@ -22,3 +22,11 @@
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
+
+- SS-02 solder sucker - a very nice solder sucker that is much better than the cheapo ones you get for free with soldering irons
+
+<figure>
+<img width="300" src="../Images/solderSucker.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
