@@ -5,9 +5,9 @@
 </figure>
 
 ## Bigger Project Pages (Formal Writeups)
+[LDS-006 Lidar](lds-006/overview.md)  
 [p8-firmware](p8-firmware/p8-firmware.md)  
 [SAP-1](sap-1/overview.md)  
-[LDS-006 Lidar](lds-006/overview.md)  
 
 ## Smaller Projects
 [Arduino LED Strip Controller](random-projects/led-strip-controller.md)  
