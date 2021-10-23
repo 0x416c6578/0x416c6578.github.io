@@ -12,13 +12,13 @@ The blog posts are more related to some of the work that went into this page, as
 The LDS-006 is a 360 degree lidar commonly found in the Ecovacs DeeBot line of robotic vacuums. Generally a part similar to the LDS-006 would cost over £50, with many higher end ones costing over £100 (see [here](https://www.aliexpress.com/wholesale?catId=0&SearchText=lidar) for reference). However this lidar could be found for as little as $7 (plus shipping and tax) on Aliexpress, listed as being salvaged / taken from Ecovacs vacuums.
 
 <figure>
-<img width="300" src="../Images/lidar.png" alt="" style="border:1px solid black;"/>
+<img width="300" src="../Images/lds-006/lidar.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
 
 <figure>
-<img width="300" src="../Images/lidarMotor.png" alt="" style="border:1px solid black;"/>
+<img width="300" src="../Images/lds-006/lidarMotor.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
@@ -37,7 +37,7 @@ The module has two distinct parts to it; first is the spinning assembly with las
 
 ## Spinning Assembly
 <figure>
-<img width="300" src="../Images/lidarSpinner.png" alt="" style="border:1px solid black;"/>
+<img width="300" src="../Images/lds-006/lidarSpinner.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
@@ -48,7 +48,7 @@ Power is inductively coupled to the spinning part, and data is sent back via an 
 
 ## Controller Board and Motor Assembly
 <figure>
-<img width="300" src="../Images/lidarMainBoardZoomed.png" alt="" style="border:1px solid black;"/>
+<img width="300" src="../Images/lds-006/lidarMainBoardZoomed.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
