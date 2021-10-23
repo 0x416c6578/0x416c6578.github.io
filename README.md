@@ -4,10 +4,10 @@
 </figcaption>
 </figure>
 
-## Bigger Project Pages (Formal Writeups)
-[LDS-006 Lidar](lds-006/overview.md)  
-[p8-firmware](p8-firmware/p8-firmware.md)  
-[SAP-1](sap-1/overview.md)  
+## Bigger Project Pages (Writeups)
+[LDS-006 Lidar Work (2021)](lds-006/overview.md)  
+[`p8-firmware` (Summer 2020)](p8-firmware/p8-firmware.md)  
+[SAP-1 (2019, Extended Project Qualification)](sap-1/overview.md)  
 
 ## Smaller Projects
 [Arduino LED Strip Controller](random-projects/led-strip-controller.md)  
