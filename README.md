@@ -4,12 +4,12 @@
 </figcaption>
 </figure>
 
-## Bigger Project Pages (Writeups)
+## Large Projects
 [LDS-006 Lidar Work (2021)](lds-006/overview.md)  
 [`p8-firmware` (Summer 2020)](p8-firmware/p8-firmware.md)  
 [SAP-1 (2018/19, Extended Project Qualification)](sap-1/overview.md)  
 
-## Smaller Projects
+## Small Projects
 [Arduino LED Strip Controller](random-projects/led-strip-controller.md)  
 [ESP8266 Laser Turret](random-projects/laser-turret.md)  
 [Arduino EEPROM Dumper](random-projects/eeprom-dumper.md)  
@@ -29,9 +29,9 @@
 
 ## Other
 [XFCE Hacks and Tweaks](posts/004-Random-XFCE-Hacks.md)  
-[Tools / Equipment I Use / Recommend](posts/000-Tools-and-Stuff.md)
+[Stuff I Recommend](posts/000-Tools-and-Stuff.md)
 
 ## About
-I'm 0x416c6578 (Alex). I'm a CS student with interests in embedded programming / hardware. More info about me can be found [here](other/about.md). This blog is mainly a reference for me and anyone else who might be doing similar work.
+I'm 0x416c6578 (Alex). I'm a CS student with interests in embedded programming / hardware. More info about me can be found [here](other/about.md). This page is mainly a reference for me and anyone else who might be doing similar work.
 
-Questions or comments? Post an issue on the [repo](https://github.com/0x416c6578/0x416c6578.github.io) for these pages.
+Questions or comments? Post an issue on the [repo](https://github.com/0x416c6578/0x416c6578.github.io).
