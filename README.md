@@ -3,7 +3,7 @@
 </p>
 
 ## Large Projects
-[LDS-006 Lidar Work (2021)](lds-006/overview.md)  
+[LDS-006 Lidar (2021, WIP)](lds-006/overview.md)  
 [`p8-firmware` (Summer 2020)](p8-firmware/p8-firmware.md)  
 [SAP-1 (2018/19, Extended Project Qualification)](sap-1/overview.md)  
 
