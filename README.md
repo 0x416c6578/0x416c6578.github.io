@@ -1,4 +1,4 @@
-<p align="left">
+<p align="center">
   <img width="150" src="Images/frogcar.gif" style="border:7px solid black">
 </p>
 
