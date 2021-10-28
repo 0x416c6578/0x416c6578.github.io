@@ -1,8 +1,6 @@
-<figure>
-<img width="10000" src="Images/banner.png" alt="" style="border:1px solid black;"/>
-<figcaption style="font-style: italic;">
-</figcaption>
-</figure>
+<p align="left">
+  <img width="150" src="Images/frogcar.gif" style="border:7px solid black">
+</p>
 
 ## Large Projects
 [LDS-006 Lidar Work (2021)](lds-006/overview.md)  
