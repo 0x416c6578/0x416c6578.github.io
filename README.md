@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="150" src="Images/frogcar.gif" style="border:7px solid #202020">
+  <img width="150" src="Images/frogcar.gif" style="border:7px solid">
 </p>
 
 ## Large Projects
