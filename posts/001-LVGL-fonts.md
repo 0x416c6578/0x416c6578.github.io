@@ -132,4 +132,4 @@ void displayChar(char toWrite) {
 
 ___
 
-- All this information was gained only from the font files; I didn't look at the actual LVGL source code so there is a good change I am wrong with some parts
+- All this information was gained only from the font files; I didn't look at the actual LVGL source code so there is a good chance I am wrong with some parts
