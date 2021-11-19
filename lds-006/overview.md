@@ -9,7 +9,7 @@ The blog posts are more related to some of the work that went into this page, as
 [Hardware Hacking and other Serial Data Stuff](../posts/011-Attempts-Serial-Stuff.md)  
 
 ## Hidden Driver Code
-Thanks to the help of https://github.com/opravdin, the code and information for a driver for the LDS-006 was found on 19.10.21. The protocol seems to match up with the data I am receiving, although I am yet to do the calculations on distance etc. [here](https://github-com.translate.goog/Aluminum-z/Laser-Radar-LDS-006-Drive-Test?_x_tr_sl=zh-CN&_x_tr_tl=en&_x_tr_hl=en-GB&_x_tr_pto=nui) is the link to the ungoogleable GitHub repository containing the code and info, put through Google translate to English from Chinese.
+Thanks to the help of https://github.com/opravdin, the code and information for a driver for the LDS-006 was found on 19.11.21. The protocol seems to match up with the data I am receiving, although I am yet to do the calculations on distance etc. [here](https://github-com.translate.goog/Aluminum-z/Laser-Radar-LDS-006-Drive-Test?_x_tr_sl=zh-CN&_x_tr_tl=en&_x_tr_hl=en-GB&_x_tr_pto=nui) is the link to the ungoogleable GitHub repository containing the code and info, put through Google translate to English from Chinese.
 
 ## General Overview
 The LDS-006 is a 360 degree lidar commonly found in the Ecovacs DeeBot line of robotic vacuums. Generally a part similar to the LDS-006 would cost over £50, with many higher end ones costing over £100 (see [here](https://www.aliexpress.com/wholesale?catId=0&SearchText=lidar) for reference). However this lidar could be found for as little as $7 (plus shipping and tax) on Aliexpress, listed as being salvaged / taken from Ecovacs vacuums.
