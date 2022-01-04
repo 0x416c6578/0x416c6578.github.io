@@ -25,7 +25,7 @@
 [14.09.21 - Work on Decoding Serial Data from LIDAR](posts/010-Decoding-Serial-Data.md)  
 [06.10.21 - Messing with the Laser Assembly](posts/011-Attempts-Serial-Stuff.md)  
 
-## Other
+## Other Stuff
 [XFCE Hacks and Tweaks](posts/004-Random-XFCE-Hacks.md)  
 [Stuff I Recommend](posts/000-Tools-and-Stuff.md)  
 
