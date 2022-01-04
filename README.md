@@ -33,6 +33,7 @@
 Below are recipes that I like, they are here for easy future usage for me.  
 [Pancakes](recipes/pancakes.md)  
 [Basic Shortbread](recipes/shortbread.md)  
+[Basic Fairy Cakes](recipes/fairy-cakes.md)  
 
 ## About
 I'm 0x416c6578 (Alex). I'm a CS student with interests in embedded programming / hardware. More info about me can be found [here](other/about.md). This page is mainly a reference for me and anyone else who might be doing similar work.
