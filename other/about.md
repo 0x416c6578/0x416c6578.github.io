@@ -30,4 +30,4 @@ I am Alex, currently in my third year studying Computer Science.
 - Foundations of Machine Learning
   - Mathematics underpinning machine learning algorithms, probability, regression and classification, PCA
 - Robotic Systems
-  - Kinematics, robot configurations, trajectory generation, sensors, computer vision and bio-inspired robotics
+  - Kinematics (forward and inverse), robot configurations, trajectory generation, sensors, computer vision and bio-inspired robotics
