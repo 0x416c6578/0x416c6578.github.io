@@ -14,3 +14,5 @@ I added a dip switch to the board for offline presets, although I have some 433 
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
+
+Information and code can be found [here](https://github.com/0x416c6578/arduino-projects/tree/main/LED_Strip).

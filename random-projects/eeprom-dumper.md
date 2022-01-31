@@ -6,3 +6,5 @@ This was a project I originally built to try and fix an ethernet HomePlug adapte
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
+
+Information and code can be found [here](https://github.com/0x416c6578/arduino-projects/tree/main/EEPROM_Dumper).

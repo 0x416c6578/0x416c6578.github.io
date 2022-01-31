@@ -12,3 +12,5 @@ Just an ESP8266 controlling two servos and a laser pointer. Offers basic HTTP AP
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
+
+Information and code can be found [here](https://github.com/0x416c6578/arduino-projects/tree/main/Laser_Turret).
