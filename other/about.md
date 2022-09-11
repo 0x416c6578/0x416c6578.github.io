@@ -22,11 +22,6 @@ Biquadratic modelling (orange) of pixel response values (blue)
 </figure>
 
 ## Optional University Modules
-### Year 2
-- Computer Systems II 
-  - Focus on AVR hardware, scheduling, MMIO, security of embedded hardware
-  - LCD graphics library project can be found [here](https://github.com/0x416c6578/lafortuna-lcd-mirror)
-
 ### Year 3
 - Computer Vision
   - Varied mix of traditional and modern computer vision techniques
@@ -40,6 +35,10 @@ Biquadratic modelling (orange) of pixel response values (blue)
   - Using machine learning to detect pricing manipulations in a smart grid
 - Natural Language Processing
   - Regex, classical NLP techniques, neural NLP techniques (RNNs, GRUs, Transformers)
+### Year 2
+- Computer Systems II 
+  - Focus on AVR hardware, scheduling, MMIO, security of embedded hardware
+  - LCD graphics library project can be found [here](https://github.com/0x416c6578/lafortuna-lcd-mirror)
 
 ## Core University Modules
 - Programming I (intro to OOP)
