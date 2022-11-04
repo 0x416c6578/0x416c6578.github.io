@@ -24,7 +24,7 @@
 [12.09.21 - Fixing Periodic Resets of LDS-006 CPU](posts/009-GD32-Reset-Fix.md)  
 [14.09.21 - Work on Decoding Serial Data from LIDAR](posts/010-Decoding-Serial-Data.md)  
 [06.10.21 - Messing with the Laser Assembly](posts/011-Attempts-Serial-Stuff.md)  
-[04.11.22 - OnePlus 8T Auto Brightness](posts/012-oneplus-auto-brightness.md)
+[04.11.22 - OnePlus 8T Auto Brightness "Fix"](posts/012-oneplus-auto-brightness.md)
 
 ## Other Stuff
 [XFCE Hacks and Tweaks](posts/004-Random-XFCE-Hacks.md)  

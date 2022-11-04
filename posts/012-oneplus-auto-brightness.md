@@ -1,4 +1,4 @@
-# OnePlus 8T Auto Brightness is Bad
+# OnePlus 8T Auto Brightness "Fix"
 I've been having some problems with the OnePlus 8T's auto brightness feature on LineageOS 19.1 (Android 12L). Because of the phones design, the ambient light sensor is positioned very close to the display, causing some strange and annoying behaviour.
 
 ## Positive Feedback Loop
