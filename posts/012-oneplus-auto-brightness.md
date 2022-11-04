@@ -9,4 +9,4 @@ Sometimes when the device is powered on, the screen will shoot to 100% brightnes
 
 ___
 
-Overall the 8T is a pretty good phone, but I think the push for a massive bezel-less display and less than adequate testing has led to a worse design of this part of the phone, to the detriment of users (https://community.oneplus.com/thread/1409725, https://www.reddit.com/r/LineageOS/comments/nxxs36/oneplus_8t_display_auto_brightness_acting_weird/).
+Overall the 8T is a pretty good phone, but I think the push for a massive bezel-less display and less than adequate testing has led to a worse design of this part of the phone, to the detriment of users (<https://community.oneplus.com/thread/1409725>, <https://www.reddit.com/r/LineageOS/comments/nxxs36/oneplus_8t_display_auto_brightness_acting_weird/>).
