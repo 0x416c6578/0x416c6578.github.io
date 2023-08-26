@@ -1,5 +1,5 @@
 # About Me
-I am Alex, a First Class Honours BSc Computer Science Graduate (79.5% average).
+I am Alex, a First Class Honours BSc Computer Science Graduate (79.5% average). I am currently a software developer in the aerospace and navigation domain.
 
 ## Third Year Project
 - Designed and implemented a robotically controlled arch for dataset generation in Reflectance Transformation Imaging
