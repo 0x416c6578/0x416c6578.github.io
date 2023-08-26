@@ -2,6 +2,14 @@
   <img width="150" src="Images/frogcar.gif" style="border:7px solid">
 </p>
 
+## [About](other/about.md)
+I'm 0x416c6578 (Alex). I have interests in embedded programming / hardware. 
+
+More info about me can be found [here](other/about.md). 
+
+This site is mainly a reference for me and anyone else who might be doing similar work. Questions or comments? Post an issue on the [repo](https://github.com/0x416c6578/0x416c6578.github.io).
+
+
 ## Large Projects
 [LDS-006 Lidar (2021, WIP)](lds-006/overview.md)  
 [`p8-firmware` (Summer 2020)](p8-firmware/p8-firmware.md)  
@@ -28,8 +36,3 @@
 
 ## Other Stuff
 [XFCE Hacks and Tweaks](posts/004-Random-XFCE-Hacks.md)  
-
-## About
-I'm 0x416c6578 (Alex). I'm a CS student with interests in embedded programming / hardware. More info about me can be found [here](other/about.md). This page is mainly a reference for me and anyone else who might be doing similar work.
-
-Questions or comments? Post an issue on the [repo](https://github.com/0x416c6578/0x416c6578.github.io).
