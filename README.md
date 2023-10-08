@@ -3,7 +3,7 @@
 </p>
 
 ## [About](other/about.md)
-I'm 0x416c6578 (Alex). I have interests in embedded programming / hardware. 
+I'm 0x416c6578 (Alex). I have interests in embedded programming / hardware, free software, Android and Linux.
 
 More info about me can be found [here](other/about.md). 
 
@@ -33,6 +33,7 @@ This site is mainly a reference for me and anyone else who might be doing simila
 [14.09.21 - Work on Decoding Serial Data from LIDAR](posts/010-Decoding-Serial-Data.md)  
 [06.10.21 - Messing with the Laser Assembly](posts/011-Attempts-Serial-Stuff.md)  
 [04.11.22 - OnePlus 8T Auto Brightness "Fix"](posts/012-oneplus-auto-brightness.md)
+[08.10.23 - LineageOS Hosts File Editing Without Root](posts/013-Lineageos-Hosts.md)
 
 ## Other Stuff
 [XFCE Hacks and Tweaks](posts/004-Random-XFCE-Hacks.md)  
