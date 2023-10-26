@@ -1,23 +1,37 @@
 # About Me
-I am Alex, a First Class Honours BSc Computer Science Graduate (79.5% average). 
+I am Alex, a First Class Honours BSc Computer Science Graduate (79.5% average) from the University of Southampton.
 
-## Third Year Project
-- Designed and implemented a robotically controlled arch for dataset generation in Reflectance Transformation Imaging
+## Final Year Project
+- Designed and implemented a robotically controlled arch for dataset generation in Reflectance Transformation Imaging. Involved:
   - Mechanical design of the system
+    - FreeCAD
+    - 3D printing
   - Electronics design of the controller
-  - With a focus on reducing cost and encouraging reproducibility
-- Implemented the Polynomial Texture Mapping algorithm using a novel higher order multinomials technique
+    - KiCad
+    - High current switching design
+  - Control software for the arch / camera
+    - Arduino C(++) with Python control library
+    - Bluetooth controller for phone camera
+  - I built upon the Polynomial Texture Mapping algorithm using a novel higher order multinomials technique - see diagrams below
 
 <figure>
 <img width="500" src="../Images/other-projects/finalProduct.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
+The final product
 </figcaption>
 </figure>
 
 <figure>
 <img width="500" src="../Images/other-projects/biquadFit3dGraph.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
-Biquadratic modelling (orange) of pixel response values (blue)
+Biquadratic modelling (orange) of pixel response values (blue) as outlined in the original Polynomial Texture Mapping paper
+</figcaption>
+</figure>
+
+<figure>
+<img width="500" src="../Images/other-projects/higherDegree3dPlot.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+Using a higher order (degree 3) polynomial to better model the specular reflection (note the steeper peak)
 </figcaption>
 </figure>
 

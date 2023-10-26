@@ -5,14 +5,26 @@
 ## [About](other/about.md)
 I'm Alex, (`0x416c6578`). I have interests in embedded programming / hardware, free software, Linux and occasionally Android. I am currently a software developer in the aerospace and navigation domain.
 
+More cool info about my education and experience can be found [here](other/about.md).
+
 This site is mainly a reference for me and anyone else who might be doing similar work. Questions or comments? Post an issue on the [repo](https://github.com/0x416c6578/0x416c6578.github.io).
 
-Info about my education and experience can be found [here](other/about.md)
 
 ## Large Projects
 [LDS-006 Lidar (2021, WIP)](lds-006/overview.md)  
 [`p8-firmware` (Summer 2020)](p8-firmware/p8-firmware.md)  
 [SAP-1 (2018/19, Extended Project Qualification)](sap-1/overview.md)  
+
+## Small Projects
+[Arduino LED Strip Controller](random-projects/led-strip-controller.md)  
+[ESP8266 Laser Turret](random-projects/laser-turret.md)  
+[Arduino EEPROM Dumper](random-projects/eeprom-dumper.md)  
+- Code for Arduino based projects can be found [here](https://github.com/0x416c6578/arduino-projects)  
+
+___
+
+- I have various FreeCAD models for random things available on [this](https://github.com/0x416c6578/cad-projects) repo.  
+- I also have a basic but useful tool for learning Mandarin Chinese characters available on [this](https://github.com/0x416c6578/mandarin-stuff) repo.
 
 ## Technical Blog Posts / Info About Work (Informal)
 [25.07.20 - A Deep Dive into LVGL Fonts](posts/001-LVGL-fonts.md)  
@@ -28,11 +40,6 @@ Info about my education and experience can be found [here](other/about.md)
 [04.11.22 - OnePlus 8T Auto Brightness "Fix"](posts/012-oneplus-auto-brightness.md)  
 [08.10.23 - LineageOS Hosts File Editing Without Root](posts/013-Lineageos-Hosts.md)  
 
-## Small Projects
-[Arduino LED Strip Controller](random-projects/led-strip-controller.md)  
-[ESP8266 Laser Turret](random-projects/laser-turret.md)  
-[Arduino EEPROM Dumper](random-projects/eeprom-dumper.md)  
-- Code for Arduino based projects can be found [here](https://github.com/0x416c6578/arduino-projects)
 
 ## Other Stuff
 [XFCE Hacks and Tweaks](posts/004-Random-XFCE-Hacks.md)  
