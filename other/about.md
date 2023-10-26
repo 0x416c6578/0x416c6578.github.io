@@ -1,5 +1,5 @@
 # About Me
-I am Alex, a First Class Honours BSc Computer Science Graduate (79.5% average). I am currently a software developer in the aerospace and navigation domain.
+I am Alex, a First Class Honours BSc Computer Science Graduate (79.5% average). 
 
 ## Third Year Project
 - Designed and implemented a robotically controlled arch for dataset generation in Reflectance Transformation Imaging
@@ -21,6 +21,10 @@ Biquadratic modelling (orange) of pixel response values (blue)
 </figcaption>
 </figure>
 
+## Other Things
+- In 2021 I gave a talk to my University's Cybersecurity society on an introduction to hardware hacking; slides can be found [here](https://github.com/0x416c6578/0x416c6578.github.io/blob/master/other/files/SUCSS_Introduction_to_Hardware_Hacking.pdf).
+
+# University Modules
 ## Optional University Modules
 ### Year 3
 - Computer Vision
