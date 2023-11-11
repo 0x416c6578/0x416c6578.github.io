@@ -1,10 +1,17 @@
 # Alesis Core 1 Audio Interface Input Level Fix
+
+<figure>
+<img width="400" src="../Images/audio-interface-pics/0.jpg" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+</figcaption>
+</figure>
+
 I bought a second hand Alesis Core 1 audio interface from eBay a while back and I haven't really used it because of a problem with the input level control knob. When changing the level, the output can be heard crackling and jumping between audio levels. This behaviour can be exacerbated by pressing into the dial, which led me to think that the potentiometer wipers not making proper contact to the resistance wire? PCB? stator? - whatever the non spinny part of the potentiometer is called.
 
 <figure>
 <img width="200" src="../Images/audio-interface-pics/1.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
-Interface in Question
+Potentiometer in Question ("INPUT")
 </figcaption>
 </figure>
 
