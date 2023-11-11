@@ -39,6 +39,7 @@ ___
 [06.10.21 - Messing with the Laser Assembly](posts/011-Attempts-Serial-Stuff.md)  
 [04.11.22 - OnePlus 8T Auto Brightness "Fix"](posts/012-oneplus-auto-brightness.md)  
 [08.10.23 - LineageOS Hosts File Editing Without Root](posts/013-Lineageos-Hosts.md)  
+[11.11.23 - Alesis Core 1 Audio Interface Level Control Potentiometer Fix](posts/014-Audio-Interface-Fix.md)  
 
 
 ## Other Stuff
