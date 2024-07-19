@@ -1,5 +1,5 @@
 # About Me
-I am Alex, a First Class Honours BSc Computer Science Graduate (79.5% average) from the University of Southampton.
+I am Alex, a First Class Honours BSc Computer Science graduate (79.5% average).
 
 ## Final Year Project
 - Designed and implemented a robotically controlled arch for dataset generation in Reflectance Transformation Imaging. Involved:
