@@ -2,10 +2,12 @@
   <img width="150" src="Images/frogcar.gif" style="border:7px solid">
 </p>
 
+
 ## About
 Hi 👋, I'm Alex (who sometimes goes by the memorable name of`0x416c6578`). I am a software developer in the aerospace and navigation domain, and I have interests in embedded programming / hardware, free software, Linux and occasionally Android development. This site aims to showcase projects or random things I do outside of my profession, aiming to be a useful reference for people undertaking similar work. Questions or comments? Post an issue on the [repo](https://github.com/0x416c6578/0x416c6578.github.io).
 
 More info about my education and experience can be found [here](other/about.md).
+
 
 ## Large Projects
 [LDS-006 Lidar (2021, WIP)](lds-006/overview.md)  
@@ -63,8 +65,7 @@ More info about my education and experience can be found [here](other/about.md).
 
 ___
 
-I have various FreeCAD models for random things available on [this](https://github.com/0x416c6578/cad-projects) repo.  
-I also have a basic but useful tool for learning Mandarin Chinese characters available on [this](https://github.com/0x416c6578/mandarin-stuff) repo.
+I have various FreeCAD models for random things available on [this](https://github.com/0x416c6578/cad-projects) repo.
 
 
 ## Links
