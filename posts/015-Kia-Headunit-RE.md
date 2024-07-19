@@ -52,7 +52,7 @@ This was my target! Importing into Ghidra was simple, it all decompiled with the
 <figure>
 <img width="600" src="../Images/kia-things/004-ghidra-searching.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
-Root FS 
+References in Ghidra
 </figcaption>
 </figure>
 
