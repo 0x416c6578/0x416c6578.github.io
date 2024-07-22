@@ -4,15 +4,9 @@
 
 
 ## About
-Hi 👋, I'm Alex (who sometimes goes by the memorable name of`0x416c6578`). I am a software developer in the aerospace and navigation domain, and I have interests in embedded programming / hardware, free software, Linux and occasionally Android development. This site aims to showcase projects or random things I do outside of my profession, aiming to be a useful reference for people undertaking similar work. Questions or comments? Post an issue on the [repo](https://github.com/0x416c6578/0x416c6578.github.io).
+I'm Alex (who sometimes goes by the memorable name of`0x416c6578`). I am a software developer in the aerospace and navigation domain, and I have interests in embedded programming and hardware hacking.
 
-More info about my education and experience can be found [here](other/about.md).
-
-
-## Large Projects
-[LDS-006 Lidar (2021, WIP)](lds-006/overview.md)  
-[`p8-firmware` (Summer 2020)](p8-firmware/p8-firmware.md)  
-[SAP-1 (2018/19, Extended Project Qualification)](sap-1/overview.md)  
+Info about my education can be found [here](other/about.md).
 
 ## Things I've Done
 ### [19.07.24 - Kia Rio Headunit Passcode Reverse Engineering](posts/015-Kia-Headunit-RE.md)
@@ -49,12 +43,19 @@ More info about my education and experience can be found [here](other/about.md).
 - First exploration of the LDS-006 Lidar
 
 ### [25.08.20 - XFCE4 Automatic Theme Switching](posts/003-Auto-Dark-Mode-XFCE.md)
+- For my own reference
 
 ### [21.08.20 - Various Snippets of Info From p8-firmware Sources](posts/002-P8-firmware-info.md)
 - Coolest thing was finding a bug in the `arduino-nRF5` SDK
 
 ### [25.07.20 - A Deep Dive into LVGL Fonts](posts/001-LVGL-fonts.md)
-- A detailed look at the LVGL font format, with some reverse engineering
+- A detailed look at the LVGL font format, with some reverse engineering thanks to my apparent aversion to reading the documentation
+
+
+## Large Projects
+[LDS-006 Lidar (2021, WIP)](lds-006/overview.md)  
+[`p8-firmware` (Summer 2020)](p8-firmware/p8-firmware.md)  
+[SAP-1 (2018/19, Extended Project Qualification)](sap-1/overview.md)  
 
 
 ## Small Projects

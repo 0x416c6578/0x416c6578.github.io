@@ -1,7 +1,7 @@
 # About Me
 I am Alex, a First Class Honours BSc Computer Science graduate (79.5% average).
 
-## Final Year Project
+## Dissertation
 - Designed and implemented a robotically controlled arch for dataset generation in Reflectance Transformation Imaging. Involved:
   - Mechanical design of the system
     - FreeCAD
