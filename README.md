@@ -17,11 +17,11 @@ Info about my education can be found [here](other/about.md).
 #### 08.10.23 - [LineageOS Hosts File Editing Without Root](posts/013-Lineageos-Hosts.md)
 - *How to edit an Android hosts file without root (although with custom recovery / secure boot disabled)*
 
-#### 04.11.22 - [OnePlus 8T Auto Brightness "Fix"](posts/012-oneplus-auto-brightness.md)
-- *Complaining about rubbish hardware*
+<!-- #### 04.11.22 - [OnePlus 8T Auto Brightness "Fix"](posts/012-oneplus-auto-brightness.md)
+- *Complaining about rubbish hardware* -->
 
-#### 06.10.21 - [Messing with the Laser Assembly](posts/011-Attempts-Serial-Stuff.md)
-- *Yet more work on the LDS-006 Lidar*
+#### 06.10.21 - [Messing with the LDS-006 Laser Assembly](posts/011-Attempts-Serial-Stuff.md)
+- *Yet more work on the LDS-006 Lidar (currently latest)*
 
 #### 14.09.21 - [Work on Decoding Serial Data from LIDAR](posts/010-Decoding-Serial-Data.md)
 - *Figuring out the serial data format of the LDS-006*
