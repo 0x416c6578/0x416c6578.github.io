@@ -1,4 +1,4 @@
-<img src="../Images/sap1Finished.png" alt=" " width=""/>
+<img loading="lazy" src="../Images/sap1Finished.jpg" alt=" " width=""/>
 
 - This was a project I did for school
 - It was mostly based on the work of [Ben Eater](eater.net) and is amazing YouTube series on the work of A.P.Malvino in _Digital Computer Electronics_

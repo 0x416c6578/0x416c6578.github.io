@@ -14,7 +14,7 @@ ___
 IT WORKS! - It turns out that the reset pin was the problem! After temporarily pulling it high with a bit of wire the CPU now stays alive indefinitely.
 
 <figure>
-<img width="600" src="../Images/lds-006/yayyyyyyy.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="600" src="../Images/lds-006/yayyyyyyy.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
@@ -25,13 +25,13 @@ RCs and PLL. VDDA and VSSA must be connected to VDD and VSS, respectively."_). V
 I measured the resistor on the working LDS-006 and it read about 90k, which was the same as on my "development" LDS-006 board. I tried replacing it with a 10k resistor (pictured below with a grain of rice for scale), however the reset was still happening. Below is the logic analyzer trace for the `NRST` pin, we can see that it is for some reason pulled low periodically (causing the resets). But measuring the other side of the resistor (connected to `VCCA`), the trace is rock solid. As far as I can currently tell, `NRST` isn't connected to anything else, so I can't quite tell why it is being pulled low. I just decided to short over that resistor to properly keep that pin high.
 
 <figure>
-<img width="600" src="../Images/lds-006/resetPin.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="600" src="../Images/lds-006/resetPin.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
 
 <figure>
-<img width="300" src="../Images/lds-006/resistorReplacement.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="300" src="../Images/lds-006/resistorReplacement.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
@@ -42,7 +42,7 @@ ___
 Turns out it isn't quite as simple; the internal resets generate a low pulse on the NRST pin, so clamping that pin high is actually quite bad since software resets (from things like the watchdog or low power) would never complete. The diagram below is from the STM32 reference, but that basically applies to the GD32 as well.
 
 <figure>
-<img width="600" src="../Images/lds-006/resetsDiagram.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="600" src="../Images/lds-006/resetsDiagram.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>

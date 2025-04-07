@@ -9,7 +9,7 @@ However since the headunit was replaced, I seemingly got a new software version 
 Doing some research uncovered that Kias and Hyundais use either Android based software, or a more barebones Linux / Qt UI. Messing with my car made me realise it wasn't Android, so I did some more digging and found references to the "D2V" platform. I then stumbled upon [this](https://programmingwithstyle.com/) amazing blog which detailed basically all of the information I needed. It however didn't specify which passcode to use for engineering mode, but it did offer lots of very useful information, so a lot of the info in this post is based off of that. The blog linked to the Kia update website (update.kia.com) where you could download a D2V update zip if you set your region to US (for some reason updates are not possible if you are in the EU, only map updates). I downloaded the update (link is <https://mobis-sw.haecdn.com/d2v_NA_VDS_c/SC.zip>):
 
 <figure>
-<img width="600" src="../Images/kia-things/001-update-file.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="600" src="../Images/kia-things/001-update-file.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Update files
 </figcaption>
@@ -18,7 +18,7 @@ Update files
 Which said it was compatible for 2021 Rios (my car). I then decrypted it with the password in [this post](https://programmingwithstyle.com/posts/howihackedmycarpart5/) specifically, making sure to take care with the Korean characters in it 😳:
 
 <figure>
-<img width="600" src="../Images/kia-things/002-zip-password.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="600" src="../Images/kia-things/002-zip-password.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Zip password
 </figcaption>
@@ -32,7 +32,7 @@ Some exploration of these folders led me to the `enc_system` directory, specific
 Mounting the image (`sudo mount -t ext4 -o loop system.img /tmp/car/`) gave me a lovely root FS of the headunit:
 
 <figure>
-<img width="600" src="../Images/kia-things/008-root-fs.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="600" src="../Images/kia-things/008-root-fs.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Root FS 
 </figcaption>
@@ -41,7 +41,7 @@ Root FS
 A bit of `grep`ing led me to the engineering mode app:
 
 <figure>
-<img width="400" src="../Images/kia-things/003-engineer-mode-app.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="400" src="../Images/kia-things/003-engineer-mode-app.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Engineering mode application
 </figcaption>
@@ -50,7 +50,7 @@ Engineering mode application
 This was my target! Importing into Ghidra was simple, it all decompiled with the default / detected options. I then did some searching for "password" in strings and labels, then found the `isPasswordCorrect` string scattered around:
 
 <figure>
-<img width="600" src="../Images/kia-things/004-ghidra-searching.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="600" src="../Images/kia-things/004-ghidra-searching.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 References in Ghidra
 </figcaption>
@@ -59,7 +59,7 @@ References in Ghidra
 This seemed quite promising... Looking at the decompilation of the enclosing function where the strings are found, we could see some veeeerrry interesting logic:
 
 <figure>
-<img width="500" src="../Images/kia-things/005-found-hashes.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="500" src="../Images/kia-things/005-found-hashes.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Bingo
 </figcaption>
@@ -71,7 +71,7 @@ Thanks to some nice debug logging, we uncover the likely area where the password
 We can see references to `EngineerPasswordDisplay` which implies that this code is for the engineering mode screen, but I still need access to the variant coding menus. Thankfully the other string reference shown in the Ghidra screenshot above linked to basically identical logic except with a different set of hashes and some logging for `VariantPasswordDisplay`. I again used the forth hash for 202**4** and plugged it into Hashcat, and again got a crack!
 
 <figure>
-<img width="600" src="../Images/kia-things/006-cracked-md5-pw.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="600" src="../Images/kia-things/006-cracked-md5-pw.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 The cracked passwords
 </figcaption>
@@ -82,7 +82,7 @@ The screenshot above shows the two hashes and the corresponding passwords, the t
 Below we can see the high level logic of the operation (ignoring all the Ghidra funkiness). It seems to just be calculating a hash of the inputted string, then checking for equality with the hash that corresponds to the current year's least significant digit.
 
 <figure>
-<img width="600" src="../Images/kia-things/007-hashing-logic.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="600" src="../Images/kia-things/007-hashing-logic.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 The hashing logic
 </figcaption>

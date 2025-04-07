@@ -1,5 +1,5 @@
 # About Me
-I am Alex, a First Class Honours BSc Computer Science graduate (79.5% average).
+I am Alex, a First Class Honours BSc Computer Science graduate (81.2% average).
 
 ## Dissertation
 - Designed and implemented a robotically controlled arch for dataset generation in Reflectance Transformation Imaging. Involved:
@@ -15,21 +15,21 @@ I am Alex, a First Class Honours BSc Computer Science graduate (79.5% average).
   - I built upon the Polynomial Texture Mapping algorithm using a novel higher order multinomials technique - see diagrams below
 
 <figure>
-<img width="500" src="../Images/other-projects/finalProduct.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="500" src="../Images/other-projects/finalProduct.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 The final product
 </figcaption>
 </figure>
 
 <figure>
-<img width="500" src="../Images/other-projects/biquadFit3dGraph.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="500" src="../Images/other-projects/biquadFit3dGraph.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Biquadratic modelling (orange) of pixel response values (blue) as outlined in the original Polynomial Texture Mapping paper
 </figcaption>
 </figure>
 
 <figure>
-<img width="500" src="../Images/other-projects/higherDegree3dPlot.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="500" src="../Images/other-projects/higherDegree3dPlot.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Using a higher order (degree 3) polynomial to better model the specular reflection (note the steeper peak)
 </figcaption>

@@ -3,13 +3,13 @@
 The LDS-006 is a very cheap 360 degree Lidar module that you can buy on Aliexpress. I bought one because I thought the £13 price was too good to be true for a type of module that tends to cost over £50. The listing seemed to say they were salvage pieces from Ecovacs Deebot robot vacuum cleaners, but when it arrived it looked brand new. The listing had almost no information about the module, however I assumed it talked serial like some other modules I had seen before.
 
 <figure>
-<img width="400" src="../Images/lds-006/lidar.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="400" src="../Images/lds-006/lidar.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
 
 <figure>
-<img width="400" src="../Images/lds-006/lidarMotor.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="400" src="../Images/lds-006/lidarMotor.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
@@ -22,7 +22,7 @@ My first test was to see if the thing was actually working, so I hooked up a amm
 The module is designed similarly to other Lidar modules, with the power being inductively coupled up to the spinning part, and data being sent back via an IR LED and receiver. The spinning part houses an IR laser and receiver/sensor, with a GD32F\[something\] microcontroller handling all the fancy laser control and measurement stuff. The bottom board contains another GD32F130 microcontroller, and rather a lot of passives (compared to the Xiaomi lidar that Marco Reps showed in his video). The motor control is done via PWM on pin PA4 of the chip (which just runs over to a MOSFET to drive the DC motor). PA2 and PA3 go out to the connector, as they are the USART1 TX and RX pins respectively. The UART is __NOT 5V TOLERANT__ (according to the datasheet), although I accidentally shoved 5v through it and it still worked fine after. This means that the blue wire is UART TX, and the green is UART RX.
 
 <figure>
-<img width="600" src="../Images/lds-006/lidarInternals.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="600" src="../Images/lds-006/lidarInternals.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
@@ -32,7 +32,7 @@ Inside the spinning part there is a photoelectric fork sensor that detects when 
 There is an SWD debug port next to the microcontroller. The pinout is GND->SWCLK->SWDIO->3v3 (from left to right on the image below), and it works fine with an ST-Link v2 clone I had lying around (more on this later).
 
 <figure>
-<img width="500" src="../Images/lds-006/lidarSWD.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="500" src="../Images/lds-006/lidarSWD.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
@@ -41,7 +41,7 @@ There is an SWD debug port next to the microcontroller. The pinout is GND->SWCLK
 After sussing out some of the internals, I decided to give it another try over serial. The serial setup is standard everything @ 115200 baud. After an hour or so of trying different settings, voltages, pullups and pulldowns etc, I had got nowhere. I tried spamming letters and symbols into my picocom prompt in frustration, and suddenly data started spewing out! It turns out it will start sending data upon receiving the character `$`. That was the only interaction I found you could do with the module. It would send back `!` upon receiving `$` but no amount of spamming (and `cat`ting `/dev/urandom` into it!) could cause any other behaviour.
 
 <figure>
-<img width="500" src="../Images/lds-006/lidarData.png" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="500" src="../Images/lds-006/lidarData.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
