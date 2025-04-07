@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="150" src="Images/frogcar.gif" style="border:7px solid">
+  <img loading="lazy" width="150" src="Images/frogcar.gif" style="border:7px solid">
 </p>
 
 

@@ -1,7 +1,7 @@
 # Alesis Core 1 Audio Interface Input Level Fix
 
 <figure>
-<img width="400" src="../Images/audio-interface-pics/0.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="400" src="../Images/audio-interface-pics/0.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 </figcaption>
 </figure>
@@ -9,7 +9,7 @@
 I bought a second hand Alesis Core 1 audio interface from eBay a while back and I haven't really used it because of a problem with the input level control knob. When changing the level, the output can be heard crackling and jumping between audio levels. This behaviour can be exacerbated by pressing into the dial, which led me to think that the potentiometer wipers not making proper contact to the resistance wire? PCB? stator? - whatever the non spinny part of the potentiometer is called.
 
 <figure>
-<img width="200" src="../Images/audio-interface-pics/1.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="200" src="../Images/audio-interface-pics/1.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Potentiometer in Question ("INPUT")
 </figcaption>
@@ -17,21 +17,21 @@ Potentiometer in Question ("INPUT")
 
 ## Disassembly
 <figure>
-<img width="300" src="../Images/audio-interface-pics/2.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="300" src="../Images/audio-interface-pics/2.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Underside of PCB
 </figcaption>
 </figure>
 
 <figure>
-<img width="300" src="../Images/audio-interface-pics/3.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="300" src="../Images/audio-interface-pics/3.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Side View
 </figcaption>
 </figure>
 
 <figure>
-<img width="300" src="../Images/audio-interface-pics/4.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="300" src="../Images/audio-interface-pics/4.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Removing the Front Panel
 </figcaption>
@@ -41,7 +41,7 @@ Getting inside the thing wasn't too difficult; just some screws underneath the d
 
 ## Fixing in Progress
 <figure>
-<img width="300" src="../Images/audio-interface-pics/5.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="300" src="../Images/audio-interface-pics/5.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Bad Potentiometer Desoldered
 </figcaption>
@@ -50,7 +50,7 @@ Bad Potentiometer Desoldered
 I desoldered the misbehaving potentiometer, resorting to just cutting the metal shield from the solder pads - it was to much of a pain to desolder because of the high thermal mass. 
 
 <figure>
-<img width="300" src="../Images/audio-interface-pics/6.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="300" src="../Images/audio-interface-pics/6.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Inside the Potentiometer
 </figcaption>
@@ -59,7 +59,7 @@ Inside the Potentiometer
 Taking apart the component it is clear to see the wipers on the underside of the spinny bit? rotor? knob?
 
 <figure>
-<img width="300" src="../Images/audio-interface-pics/7.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="300" src="../Images/audio-interface-pics/7.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Pulling the Wipers Up a Bit
 </figcaption>
@@ -70,7 +70,7 @@ I used a pair of tweezers to pull up on the wipers so that they would hopefully 
 ___
 
 <figure>
-<img width="300" src="../Images/audio-interface-pics/8.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="300" src="../Images/audio-interface-pics/8.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Cracks on the PCB????? 😳
 </figcaption>
@@ -81,7 +81,7 @@ I did see these strange crack looking things on the underside of the potentiomet
 ___
 
 <figure>
-<img width="300" src="../Images/audio-interface-pics/9.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="300" src="../Images/audio-interface-pics/9.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Resoldering
 </figcaption>
@@ -90,7 +90,7 @@ Resoldering
 Anyway I resoldered the potentiometer to the PCB, making sure to keep it aligned with the other one so that it would fit into the front panel.
 
 <figure>
-<img width="300" src="../Images/audio-interface-pics/10.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="300" src="../Images/audio-interface-pics/10.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Glued it Down
 </figcaption>
@@ -100,7 +100,7 @@ Because I cut the aforementioned metal shield, I had to use some hot glue to mak
 
 ## Fixed!
 <figure>
-<img width="300" src="../Images/audio-interface-pics/11.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="300" src="../Images/audio-interface-pics/11.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Testing
 </figcaption>
@@ -109,7 +109,7 @@ Testing
 Before putting the device back together I tested it outside of the PCB, and amazingly the issues were fixed!!! No more does the interface have a non responsive input level knob and weird crackles.
 
 <figure>
-<img width="300" src="../Images/audio-interface-pics/12.jpg" alt="" style="border:1px solid black;"/>
+<img loading="lazy" width="300" src="../Images/audio-interface-pics/12.jpg" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
 Put Back Together
 </figcaption>
