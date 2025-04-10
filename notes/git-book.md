@@ -1,7 +1,7 @@
 # Pro Git
 In my day to day job I use Git very frequently, but I've never spent the time to properly get my head round the more complex parts, instead relying on muscle memory and StackOverflow for those occasions that I get stuck. 
 
-I decided to read parts of Pro Git (https://git-scm.com/book/en/v2), going back to basics to learn a bit more about the internals and more advanced features of Git, and to solidify my understanding of this powerful but at times opaque tool.
+I decided to read parts of Pro Git [git-scm.com/book/en/v2](https://git-scm.com/book/en/v2), going back to basics to learn a bit more about the internals and more advanced features of Git, and to solidify my understanding of this powerful but at times opaque tool.
 
 ## Notes
 - Everything in Git is checksummed before it is stored, and referred to by that checksum (SHA-1)
