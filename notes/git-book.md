@@ -37,7 +37,7 @@ I decided to read parts of Pro Git ([git-scm.com/book/en/v2](https://git-scm.com
   - You can glob `git rm` commands but must make sure to include a `\` before a `*` to disable shell filename expansion
 - Git doesn't explicitly track file movement but it will be smart and figure that out after the fact
 
-### Viewing Commits
+### Viewing Commits with `git log`
 - `git log` is used to view the commit history in reverse chronological order
   - `-p` to show the difference (patch output) in each commit
   - `-n` for a number `n` to show the last `n` commits
@@ -51,5 +51,21 @@ I decided to read parts of Pro Git ([git-scm.com/book/en/v2](https://git-scm.com
 
 ### Undoing Things
 - If you committed too early, you can amend the commit with new (staged) changes with `git commit --amend` (without changes staged it will just allow changing the commit message)
-- To remove a file from the staging area, do `git reset HEAD <file>` 
-- To unmodify a modified file, checkout the file with `git checkout -- <file>`, Git will replace your working directory version with the last staged or committed version
+- To remove a file from the **staging area**, do `git reset HEAD <file>` 
+- To **unmodify a modified file**, checkout the file with `git checkout -- <file>`, Git will replace your working directory version with the last staged or committed version
+- `git restore` is an alternative to `git reset`
+  - You can restore a staged file to unstage it with `git restore --staged <file>`
+  - Then you can remove modifications with `git restore <file>` (rather than checking out the file)
+
+### Remotes
+- `git remote -v` shows the remotes you have configured for the repository. `origin` is the default name Git gives the server you cloned from, but remotes can have different names if desired. 
+  - These names are called *shortnames*
+- You can add a new remote with `git remote add <shortname> <url>`
+- You can fetch the information from a remote branch with `git fetch <remote>`, e.g. `git fetch origin`
+  - `origin`'s main branch is then accessible locally as `origin/main`
+  - Again you can have multiple remotes configured (e.g. for multiple collaborators since Git is distributed), and you can pull the changes from a remote with `git fetch <remote>`
+    - You'll get references to all the branches from that remote which can be merged or inspected
+- `git pull` can be used to fetch and merge a remote branch into your current local branch, if you have your current branch set up to track a remote branch
+  - `git clone` sets up the local `main` branch to track the remote `main` branch
+  - Remember `pull` is a `fetch` and `merge` operation in one
+- You can push your commits to a remote with `git push <remote> <branch>` - `git clone` again sets up the `origin` remote and `main` branch automatically
