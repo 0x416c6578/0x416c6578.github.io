@@ -89,8 +89,38 @@ Useful aliases can be found at the [bottom of this page](#useful-aliases)
   - In a detached HEAD state, commits won't belong to a specific branch and will be unreachable except through the exact commit hash
   - If you want to make changes to a tag, create a branch with `git checkout -b <branchname> <tag>`
 
-### Branching
+### Branching Fundamentals (Important)
+- Git stores commits as objects that contain a pointer to the snapshot of the staged content (and other data like author name and email and message) and most importantly a pointer to the commit(s) that came directly before it (parent(s) -> *s* for commits that are the result of a merge)
+  - Staging a file computes a checksum of the file and stores that version of the file in the Git repository (as a *blob*) and adds the checksum to the staging area
+  - Committing a file means Git checksums each directory/subdirectory, storing them as a *tree* in the Git repository. Git then creates the commit object that contains the metadata and a pointer to the *root project tree* so that it can recreate the snapshot (commit) when needed
+  - So committing a file creates 3 things -> a *blob* of the contents, a *tree* listing the contents of the directory specifying which filename is stored as which blob, and finally a *commit* with the pointer to that root tree and the commit metadata
+- An initial commit has no parent, and again future commits reference their parent(s)
+- Branches are just movable pointers to commits. When you commit, the branch pointer moves forward to the new commit.
+- Remember tags are basically branches that don't move with commits
 
+### Branching
+- Git keeps a pointer called HEAD which points to the local branch you're currently on 
+- `git branch <branch>` creates a new branch, `git checkout <branch>` switches you to that branch (changes HEAD to the new branch pointer)
+  - If you then make commits on the new branch, you can switch back to the old branch with `checkout` and the files will be restored to the state they were in at that the point of branching
+- `git log --oneline --decorate --graph --all` will print the history of commits, showing branches and history divergence
+- Branches are very cheap to create and destroy (all they are is a single file containing the SHA-1 of the commit it points to)
+- When you merge a commit with another commit that can be reached by following the first commit's history, all Git does is move the pointer forward to that new commit since there is no divergent stuff to merge - called **fast-forward**
+- When there is divergent stuff, Git will use a merge strategy (e.g. recursive, ort etc.) using the two snapshots pointed to by the branch tips, and the common ancestor of the two
+  - This results in a *merge commit* which is special because it has two parents
+
+<figure>
+<img loading="lazy" width="600" src="../Images/git-book/merge example.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+Reproduced from Fig.24 from Pro Git
+</figcaption>
+</figure>
+
+<figure>
+<img loading="lazy" width="600" src="../Images/git-book/merge result.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+Reproduced from Fig.25 from Pro Git
+</figcaption>
+</figure>
 
 ## Useful Aliases
 Various useful aliases
