@@ -3,7 +3,7 @@
 </p>
 
 ## About
-Hi! I'm Alex (who sometimes goes by the memorable name of`0x416c6578`), a backend software developer in the aerospace and navigation domain. I have interests in embedded programming and hardware hacking. Some info about my education can be found [here](other/about.md). Some of my work can be found at [github.com/0x416c6578](https://github.com/0x416c6578)  
+Hi! I'm Alex (who sometimes goes by the memorable name of`0x416c6578`), a backend software developer in the aerospace and navigation domain. I have interests in embedded programming and hardware hacking. Some info about my education can be found [here](other/about.md). Some of my work can be found at [github.com/0x416c6578](https://github.com/0x416c6578).  
 
 **19.07.24** - [Kia Rio Headunit Passcode Reverse Engineering](posts/015-Kia-Headunit-RE.md) *Using Ghidra and Hashcat to crack the password to my Kia Rio headunit*  
 **11.11.23** - [Alesis Core 1 Audio Interface Level Control Potentiometer Fix](posts/014-Audio-Interface-Fix.md) *Fixing an Alesis Core 1 audio interface with some top level bodging*  
