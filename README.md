@@ -3,7 +3,7 @@
 </p>
 
 ## About
-Hi! I'm Alex (who sometimes goes by the memorable name of`0x416c6578`), a backend software developer in the aerospace and navigation domain. I have interests in embedded programming and hardware hacking. Some info about my education can be found [here](other/about.md).
+Hi! I'm Alex (who sometimes goes by the memorable name of`0x416c6578`), a backend software developer in the aerospace and navigation domain. I have interests in embedded programming and hardware hacking. Some info about my education can be found [here](other/about.md). Some of my work can be found at [github.com/0x416c6578](https://github.com/0x416c6578)  
 
 **19.07.24** - [Kia Rio Headunit Passcode Reverse Engineering](posts/015-Kia-Headunit-RE.md) *Using Ghidra and Hashcat to crack the password to my Kia Rio headunit*  
 **11.11.23** - [Alesis Core 1 Audio Interface Level Control Potentiometer Fix](posts/014-Audio-Interface-Fix.md) *Fixing an Alesis Core 1 audio interface with some top level bodging*  
@@ -20,30 +20,15 @@ Hi! I'm Alex (who sometimes goes by the memorable name of`0x416c6578`), a backen
 **25.07.20** - [A Deep Dive into LVGL Fonts](posts/001-LVGL-fonts.md) *A detailed look at the LVGL font format, with some reverse engineering thanks to my apparent aversion to reading the documentation*  
 
 ## Book Notes
-Various notes on stuff I have been reading - mainly for my own reference.
-
+Various notes on stuff I have been reading - mainly for my own reference.  
 [Pro Git](notes/git-book.md)  
 
-## Large Projects
-[LDS-006 Lidar (2021, WIP)](lds-006/overview.md)  
-[`p8-firmware` (Summer 2020)](p8-firmware/p8-firmware.md)  
-[SAP-1 (2018/19, Extended Project Qualification)](sap-1/overview.md)  
+## Hardware Projects
+[LDS-006 Lidar Work](lds-006/overview.md)  
+[P8 Firmware](p8-firmware/p8-firmware.md)  
+[SAP-1 (Extended Project Qualification)](sap-1/overview.md)  
 
-
-## Small Projects
+### Smaller Things
 [Arduino LED Strip Controller](random-projects/led-strip-controller.md)  
 [ESP8266 Laser Turret](random-projects/laser-turret.md)  
 [Arduino EEPROM Dumper](random-projects/eeprom-dumper.md)  
-- Code for Arduino based projects can be found [here](https://github.com/0x416c6578/arduino-projects)  
-
-___
-
-I have various FreeCAD models for random things available on [this](https://github.com/0x416c6578/cad-projects) repo.
-
-
-## Links
-[Github](https://github.com/0x416c6578)  
-
-
-## Unclassifiables
-[Music](other/other.md)  

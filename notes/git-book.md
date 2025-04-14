@@ -3,6 +3,8 @@ In my day to day job I use Git very frequently, but I've never spent the time to
 
 I decided to read parts of Pro Git ([git-scm.com/book/en/v2](https://git-scm.com/book/en/v2)), going back to basics to learn a bit more about the internals and more advanced features of Git, and to solidify my understanding of this powerful but at times opaque tool.
 
+Useful aliases can be found at the [bottom of this page](#useful-aliases)
+
 ## Notes
 - Everything in Git is checksummed before it is stored, and referred to by that checksum (SHA-1)
 - The staging area is used to mark modified files to go into the next commit (the three sections of a project are the working tree (where files can be _modified_), the staging area (where _staged_ files are) and the Git directory (where _committed_ files are))
@@ -69,3 +71,28 @@ I decided to read parts of Pro Git ([git-scm.com/book/en/v2](https://git-scm.com
   - `git clone` sets up the local `main` branch to track the remote `main` branch
   - Remember `pull` is a `fetch` and `merge` operation in one
 - You can push your commits to a remote with `git push <remote> <branch>` - `git clone` again sets up the `origin` remote and `main` branch automatically
+- `git remote show <remote shortname>` is good for seeing the configuration for a specified remote
+  - It will also show branches you don't yet have stored locally, branches you have that were removed from the remote, and other information
+
+### Tagging
+- `git tag` to list tags, `-l "v1.8.*"` to find specific tags with a wildcard (requires `-l`)
+- *Lightweight* tags are just pointers to specific commits, *annotated* tags contain more info and are stored as full objects in the Git database
+  - It's better to use annotated tags
+- `git tag -a v1.4 -m "This is v1.4"` to create a new annotated tag with a message
+- `git show v1.4` to show the information about a tag
+- `git tag v1.4` without `-a` creates a lightweight tag - lightweight tags can be thought of as just a commit hash stored in a file, no more information is kept
+- You can retroactively tag a commit with `git tag -a v1.4 <commit hash>` - can be a partial commit hash as long as it's unique
+- Git push won't push tags by default - they need explicit pushing with `git push origin v1.4`, similar to pushing to a remote branch
+  - Alternatively you can `git push origin --tags` to push all local tags
+- Delete a tag with `git push origin --delete <tagname>`
+- You can `git checkout <tagname>` to checkout a tag, this puts you in a *detached HEAD* state
+  - In a detached HEAD state, commits won't belong to a specific branch and will be unreachable except through the exact commit hash
+  - If you want to make changes to a tag, create a branch with `git checkout -b <branchname> <tag>`
+
+### Branching
+
+
+## Useful Aliases
+Various useful aliases
+- `git config --global alias.unstage 'reset HEAD --'`
+- `git config --global alias.last 'log -1 HEAD'`
