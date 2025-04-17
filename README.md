@@ -6,7 +6,6 @@
 Hi! I'm Alex (who sometimes goes by the memorable name of`0x416c6578`), a backend software developer in the aerospace and navigation domain. I have interests in embedded programming and hardware hacking. Some info about my education can be found [here](other/about.md). Some of my work can be found at [github.com/0x416c6578](https://github.com/0x416c6578).  
 
 **19.07.24** - [Kia Rio Headunit Passcode Reverse Engineering](posts/015-Kia-Headunit-RE.md) *Using Ghidra and Hashcat to crack the password to my Kia Rio headunit*  
-**11.11.23** - [Alesis Core 1 Audio Interface Level Control Potentiometer Fix](posts/014-Audio-Interface-Fix.md) *Fixing an Alesis Core 1 audio interface with some top level bodging*  
 **08.10.23** - [LineageOS Hosts File Editing Without Root](posts/013-Lineageos-Hosts.md) *How to edit an Android hosts file without root (although with custom recovery / secure boot disabled)*  
 **06.10.21** - [Messing with the LDS-006 Laser Assembly](posts/011-Attempts-Serial-Stuff.md) *Yet more work on the LDS-006 Lidar (currently latest)*  
 **14.09.21** - [Work on Decoding Serial Data from LIDAR](posts/010-Decoding-Serial-Data.md) *Figuring out the serial data format of the LDS-006*  
@@ -32,3 +31,4 @@ Various notes on stuff I have been reading - mainly for my own reference.
 [Arduino LED Strip Controller](random-projects/led-strip-controller.md)  
 [ESP8266 Laser Turret](random-projects/laser-turret.md)  
 [Arduino EEPROM Dumper](random-projects/eeprom-dumper.md)  
+[Alesis Core 1 Audio Interface Level Control Potentiometer Fix](posts/014-Audio-Interface-Fix.md)  
