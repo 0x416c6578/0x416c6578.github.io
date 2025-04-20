@@ -21,6 +21,7 @@ Hi! I'm Alex (who sometimes goes by the memorable name of`0x416c6578`), a backen
 ## Book Notes
 Various notes on stuff I have been reading - mainly for my own reference.  
 [Pro Git](notes/git-book.md)  
+[Go Notes](notes/go-class.md)  
 
 ## Hardware Projects
 [LDS-006 Lidar Work](lds-006/overview.md)  
