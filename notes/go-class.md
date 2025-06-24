@@ -1,4 +1,4 @@
-m# Matt Holiday Go Class (YouTube)
+# Matt Holiday Go Class (YouTube)
 Notes from learning the fundamentals of the Go programming language from [this amazing tutorial](https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6). It is a fantastic video tutorial on YouTube that explains Go concepts from the ground up and offers some great insight into the language design 
 
 ## Notes
@@ -53,7 +53,7 @@ _m := make(map[string]int) // empty non-nil map
 - Maps are passed by reference, and the key type must have == and != defined (so the key cannot be a slice, map or function)
 - Map literals are a thing:
 ```go
-var m = map[string]int{
+var m = map[string]int {
   "hello": 1
 }
 ```
@@ -78,5 +78,34 @@ Reproduced from <a href="https://www.youtube.com/watch?v=T0Xymg0_aSU">https://ww
 </figcaption>
 </figure>
 
-### `nil`
-- `nil` indicates the absence of something
+### `nil` (From [https://www.youtube.com/watch?v=ynoY2xz-F8s](https://www.youtube.com/watch?v=ynoY2xz-F8s))
+- `nil` indicates the absence of something, with part of the Go philosophy being to make the zero value useful
+- The length of a nil slice is 0, you can read a map that doesn't exist - any key returns the default value. These features reduce code noise / boilerplate
+- The `nil` value has no type; it is defined for the following constructs:
+  - Nil pointer -> the zero value for pointers - points to nothing
+  - Nil slice -> a slice with no backing array (with zero length and zero capacity)
+  - Nil channels, maps and functions -> these are all pointers under the hood so a nil [channel,pointer,function] is just a nil pointer
+#### Nil Interfaces
+- Nil interfaces -> I still don't fully understand this but interfaces internally have two things - the type of the value inside and the value itself
+```go
+var s fmt.Stringer   // This is a nil interface with no concrete type and no value (nil, nil)
+
+fmt.Println(s == nil)   // Will print true since (nil, nil) == nil
+
+//---
+
+var p *Person // This Person satisfies the person interface
+
+var s fmt.Stringer = p // Now we have (*Person, nil) - a concrete type (*Person) but still no value. This is now no longer equal to nil
+
+//---
+
+func do() error { // This will return the nil pointer wrapped in the error interface (*doError, nil)
+  var err *doError
+  return err // This is a nil pointer of type *doError
+}
+
+fmt.Println(do() == nil) // Will be FALSE because of the above example - (*doError, nil) != nil!!!
+
+// It is good practice to not define or return concrete error variables
+```
