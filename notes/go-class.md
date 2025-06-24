@@ -3,13 +3,16 @@ Notes from learning the fundamentals of the Go programming language from [this a
 
 ## Notes
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
+
 ```go
 var a int
 // or
 a := 2 // in functions or methods
 ```
+
 - Fun Printf snippet - `%d %[1]v` will _reuse_ the first passed in argument (e.g. if we want to print a single variable twice in a Printf, you'd normally do `fmt.Printf("%d %d", a, a)`, but with this you just need to do `fmt.Printf("%d %[1]v", a)` and that parameter `a` will be reused)
 - Only numbers, strings or booleans can be constants
+
 ```go
 const(
     a = 1
@@ -17,6 +20,7 @@ const(
     s = "hello"
 )
 ```
+
 ### Strings
 - `byte` is a synonym for `uint8`
 - `rune` is a synonym for `int32` for characters 
@@ -24,9 +28,11 @@ const(
   - Logically a sequence of unicode `runes`
   - Physically a sequence of bytes (UTF-8 encoding)
 - We can do raw strings with backticks (they don't evaluate escape characters such an `\n`)
+
 ```go
 `string with "quotes"`
 ```
+
 - IMPORTANT: The length of a `string` is the number of UTF-8 bytes required to encode it, NOT THE NUMBER OF LOGICAL CHARACTERS
 - Internally strings consist of a length (remember that they are immutable) and a pointer to the memory where the string is stored. Since the _descriptor_ contains a length, no null byte termination is needed (as is the case in C)
 - Strings are passed by reference
@@ -45,10 +51,12 @@ const(
 - Maps are implemented using a hash table
 - When you try to read a key that doesn't exist, you receive the default value of the map value type (e.g. for an `int` you'd get 0)
 - You can also read from nil (uninitialised) maps, again will return the default value for any key
+
 ```go
 var m map[string]int // nil map (reading any key will return the default value of the map value type)
 _m := make(map[string]int) // empty non-nil map
 ```
+
 - `make` creates the underlying hash table and allocates memory etc. It is required to instantiate and write to a map
 - Maps are passed by reference, and the key type must have == and != defined (so the key cannot be a slice, map or function)
 - Map literals are a thing:
@@ -59,6 +67,7 @@ var m = map[string]int {
 ```
 - Maps can be created with a set capacity for better performance
 - Maps also have a two-result lookup function:
+
 ```go
 p := map[string]int{} // Empty non nil map
 a, ok := p["hello"] // Returns 0, false since the key "hello" doesn't exist
@@ -87,6 +96,7 @@ Reproduced from <a href="https://www.youtube.com/watch?v=T0Xymg0_aSU">https://ww
   - Nil channels, maps and functions -> these are all pointers under the hood so a nil [channel,pointer,function] is just a nil pointer
 #### Nil Interfaces
 - Nil interfaces -> I still don't fully understand this but interfaces internally have two things - the type of the value inside and the value itself
+
 ```go
 var s fmt.Stringer   // This is a nil interface with no concrete type and no value (nil, nil)
 
