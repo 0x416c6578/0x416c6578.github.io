@@ -2,6 +2,7 @@
 Notes from learning the fundamentals of the Go programming language from [this amazing tutorial](https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6). It is a fantastic video tutorial on YouTube that explains Go concepts from the ground up and offers some great insight into the language design 
 
 ## Notes
+### Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
 
 ```go
@@ -60,11 +61,13 @@ _m := make(map[string]int) // empty non-nil map
 - `make` creates the underlying hash table and allocates memory etc. It is required to instantiate and write to a map
 - Maps are passed by reference, and the key type must have == and != defined (so the key cannot be a slice, map or function)
 - Map literals are a thing:
+
 ```go
 var m = map[string]int {
   "hello": 1
 }
 ```
+
 - Maps can be created with a set capacity for better performance
 - Maps also have a two-result lookup function:
 
@@ -118,4 +121,146 @@ func do() error { // This will return the nil pointer wrapped in the error inter
 fmt.Println(do() == nil) // Will be FALSE because of the above example - (*doError, nil) != nil!!!
 
 // It is good practice to not define or return concrete error variables
+``` 
+
+### Control Statements
+- If statements require braces
+- We can have a short declaration in an if statement to simplify logic:
+
+```go
+if x, err := doSomething(); err != nil {
+  return err  
+}
 ```
+
+- Only for loops exist in Go, no do or while
+- We can do ranged for loops for arrays and slices:
+
+```go
+for i := range someArr {
+  // i is an index here. Remember this - this mistake can happen often. i is the INDEX NOT THE VALUE. 
+  // If you want to range over the values you can use the blank identifier like for _, v := range someArray
+}
+
+for i, v := range someArr {
+  // i is an index, v is the value at that index
+  // The value v is COPIED - don't modify. If the values are some large struct, it might be better to use the explicit indexing for loop
+}
+
+for k := range someMap {
+  // Looping over all keys in a map
+}
+
+for k, v := range someMap {
+  // Getting the keys and values in the loop
+}
+```
+
+- Remember maps in Go have no order since they are based on a hashtable
+  - To run through a maps values in key order, the keys must be extracted, sorted, then looped over to index into the map
+- An infinite loop can be started with an empty for:
+
+```go
+for {
+  // Infinite loop
+}
+```
+
+- Switch statements are syntactic sugar for a series of if-then statements
+
+```go
+switch someVal {
+  case 0,1,2:
+    fmt.Println("Low")
+  case 3,4,5:
+    // Noop
+  default:
+    fmt.Println("Other")
+}
+```
+
+- Cases break automatically in Go - no break statement is needed 
+- There is also a switch on true statement which is used to make arbitrary comparisons:
+
+```go
+a := 3
+
+switch {
+  case a <= 2:
+  case a == 8:
+  default:
+    // Do something
+}
+```
+
+- It's basically just a bunch of if statements, evaluated in the order they are written
+
+### Packages
+- Every standalone program in Go must have a `main` package
+- There are two main scopes in Go; package scope and function scope
+- You can declare anything at package scope but you can't use the short declaration operator `:=`
+  - This is to make the program easier to parse since every statement at the top level has a keyword (e.g. const, var, type, func etc.)
+- Packages break the program down into independent parts
+- Anything with a capital letter is exported
+- within a package, everything is visible (even across multiple files - you can have multiple files under the same package)
+
+### Imports
+- Go imports are based on necessity, if an import isn't used within a file then it is a syntax error
+- Go understandably doesn't allow circular imports
+- There is an `init()` function for a package, however using this isn't really recommended
+- *Packages should embed complex behaviour behind a simple API*
+
+### Variable Declarations
+- Using the `var` keyword
+
+```go
+var a int
+var a int = 1
+var c = 1       // Type inference
+var d = 1.0
+
+// Declaration block for simplicity
+var (
+  x, y int
+  z    float64
+  s    string
+)
+```
+
+#### Short Declaration Operator `:=`
+- The short declaration operator `:=` is used to declare and assign to a variable
+- It can't be used outside of functions (to allow for faster parsing of a program)
+- It must declare at least one new variable:
+
+```go
+err := doSomething()
+err := doSomethingElse() // This is wrong, you can't re-declare err
+x, err := doSomethingOther() // This is fine since you are declaring the new var x, and just reassigning err from the original assignment on the skip line above
+```
+
+- The caveat to that final point is that we _can redeclare (shadow) to variables in an outer scope_
+  - When using a short declaration in a control structure (e.g. `if _,err := do(); err != nil`), that err declaration is local to the control structure scope (that if block scope). 
+- See example for a gotcha:
+
+```go
+func do() error {
+  var err error
+
+  for {
+    n, err := f.Read(buf)
+
+    if err != nil {
+      break
+    }
+
+    doSomething(buf)
+  }
+
+  return err
+}
+```
+
+- The mistake here is that the err in the for loop is of an inner scope, it shadows the one defined in the function scope above, and is lost when the for loop exits. Thus returning the err in the last line will _always be nil_ 
+
+### Typing
+#### Structural and Named Typing
