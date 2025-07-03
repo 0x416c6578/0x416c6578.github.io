@@ -264,3 +264,17 @@ func do() error {
 
 ### Typing
 #### Structural and Named Typing
+- Structural typing is based on the structure of a variable. Some examples of things with the same type:
+  - Arrays with the same base type _and_ size
+  - Slices with the same base type
+  - Maps with the same key _and_ value types
+  - Structs with the same sequence of field names and types
+  - Functions with the same typed parameters and return types
+- Named typing happens when you introduce a new custom type with the `type` keyword
+  - Things are only the same type when they have the same declared named type, so declaring `type x int` means that you can't assign something with type `x` to `int` or vice versa, you would have to use a type conversion like `var thing x = x(12)`
+- Integer literals are untyped - they can assign to any size integer without conversion, and can be assigned to floats, complex etc.
+- The only overloaded operator in Go is the + operator to concatenate strings
+
+### Functions
+- Functions in Go are first class objects
+- Almost anything can be defined in a function, except (understandably) methods
