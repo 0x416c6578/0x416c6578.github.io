@@ -356,3 +356,5 @@ func main() {
 - The inner function will get a reference to the outer function's variables
 - Those variables may have a longer than expected lifetime so long as there's a reference to the inner function
 - The actual _closure_ is the concrete thing returned by calling `thing()` above - it is a function that returns an int alongside the environment containing references to the values a and b
+- See [this post](../posts/017-Go-For-Loop-Caveat.md) for information on an important change in Go 1.22 that changes the semantics of for loops that differs from the information shown in the tutorial video
+

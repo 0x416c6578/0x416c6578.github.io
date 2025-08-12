@@ -5,6 +5,7 @@
 ## About
 Hi! I'm Alex (who sometimes goes by the memorable name of`0x416c6578`), a backend software developer in the aerospace and navigation domain. I have interests in embedded programming and hardware hacking. Some info about my education can be found [here](other/about.md). Some of my work can be found at [github.com/0x416c6578](https://github.com/0x416c6578).  
 
+**12.08.25** - [Go 1.22 Loop Semantics Change](posts/017-Go-For-Loop-Caveat.md) *Addendum for Go learning explaining the change in semantics of for loops in Go*  
 **24.06.25** - [Three Peaks 2025](posts/016-Three-Peaks.md) *Completing the three peaks challenge*  
 **19.07.24** - [Kia Rio Headunit Passcode Reverse Engineering](posts/015-Kia-Headunit-RE.md) *Using Ghidra and Hashcat to crack the password to my Kia Rio headunit*  
 **08.10.23** - [LineageOS Hosts File Editing Without Root](posts/013-Lineageos-Hosts.md) *How to edit an Android hosts file without root (although with custom recovery / secure boot disabled)*  
