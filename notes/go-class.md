@@ -291,7 +291,10 @@ func do() error {
 - Functions can return multiple return values by putting them in parens, e.g. `(int, error)`
 - An idiomatic pattern is to return `(value, error)` where `error != nil` indicates some error has occurred
 
-### Defer
+#### Naked Return Values
+- If you name the return value in the signature of your function, Go will implicitly declare variable(s) with the given names and types 
+
+#### Defer
 - The defer statement allows you to defer some operation (function call) to run on function exit
 - Care needs to be taken to make sure the defer makes sense and is valid
 - Defer operates on a function scope, e.g.:
@@ -310,3 +313,46 @@ func main() {
   // At this point we can do something with the file and only if it is a file passed in the params will it be closed at function exit
 }
 ```
+
+- The above example has `f.close()` running at _function_ exit not block ending
+- The value of arguments in a deferred function call are _copied_ at the point of the defer call
+
+```go
+func thing() {
+  a := 10
+  defer fmt.Println(a)
+  a = 11
+  fmt.Println(a)
+  // Will print 11,10
+}
+```
+
+### Closures
+- Scope is static - based on the structure of the source code
+- Lifetime depends on the program execution (e.g. returning a reference from a function makes that value live outside of the function scope)
+  - The variable will exist so long as a part of the program keeps a pointer to it
+  - Go will do escape analysis to figure out the lifetime of a thing
+- A closure is when a function inside another function closes over one or more local variables of the outer function:
+
+```go
+func fib() func() int {
+  a, b := 0, 1
+
+  return func() int {
+    a, b = b, a+b
+    return b 
+  }
+}
+
+func main() {
+  f := fib()
+
+  for x := f(); x < 100; x = f() {
+    fmt.Println(x) // Prints fibonacci numbers less than 100
+  }
+}
+```
+
+- The inner function will get a reference to the outer function's variables
+- Those variables may have a longer than expected lifetime so long as there's a reference to the inner function
+- The actual _closure_ is the concrete thing returned by calling `thing()` above - it is a function that returns an int alongside the environment containing references to the values a and b
