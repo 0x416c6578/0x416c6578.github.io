@@ -354,7 +354,48 @@ func main() {
 ```
 
 - The inner function will get a reference to the outer function's variables
+  - This is IMPORTANT - the closure gets a _reference_ - watch out for this
 - Those variables may have a longer than expected lifetime so long as there's a reference to the inner function
 - The actual _closure_ is the concrete thing returned by calling `thing()` above - it is a function that returns an int alongside the environment containing references to the values a and b
 - See [this post](../posts/017-Go-For-Loop-Caveat.md) for information on an important change in Go 1.22 that changes the semantics of for loops that differs from the information shown in the tutorial video
+
+### More on Slices
+```go
+// The following shows some different slices, with information on them given below
+
+var s []int
+t := []int{}
+u := make([]int, 5)
+v := make([]int, 0, 5)
+w := []int{1,2,3,4,5}
+```
+
+- Before explaining each slice we define the slice descriptor (an internal thing) as a tuple of (length, capacity, arrAddr) 
+  - Length is the amount of elements stored in the slice
+  - Capacity is the size of the underlying array storing the values
+  - `arrAddr` is a pointer to the underlying array
+- `s` is an uninitialised or nil slice
+  - It has 0 length, 0 cap and a nil pointer in `arrAddr`
+- `t` is an initialised but empty slice
+  - It has 0 length and 0 capacity and `arrAddr` points to a special sentinel _`struct{}`_ value (again an internal thing that is basically a nothing value but not nil)
+  - This is because it has 0 capacity so it can't point to a concrete array of 0 length - this sentinel value is an internal language thing that isn't exposed
+- `u` is an initialised slice with 5 length and 5 capacity
+  - It will be storing 5 of the zero value of it's slice type - e.g. for int it would be [0,0,0,0,0]
+  - **This is an important thing to remember - appending to this list will create a list of 6 elements not 1!!**
+- `v` is an initialised slice with 0 length and 5 capacity
+  - The underlying array will have a size of 5 but won't be storing anything - attempting to read from this will cause a panic since the length is 0
+
+#### The Slice Operator
+- The slice operator allows you to take a view of a slice
+- It looks like `a[0:2]` - which will take the 0 and 1 elements of `a` (it is exclusive for the _to_ side)
+
+##### The Slice Capacity Issue
+- The slice operator basically just creates a _view_ into the underlying array of a slice
+- This means that when slicing a slice of e.g. size 5 to get `0:2`, you get back a slice descriptor with length 2 but capacity 5 (since the underlying array is the same and has length 5)
+- You can then legally slice this slice at e.g. `0:3` and you'll get back a slice descriptor of length 3 - which will contain the value at index 2 of the original slice!!!
+- **This is an important thing to remember**
+- This design is maybe not ideal but it is what it is. To fix this the slice with capacity operator was introduced
+- This looks like `a[0:2:2]` - this will create a slice descriptor of length 2 AND CAPACITY 2
+  - This means if you append to this slice Go will have to allocate a new array with new size and importantly a new memory address so the append works properly and doesn't touch the underlying array of the original slice
+- Slices are basically aliases to underlying arrays
 
