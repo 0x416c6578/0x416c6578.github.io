@@ -8,7 +8,7 @@ Notes from learning the fundamentals of the Go programming language from [this a
   - [Maps](#maps)
   - [Various Builtin Functions](#various-builtin-functions)
   - [`nil` (From https://www.youtube.com/watch?v=ynoY2xz-F8s)](#nil-from-httpswwwyoutubecomwatchvynoy2xz-f8s)
-      - [Nil Interfaces- Nil interfaces -\> I still don't fully understand this but interfaces internally have two things - the type of the value inside and the value itself](#nil-interfaces--nil-interfaces---i-still-dont-fully-understand-this-but-interfaces-internally-have-two-things---the-type-of-the-value-inside-and-the-value-itself)
+    - [Nil Interfaces](#nil-interfaces)
   - [Control Statements](#control-statements)
   - [Packages](#packages)
   - [Imports](#imports)
@@ -121,7 +121,9 @@ Reproduced from <a href="https://www.youtube.com/watch?v=T0Xymg0_aSU">https://ww
   - Nil pointer -> the zero value for pointers - points to nothing
   - Nil slice -> a slice with no backing array (with zero length and zero capacity)
   - Nil channels, maps and functions -> these are all pointers under the hood so a nil [channel,pointer,function] is just a nil pointer
-#### Nil Interfaces- Nil interfaces -> I still don't fully understand this but interfaces internally have two things - the type of the value inside and the value itself
+
+### Nil Interfaces
+- Nil interfaces -> I still don't fully understand this but interfaces internally have two things - the type of the value inside and the value itself
 
 ```go
 var s fmt.Stringer   // This is a nil interface with no concrete type and no value (nil, nil)
