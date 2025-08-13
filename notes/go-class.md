@@ -2,34 +2,31 @@
 Notes from learning the fundamentals of the Go programming language from [this amazing tutorial](https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6). It is a fantastic video tutorial on YouTube that explains Go concepts from the ground up and offers some great insight into the language design 
 
 - [Matt Holiday Go Class (YouTube)](#matt-holiday-go-class-youtube)
-  - [Notes](#notes)
-    - [Variables](#variables)
-    - [Strings](#strings)
-    - [Arrays and Slices](#arrays-and-slices)
-    - [Maps](#maps)
-    - [Various Builtin Functions](#various-builtin-functions)
-    - [`nil` (From https://www.youtube.com/watch?v=ynoY2xz-F8s)](#nil-from-httpswwwyoutubecomwatchvynoy2xz-f8s)
-      - [Nil Interfaces](#nil-interfaces)
-    - [Control Statements](#control-statements)
-    - [Packages](#packages)
-    - [Imports](#imports)
-    - [Variable Declarations](#variable-declarations)
-      - [Short Declaration Operator `:=`](#short-declaration-operator-)
-    - [Typing](#typing)
-      - [Structural and Named Typing](#structural-and-named-typing)
-    - [Functions](#functions)
-      - [Parameter Passing](#parameter-passing)
-      - [Multiple Return Values](#multiple-return-values)
-      - [Naked Return Values](#naked-return-values)
-      - [Defer](#defer)
-    - [Closures](#closures)
-    - [More on Slices](#more-on-slices)
-      - [The Slice Operator](#the-slice-operator)
-        - [The Slice Capacity Issue](#the-slice-capacity-issue)
+  - [Variables](#variables)
+  - [Strings](#strings)
+  - [Arrays and Slices](#arrays-and-slices)
+  - [Maps](#maps)
+  - [Various Builtin Functions](#various-builtin-functions)
+  - [`nil` (From https://www.youtube.com/watch?v=ynoY2xz-F8s)](#nil-from-httpswwwyoutubecomwatchvynoy2xz-f8s)
+      - [Nil Interfaces- Nil interfaces -\> I still don't fully understand this but interfaces internally have two things - the type of the value inside and the value itself](#nil-interfaces--nil-interfaces---i-still-dont-fully-understand-this-but-interfaces-internally-have-two-things---the-type-of-the-value-inside-and-the-value-itself)
+  - [Control Statements](#control-statements)
+  - [Packages](#packages)
+  - [Imports](#imports)
+  - [Variable Declarations](#variable-declarations)
+    - [Short Declaration Operator `:=`](#short-declaration-operator-)
+  - [Typing](#typing)
+    - [Structural and Named Typing](#structural-and-named-typing)
+  - [Functions](#functions)
+    - [Parameter Passing](#parameter-passing)
+    - [Multiple Return Values](#multiple-return-values)
+    - [Naked Return Values](#naked-return-values)
+    - [Defer](#defer)
+  - [Closures](#closures)
+  - [More on Slices](#more-on-slices)
+    - [The Slice Operator](#the-slice-operator)
+      - [The Slice Capacity Issue](#the-slice-capacity-issue)
 
-
-## Notes
-### Variables
+## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
 
 ```go
@@ -49,7 +46,7 @@ const(
 )
 ```
 
-### Strings
+## Strings
 - `byte` is a synonym for `uint8`
 - `rune` is a synonym for `int32` for characters 
 - `string` is an _immutable_ sequence of "characters"
@@ -66,7 +63,7 @@ const(
 - Strings are passed by reference
 - The `strings` package contains useful string functions
 
-### Arrays and Slices
+## Arrays and Slices
 - Arrays have fixed size, slices are variable size
 - Slices have a backing array to store the data; slice _descriptors_ (not an official thing - just used to denote the underlying logic of this data) have a length (how many things in the slice), a capacity (the capacity of the underlying array) and a pointer to the underlying array
 - Slices are passed by reference, but you can modify them unlike strings
@@ -75,7 +72,7 @@ const(
 - Slices have `copy` and `append` helper operators
 - Arrays are used almost as pseudo constants
 
-### Maps
+## Maps
 - Maps are implemented using a hash table
 - When you try to read a key that doesn't exist, you receive the default value of the map value type (e.g. for an `int` you'd get 0)
 - You can also read from nil (uninitialised) maps, again will return the default value for any key
@@ -109,7 +106,7 @@ if w, ok := p["the"]; ok {
 }
 ```
 
-### Various Builtin Functions
+## Various Builtin Functions
 <figure>
 <img loading="lazy" width="500" src="../Images/go-tutorial/builtins.png" alt="" style="border:1px solid black;"/>
 <figcaption style="font-style: italic;">
@@ -117,15 +114,14 @@ Reproduced from <a href="https://www.youtube.com/watch?v=T0Xymg0_aSU">https://ww
 </figcaption>
 </figure>
 
-### `nil` (From [https://www.youtube.com/watch?v=ynoY2xz-F8s](https://www.youtube.com/watch?v=ynoY2xz-F8s))
+## `nil` (From [https://www.youtube.com/watch?v=ynoY2xz-F8s](https://www.youtube.com/watch?v=ynoY2xz-F8s))
 - `nil` indicates the absence of something, with part of the Go philosophy being to make the zero value useful
 - The length of a nil slice is 0, you can read a map that doesn't exist - any key returns the default value. These features reduce code noise / boilerplate
 - The `nil` value has no type; it is defined for the following constructs:
   - Nil pointer -> the zero value for pointers - points to nothing
   - Nil slice -> a slice with no backing array (with zero length and zero capacity)
   - Nil channels, maps and functions -> these are all pointers under the hood so a nil [channel,pointer,function] is just a nil pointer
-#### Nil Interfaces
-- Nil interfaces -> I still don't fully understand this but interfaces internally have two things - the type of the value inside and the value itself
+#### Nil Interfaces- Nil interfaces -> I still don't fully understand this but interfaces internally have two things - the type of the value inside and the value itself
 
 ```go
 var s fmt.Stringer   // This is a nil interface with no concrete type and no value (nil, nil)
@@ -150,7 +146,7 @@ fmt.Println(do() == nil) // Will be FALSE because of the above example - (*doErr
 // It is good practice to not define or return concrete error variables
 ``` 
 
-### Control Statements
+## Control Statements
 - If statements require braces
 - We can have a short declaration in an if statement to simplify logic:
 
@@ -222,7 +218,7 @@ switch {
 
 - It's basically just a bunch of if statements, evaluated in the order they are written
 
-### Packages
+## Packages
 - Every standalone program in Go must have a `main` package
 - There are two main scopes in Go; package scope and function scope
 - You can declare anything at package scope but you can't use the short declaration operator `:=`
@@ -231,13 +227,13 @@ switch {
 - Anything with a capital letter is exported
 - within a package, everything is visible (even across multiple files - you can have multiple files under the same package)
 
-### Imports
+## Imports
 - Go imports are based on necessity, if an import isn't used within a file then it is a syntax error
 - Go understandably doesn't allow circular imports
 - There is an `init()` function for a package, however using this isn't really recommended
 - *Packages should embed complex behaviour behind a simple API*
 
-### Variable Declarations
+## Variable Declarations
 - Using the `var` keyword
 
 ```go
@@ -254,7 +250,7 @@ var (
 )
 ```
 
-#### Short Declaration Operator `:=`
+### Short Declaration Operator `:=`
 - The short declaration operator `:=` is used to declare and assign to a variable
 - It can't be used outside of functions (to allow for faster parsing of a program)
 - It must declare at least one new variable:
@@ -289,8 +285,8 @@ func do() error {
 
 - The mistake here is that the err in the for loop is of an inner scope, it shadows the one defined in the function scope above, and is lost when the for loop exits. Thus returning the err in the last line will _always be nil_ 
 
-### Typing
-#### Structural and Named Typing
+## Typing
+### Structural and Named Typing
 - Structural typing is based on the structure of a variable. Some examples of things with the same type:
   - Arrays with the same base type _and_ size
   - Slices with the same base type
@@ -302,26 +298,26 @@ func do() error {
 - Integer literals are untyped - they can assign to any size integer without conversion, and can be assigned to floats, complex etc.
 - The only overloaded operator in Go is the + operator to concatenate strings
 
-### Functions
+## Functions
 - Functions in Go are first class objects
 - Almost anything can be defined in a function, except (understandably) methods
 - The signature of a function is the order and type of its parameters and return values. Functions are always typed with structural typing rather than named typing
 
-#### Parameter Passing
+### Parameter Passing
 - Numbers, bools, arrays and structs are passed by value
   - This is important to note since structs are the most likely things needing to be modified by a function or method
 - Things passed by pointer (`&x`), strings (although they're immutable) slices, maps and channels are all passed by reference, meaning that their values can be updated inside a function 
 - In actuality the model is similar to Java where it is technically all by value (except the value for those above things passed by _reference_ is the value of the _descriptor_ for that thing)
 - This means that parameter reassignments for a non-pointer argument won't change the thing outside of the context of that function (but passing in a pointer to the function does mean we can reassign to the parameter and change the thing outside of the scope of the function). Basically the semantics are similar to Java
 
-#### Multiple Return Values
+### Multiple Return Values
 - Functions can return multiple return values by putting them in parens, e.g. `(int, error)`
 - An idiomatic pattern is to return `(value, error)` where `error != nil` indicates some error has occurred
 
-#### Naked Return Values
+### Naked Return Values
 - If you name the return value in the signature of your function, Go will implicitly declare variable(s) with the given names and types 
 
-#### Defer
+### Defer
 - The defer statement allows you to defer some operation (function call) to run on function exit
 - Care needs to be taken to make sure the defer makes sense and is valid
 - Defer operates on a function scope, e.g.:
@@ -354,7 +350,7 @@ func thing() {
 }
 ```
 
-### Closures
+## Closures
 - Scope is static - based on the structure of the source code
 - Lifetime depends on the program execution (e.g. returning a reference from a function makes that value live outside of the function scope)
   - The variable will exist so long as a part of the program keeps a pointer to it
@@ -386,7 +382,7 @@ func main() {
 - The actual _closure_ is the concrete thing returned by calling `thing()` above - it is a function that returns an int alongside the environment containing references to the values a and b
 - See [this post](../posts/017-Go-For-Loop-Caveat.md) for information on an important change in Go 1.22 that changes the semantics of for loops that differs from the information shown in the tutorial video
 
-### More on Slices
+## More on Slices
 ```go
 // The following shows some different slices, with information on them given below
 
@@ -412,11 +408,11 @@ w := []int{1,2,3,4,5}
 - `v` is an initialised slice with 0 length and 5 capacity
   - The underlying array will have a size of 5 but won't be storing anything - attempting to read from this will cause a panic since the length is 0
 
-#### The Slice Operator
+### The Slice Operator
 - The slice operator allows you to take a view of a slice
 - It looks like `a[0:2]` - which will take the 0 and 1 elements of `a` (it is exclusive for the _to_ side)
 
-##### The Slice Capacity Issue
+#### The Slice Capacity Issue
 - The slice operator basically just creates a _view_ into the underlying array of a slice
 - This means that when slicing a slice of e.g. size 5 to get `0:2`, you get back a slice descriptor with length 2 but capacity 5 (since the underlying array is the same and has length 5)
 - You can then legally slice this slice at e.g. `0:3` and you'll get back a slice descriptor of length 3 - which will contain the value at index 2 of the original slice!!!
