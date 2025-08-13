@@ -1,6 +1,33 @@
 # Matt Holiday Go Class (YouTube)
 Notes from learning the fundamentals of the Go programming language from [this amazing tutorial](https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6). It is a fantastic video tutorial on YouTube that explains Go concepts from the ground up and offers some great insight into the language design 
 
+- [Matt Holiday Go Class (YouTube)](#matt-holiday-go-class-youtube)
+  - [Notes](#notes)
+    - [Variables](#variables)
+    - [Strings](#strings)
+    - [Arrays and Slices](#arrays-and-slices)
+    - [Maps](#maps)
+    - [Various Builtin Functions](#various-builtin-functions)
+    - [`nil` (From https://www.youtube.com/watch?v=ynoY2xz-F8s)](#nil-from-httpswwwyoutubecomwatchvynoy2xz-f8s)
+      - [Nil Interfaces](#nil-interfaces)
+    - [Control Statements](#control-statements)
+    - [Packages](#packages)
+    - [Imports](#imports)
+    - [Variable Declarations](#variable-declarations)
+      - [Short Declaration Operator `:=`](#short-declaration-operator-)
+    - [Typing](#typing)
+      - [Structural and Named Typing](#structural-and-named-typing)
+    - [Functions](#functions)
+      - [Parameter Passing](#parameter-passing)
+      - [Multiple Return Values](#multiple-return-values)
+      - [Naked Return Values](#naked-return-values)
+      - [Defer](#defer)
+    - [Closures](#closures)
+    - [More on Slices](#more-on-slices)
+      - [The Slice Operator](#the-slice-operator)
+        - [The Slice Capacity Issue](#the-slice-capacity-issue)
+
+
 ## Notes
 ### Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
