@@ -25,6 +25,8 @@ Notes from learning the fundamentals of the Go programming language from [this a
   - [More on Slices](#more-on-slices)
     - [The Slice Operator](#the-slice-operator)
       - [The Slice Capacity Issue](#the-slice-capacity-issue)
+    - [Array and Slice APIs From Here](#array-and-slice-apis-from-here)
+  - [References](#references)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -424,3 +426,52 @@ w := []int{1,2,3,4,5}
   - This means if you append to this slice Go will have to allocate a new array with new size and importantly a new memory address so the append works properly and doesn't touch the underlying array of the original slice
 - Slices are basically aliases to underlying arrays
 
+### Array and Slice APIs [From Here](https://go.dev/blog/slices-intro)
+- To create an array from an array literal you can do `b := [2]string{"Hello", "world"}`, and you can do `b := [...]string` to let Go determine the size of the array for you based on the proceeding literal
+- Slices are made with the `make` function (`func make([]T, len, cap) []T`)
+- `len` and `cap` functions can be used to retrieve the length and capacity of a slice
+- You can take an array `arr` and create a slice referencing (or providing a view of) the storage of `arr` using `s := arr[:]`
+- If you slice an array (or slice) with capacity 5, not from the 0th element, then the resulting slice will have a capacity equal to the original capacity minus the length of the specified slice range. This is a variation on the slice capacity issue above
+  - You can grow the slice to the end of the backing array's length using `s = s[:cap(s)]`
+- Growing a slice can be done by making a larger slice and copying the data into it
+
+```go
+s := make([]int, 5)
+
+// This is basically the internal implementation of slice growing that Go uses when appending to a slice that has reached it's max capacity
+t := make([]int, len(s), (cap(s)+1)*2)
+copy(t, s)
+s = t
+```
+
+- As mentioned a slice will be automatically grown when it's length reaches its capacity
+  - `append(s []T, x ...T) []T`
+- You can append a slice into another slice by using the `...` operator to expand the second arg into a list of args
+  - `append(s, x...)` for `s []T` and `x []T`
+- The zero value of a slice (nil) acts like a zero length slice so you can declare a slice variable (without initialising it) and then append to it in a loop:
+
+```go
+
+func filter(s []int, fn func(int) bool) {
+  var res []int // == nil
+  for _, v := range s {
+    if fn(v) {
+      res = append(res, v)
+    } 
+  }
+
+  return res
+}
+```
+
+- One gotcha with slices is re-slicing doesn't make a copy of the underlying array, so you could accidentally keep the underlying array around when only a small piece of the data is actually needed
+  - To remedy this, make a new slice and copy only the useful data into it and the garbage collector will sort out the rest
+
+
+
+
+
+## References
+- [Go docs](https://go.dev/doc)
+- [Effective Go](https://go.dev/doc/effective_go)
+- [Matt Holiday Go Tutorial](https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6)
