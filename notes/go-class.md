@@ -26,6 +26,9 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [The Slice Operator](#the-slice-operator)
       - [The Slice Capacity Issue](#the-slice-capacity-issue)
     - [Array and Slice APIs From Here](#array-and-slice-apis-from-here)
+  - [Structs and JSON](#structs-and-json)
+    - [Maps of Structs](#maps-of-structs)
+    - [Structure \& Name Compatibility of Structs](#structure--name-compatibility-of-structs)
   - [References](#references)
 
 ## Variables
@@ -107,6 +110,9 @@ if w, ok := p["the"]; ok {
   // Useful if we want to do something if an entry is / isn't in the map
 }
 ```
+
+- **Important:** you cannot take the address of a map entry (e.g. like `&myMap["Hello"]`)
+  - The reason for this is the map can change its internal structure and the pointers to entries are dynamic so it is very unsafe to reference a map entry 
 
 ## Various Builtin Functions
 <figure>
@@ -228,8 +234,9 @@ switch {
 - You can declare anything at package scope but you can't use the short declaration operator `:=`
   - This is to make the program easier to parse since every statement at the top level has a keyword (e.g. const, var, type, func etc.)
 - Packages break the program down into independent parts
-- Anything with a capital letter is exported
-- within a package, everything is visible (even across multiple files - you can have multiple files under the same package)
+- Anything with a capital letter is exported 
+- Within a package, everything is visible (even across multiple files - you can have multiple files under the same package)
+- There is a standard library in Go with lots of useful features. There is also an "extension" to the standard library (e.g. for a package like "golang.org/x/net/html") that offers less stable packages that might be candidates for the standard library in the future.
 
 ## Imports
 - Go imports are based on necessity, if an import isn't used within a file then it is a syntax error
@@ -466,6 +473,29 @@ func filter(s []int, fn func(int) bool) {
 
 - One gotcha with slices is re-slicing doesn't make a copy of the underlying array, so you could accidentally keep the underlying array around when only a small piece of the data is actually needed
   - To remedy this, make a new slice and copy only the useful data into it and the garbage collector will sort out the rest
+ 
+## Structs and JSON
+- Structs are an aggregate of multiple types of named fields
+
+```go
+type Employee struct {
+  Name string
+  Number int
+  Boss *Employyee
+  Hired time.Time
+}
+```
+
+- You can use the printf (`%+v`) to pretty print a struct and it's fields
+
+### Maps of Structs
+- You can store maps of structs (e.g. `map[string]MyStruct`) however it is really bad practice to do this because a map's internal structure is dynamic
+  - Instead it is recommended to store a map of pointers to structs (e.g. `map[string]*MyStruct`)
+- You also can't perform mutation operations (e.g. `++`) on fields of structs by direct access (e.g. `myMap["thing"].IntField++`)
+  - This is because the semantics of maps are that they are meant to store _values_ not references, so when you access a value in a map by it's key, you get a _copy_ of the value meaning you can't directly mutate it and have the map update
+
+### Structure & Name Compatibility of Structs
+
 
 
 
