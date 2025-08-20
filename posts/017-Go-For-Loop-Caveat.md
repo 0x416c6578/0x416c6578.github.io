@@ -25,7 +25,7 @@ Prior to Go 1.22, this would print `4,4,4,4` (because the closures will capture 
 ### Another Example
 ```go
 func main() {
-    items := [][2]byte{{1,2}, {3,4}, {5,6}}
+    items := [][2]byte{ {1,2}, {3,4}, {5,6} }
     a := [][]byte{}
 
     for _, item := range items {
