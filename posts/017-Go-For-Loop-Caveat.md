@@ -34,4 +34,4 @@ func main() {
 }
 ```
 
-- For Go `<1,22`, this would result in `a` being `{{5,6},{5,6},{5,6}}` whereas after that, due to the above change, you would get the correct expected value of `a` since a new loop variable is introduced each iteration
+- For Go `<1,22`, this would result in `a` being `{ {5,6},{5,6},{5,6} }` whereas after that, due to the above change, you would get the correct expected value of `a` since a new loop variable is introduced each iteration
