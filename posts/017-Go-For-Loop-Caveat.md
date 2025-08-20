@@ -21,3 +21,17 @@ func main() {
 ```
 
 Prior to Go 1.22, this would print `4,4,4,4` (because the closures will capture the loop variable i and will all refer to the same memory address for i on the heap), whereas now it will print `0,1,2,3` since a new loop variable i is introduced on each loop.
+
+### Another Example
+```go
+func main() {
+    items := [][2]byte{{1,2}, {3,4}, {5,6}}
+    a := [][]byte{}
+
+    for _, item := range items {
+        a = append(a, item[:])
+    }
+}
+```
+
+- For Go <1,22, this would result in `a` being `{{5,6},{5,6},{5,6}}` whereas after that, due to the above change, you would get the correct expected value of `a` since a new loop variable is introduced each iteration

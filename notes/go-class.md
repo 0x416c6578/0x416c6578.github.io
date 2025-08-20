@@ -32,7 +32,8 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [JSON with Structs](#json-with-structs)
   - [Reference and Value Semantics](#reference-and-value-semantics)
     - [More on Copying](#more-on-copying)
-    - [The Stack](#the-stack)
+    - [Stack Usage and Escaping](#stack-usage-and-escaping)
+  - [HTTP and Networking in Go](#http-and-networking-in-go)
   - [References](#references)
 
 ## Variables
@@ -587,7 +588,7 @@ func update(things []thing) []thing {
 }
 ```
 
-### The Stack
+### Stack Usage and Escaping
 - Go will prefer storing things on the stack if it can
 - It performs escape analysis to determine if something must be moved to the heap. Some cases that require moving to the heap are:
   - Function returns a pointer to a function local object
@@ -596,6 +597,11 @@ func update(things []thing) []thing {
   - An object is assigned into an interface
   - Any object whose size is variable at runtime (e.g. slices)
 - Run `go build -gcflags -m=2` to see the results of escape analysis
+
+## HTTP and Networking in Go
+- 
+
+
 
 
 ## References
