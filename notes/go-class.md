@@ -599,8 +599,34 @@ func update(things []thing) []thing {
 - Run `go build -gcflags -m=2` to see the results of escape analysis
 
 ## HTTP and Networking in Go
-- 
+- `net/http` is the standard library package for HTTP networking
+- The core interface in this library for handling requests is 
 
+```go
+type Handler interface {
+  ServeHTTP(http.ResponseWriter, *http.Request)
+}
+```
+
+- The library also defines a helper method on functions with that signature that makes them conform to the Handler interface:
+
+```go
+type HandlerFunc func(ResponseWriter, *Request)
+
+// This is a method declaration on a function type
+func (f HandlerFunc) ServeHTTP(w ResponseWriter, r *Request) {
+  f(w, r)
+}
+
+// Then we can define a function that conforms to that interface without 
+// requiring explicit implementation of ServeHTTPz§
+func handler(w http.ResponseWriter, r *http.Request) {
+  fmt.Fprintf(w, "Hello, world")
+}
+```
+
+- Go allows methods to be put on any declared type
+- `http.Template` is a package for doing HTTP templating
 
 
 
