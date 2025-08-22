@@ -5,10 +5,9 @@
 ## About
 Hi! I'm Alex (who sometimes goes by the memorable name of`0x416c6578`), a backend software developer. Some info about my education can be found [here](other/about.md). Some of my work can be found at [github.com/0x416c6578](https://github.com/0x416c6578).  
 
-## Long Form Notes
-Various notes on stuff I have been reading - mainly for my own reference.  
+## Learning
+[Golang](notes/go.md)   
 [Pro Git](notes/git-book.md)  
-[Go Notes](notes/go-class.md)  
 
 ## Posts
 
