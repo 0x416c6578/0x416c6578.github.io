@@ -5,14 +5,13 @@
 ## About
 Hi! I'm Alex (who sometimes goes by the memorable name of`0x416c6578`), a backend software developer. Some info about my education can be found [here](other/about.md). Some of my work can be found at [github.com/0x416c6578](https://github.com/0x416c6578).  
 
-## Learning
+## Learning Notes
 [Golang](notes/go.md)   
 [Pro Git](notes/git-book.md)  
 
 ## Posts
-
+### Technical
 [Go 1.22 Loop Semantics Change](posts/017-Go-For-Loop-Caveat.md) (**12/08/25**)  
-[Three Peaks 2025](posts/016-Three-Peaks.md) (**24/06/25**)  
 [Kia Rio Headunit Passcode Reverse Engineering](posts/015-Kia-Headunit-RE.md) (**19/07/24**)  
 [LineageOS Hosts File Editing Without Root](posts/013-Lineageos-Hosts.md) (**08/10/23**)  
 [Messing with the LDS-006 Laser Assembly](posts/011-Attempts-Serial-Stuff.md) (**06/10/21**)  
@@ -26,13 +25,17 @@ Hi! I'm Alex (who sometimes goes by the memorable name of`0x416c6578`), a backen
 [Various Snippets of Info From p8-firmware Sources](posts/002-P8-firmware-info.md) (**21/08/20**)  
 [A Deep Dive into LVGL Fonts](posts/001-LVGL-fonts.md) (**25/07/20**)  
 
-## Hardware Projects
-[LDS-006 Lidar Work](lds-006/overview.md)  
-[P8 Firmware](p8-firmware/p8-firmware.md)  
-[SAP-1 (Extended Project Qualification)](sap-1/overview.md)  
+### Non Technical
+[Three Peaks 2025](posts/016-Three-Peaks.md) (**24/06/25**)  
 
-### Smaller Things
+
+## Projects
+[LDS-006 LIDAR Research](lds-006/overview.md)  
+[P8 Smartwatch Firmware](p8-firmware/p8-firmware.md)  
+[SAP-1 8 Bit CPU](sap-1/overview.md)  
+
+### Random Bits
 [Arduino LED Strip Controller](random-projects/led-strip-controller.md)  
-[ESP8266 Laser Turret](random-projects/laser-turret.md)  
+[ESP8266 Laser Pointer](random-projects/laser-turret.md)  
 [Arduino EEPROM Dumper](random-projects/eeprom-dumper.md)  
 [Alesis Core 1 Audio Interface Level Control Potentiometer Fix](posts/014-Audio-Interface-Fix.md)  

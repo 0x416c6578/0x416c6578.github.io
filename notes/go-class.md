@@ -34,6 +34,9 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [More on Copying](#more-on-copying)
     - [Stack Usage and Escaping](#stack-usage-and-escaping)
   - [HTTP and Networking in Go](#http-and-networking-in-go)
+  - [OOP Concepts in Go](#oop-concepts-in-go)
+    - [An Overview](#an-overview)
+    - [Methods and Interfaces](#methods-and-interfaces)
   - [References](#references)
 
 ## Variables
@@ -625,8 +628,31 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-- Go allows methods to be put on any declared type
+- Go allows methods to be put on any declared type, including functions as is the case in the above example
 - `http.Template` is a package for doing HTTP templating
+
+```go
+var form = `
+<h1>Todo #{{.ID}}</h1>
+<div>{{printf "User %d" .UserID}}</div>
+```
+
+- Above is an example of a template string for the `http.Template` library to populate. It uses double bracket syntax for templating and has directives like `printf` to do formatting. It will pull values from the fields specified in the template, e.g. pulling the ID from the `.ID` field of some struct
+- More reading / work on HTTP bits will be done in the future
+
+## OOP Concepts in Go
+### An Overview
+- Go offers OO programming concepts
+  - Encapsulation using packages for visibility control
+  - Abstraction and polymorphism using interface types
+  - Composition (rather than inheritance) to provide structure sharing
+- Go doesn't offer inheritance or substitutability based on types
+  - Substitutability is based only on interfaces, a function of abstract behaviour
+- Go offers more flexibility than OOP since it allows methods to be put on any user defined types rather than only "classes"
+- Go also allows any *object* to implement the methods of an interface, not just a *subclass*
+
+### Methods and Interfaces
+
 
 
 
