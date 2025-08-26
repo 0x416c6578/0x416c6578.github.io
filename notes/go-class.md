@@ -37,7 +37,6 @@ Notes from learning the fundamentals of the Go programming language from [this a
   - [OOP Concepts in Go](#oop-concepts-in-go)
     - [An Overview](#an-overview)
     - [Methods and Interfaces](#methods-and-interfaces)
-  - [References](#references)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -652,11 +651,3 @@ var form = `
 - Go also allows any *object* to implement the methods of an interface, not just a *subclass*
 
 ### Methods and Interfaces
-
-
-
-
-## References
-- [Go docs](https://go.dev/doc)
-- [Effective Go](https://go.dev/doc/effective_go)
-- [Matt Holiday Go Tutorial](https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6)
