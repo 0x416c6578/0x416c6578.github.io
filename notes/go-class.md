@@ -651,3 +651,17 @@ var form = `
 - Go also allows any *object* to implement the methods of an interface, not just a *subclass*
 
 ### Methods and Interfaces
+- Interfaces specify abstract behaviour - one or more methods that a concrete implementation must satisfy
+- Interface satisfaction in Go is implicit - if a type implements the methods of an interface it automatically satisfies that interface, no _implements_ like keyword required
+- A method is a special type of function that has a receiver parameter before the function name
+  - This receiver parameter is actually just syntactic sugar for an additional argument for the thing the method is being called on, equivalent to _self_, _this_ etc. in other languages
+- You can put methods on any user defined type, not just structs
+- An example interface is the `Stringer` interface - this defines a method `String()` that can be used to stringify the receiving thing
+
+```go 
+type Stringer interface {
+  String() string
+}
+```
+
+- This interface is used by `fmt.Printf` - it will check if the thing it needs to print satisfies the Stringer interface (_is a_ stringer), and if so just copies the output of the `String()` method to its output
