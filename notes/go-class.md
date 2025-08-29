@@ -38,6 +38,8 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [An Overview](#an-overview)
     - [Methods and Interfaces](#methods-and-interfaces)
     - [Interface Declarations](#interface-declarations)
+    - [Composition in Go](#composition-in-go)
+    - [Composition with Sorting Example](#composition-with-sorting-example)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -696,4 +698,59 @@ func (b Bigger) SomeMethod() {
 }
 ```
 
-- 
+### Composition in Go
+- You can embed a struct into another struct - the fields of the embedded struct are promoted to the level of the embedding struct
+
+```go
+type Host struct {
+  Hostname string
+  Port int
+}
+
+type SimpleURI struct {
+  Host
+  Scheme string
+  Path string
+}
+
+func main() {
+  s := SimpleURI{
+		Host:   other.Host{Hostname: "google.com", Port: 8080},
+		Scheme: "https",
+		Path:   "/search",
+	}
+
+  fmt.Println(s.Hostname, s.Scheme) // See how the Host has been promoted
+}
+```
+
+- The `SimpleURI` structure would have the fields in the `Host` struct promoted to it's level
+- Importantly the methods on the `Host` type are also promoted to the `SimpleURI` type, this is the most powerful part of composition
+- You can also embed pointers to other types - in this case the methods (both value and pointer receiver) on that embedded pointer are still promoted
+
+```go
+type Thing struct {
+	Field string
+}
+
+func (t *Thing) bruh() {
+	fmt.Println(t.Field)
+}
+
+// Would also be valid with a value receiver method
+// func (t Thing) bruh() {
+// 	fmt.Println(t.Field)
+// }
+
+type Thing2 struct {
+	*Thing
+	Field2 string
+}
+
+func main() {
+	t := Thing2{&Thing{"Hello"}, "world"}
+	t.bruh() // Method call here is valid
+}
+```
+
+### Composition with Sorting Example
