@@ -37,6 +37,7 @@ Notes from learning the fundamentals of the Go programming language from [this a
   - [OOP Concepts in Go](#oop-concepts-in-go)
     - [An Overview](#an-overview)
     - [Methods and Interfaces](#methods-and-interfaces)
+    - [Interface Declarations](#interface-declarations)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -655,7 +656,8 @@ var form = `
 - Interface satisfaction in Go is implicit - if a type implements the methods of an interface it automatically satisfies that interface, no _implements_ like keyword required
 - A method is a special type of function that has a receiver parameter before the function name
   - This receiver parameter is actually just syntactic sugar for an additional argument for the thing the method is being called on, equivalent to _self_, _this_ etc. in other languages
-- You can put methods on any user defined type, not just structs
+- You can put methods on any user defined type, not just structs (although you can't put methods directly on inbuilt types)
+  - E.g. you can define `type IntSlice []int` and attach a method to this named user-declared type, but you can't attach a method to `[]int` directly
 - An example interface is the `Stringer` interface - this defines a method `String()` that can be used to stringify the receiving thing
 
 ```go 
@@ -665,3 +667,33 @@ type Stringer interface {
 ```
 
 - This interface is used by `fmt.Printf` - it will check if the thing it needs to print satisfies the Stringer interface (_is a_ stringer), and if so just copies the output of the `String()` method to its output
+- Interfaces allow us to define functions in terms of abstract behaviour rather than concrete implementations, e.g. we can create an `OutputTo` function that accepts any type that implements the `Write([]byte)` method,  meaning we can use any thing that has that method rather than a specific implementation
+- Methods can have value or pointer receivers, the latter allows you to modify the receiver (the original object)
+  - You can't have a method with the same signature as both a pointer and a value receiver
+- You can compose interfaces:
+
+```go
+type ReadWriter interface {
+  Reader
+  Writer
+}
+```
+
+- Thus a `ReadWriter` must implement the `Read` and `Write` methods
+
+### Interface Declarations
+- All methods for a given type must be declared in the same package where the type is declared
+  - This means the compiler knows all the methods for the type at compile time and ensures safe static typing
+- However you can extend a type into a new package through embedding:
+
+```go
+type Bigger struct {
+  otherpackage.Big // Struct composition to be explored later
+}
+
+func (b Bigger) SomeMethod() {
+
+}
+```
+
+- 
