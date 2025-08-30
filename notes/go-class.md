@@ -40,6 +40,7 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [Interface Declarations](#interface-declarations)
     - [Composition in Go](#composition-in-go)
     - [Composition with Sorting Example](#composition-with-sorting-example)
+    - [Making Nil Useful](#making-nil-useful)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -754,3 +755,78 @@ func main() {
 ```
 
 ### Composition with Sorting Example
+- The standard library sort package uses interfaces to sort things
+- The main sort interface is:
+
+```go
+type Interface interface {
+  // The length of the collection
+  Len() int
+  // Says whether the element at index i is less than the element at index j
+  Less(i, j int) bool
+  // Swaps the element at index i with the element at index j in the collection
+  Swap(i, j int)
+}
+```
+
+- Then the `sort.Sort` function can take in any `Interface` conforming collection type and sort it in place
+- Example:
+
+```go
+type Component struct {
+  Name string
+  Weight int
+}
+
+type Components []Component
+
+func (c Components) Len() int { return len(c) }
+func (c Components) Swap() { c[i], c[j] = c[j], c[i] }
+```
+
+- Here we define a custom type `Component`, and we want to make `Components` sortable
+- We could define a default sort strategy on `Components` with the `Less` function as follows:
+
+```go
+func (c Components) Less(i, j int) {
+  // LT rather than the less than symbol because Jekyll
+  return c[i].Weight LT c[j].Weight
+}
+```
+
+- Thus `Components` can be sorted by weight by default
+- However, we might want to define other sorting strategies, which we can use composition for:
+
+```go
+type ByName struct{ Components }
+func (bn ByName) Less(i, j int) bool {
+  return bn.Components[i].Name LT bn.Components[j].Name
+}
+
+type ByWeight struct{ Components }
+func (bw ByWeight) Less(i,j int) bool {
+  return bn.Components[i].Weight LT bn.Components[j].Weight
+}
+```
+
+- `ByName` and `ByWeight` conform to `sort.Interface` through composition (since `Components` has the `Len` and `Swap` methods defined for it), but they then specialise the `Less` method to be a specific sorting strategy
+- The `reverse` unexported struct in `sort` is used to sort something in reverse order
+
+```go
+type reverse struct {
+  Interface // It just embeds sort.Interface
+}
+
+func (r reverse) Less(i, j int) bool {
+  return r.Interface.Less(j, i) // Note swapped arguments for reverse sorting
+}
+
+func Reverse(data Interface) Interface {
+  return &reverse{data}
+}
+```
+
+- See how the `Less` method on `reverse` is flipped
+  - Then how the function `sort.Reverse` is defined that returns a `sort.Interface` that has the reverse implementation of `Less`
+
+### Making Nil Useful
