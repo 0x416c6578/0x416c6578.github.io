@@ -41,6 +41,7 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [Composition in Go](#composition-in-go)
     - [Composition with Sorting Example](#composition-with-sorting-example)
     - [Making Nil Useful](#making-nil-useful)
+    - [Exploring Value / Pointer Method Semantics](#exploring-value--pointer-method-semantics)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -830,3 +831,61 @@ func Reverse(data Interface) Interface {
   - Then how the function `sort.Reverse` is defined that returns a `sort.Interface` that has the reverse implementation of `Less`
 
 ### Making Nil Useful
+- One of the key concepts in Go is the idea that we can make `nil` useful
+- There is nothing stopping you from calling a method on a nil receiver
+
+```go
+// The nil / zero value of this struct is ready to use since a nil slice can be appended to
+type StringStack struct {
+  data []string
+}
+
+func (s *StringStack) Push(x string) {
+  s.data = append(s.data, x)
+}
+
+func (s *StringStack) Pop() string {
+  l := len(s.data)
+
+  if l == 0 {
+    panic("pop from empty stack")
+  }
+
+  t := s.data[l-1]
+  s.data = s.data[:l-1]
+  return t
+}
+```
+
+- In the above example, the zero value of StringStack is directly usable
+
+### Exploring Value / Pointer Method Semantics
+- Go performs some implicit addition of things when calling value / pointer receivers on values / pointers
+- If you have a value `v := T{}` you can of course call value receivers on it directly, however you can also call pointer receivers on it. The compiler will implicitly add an `(&v).PointerMethod()`
+- Likewise if you have a pointer `v := &T{}`, you can of course call pointer receiver methods on it directly, however Go will also implicitly add a dereference when you call a value receiver method `(*v).PointerMethod()`
+- Although the compiler does this implicitly, the *method sets* (which are important for interfaces) of a pointer and value type are as follows:
+  - The method set of a value `T` is all the value receiver methods of `T`
+  - The method set of a pointer `*T` is all the value and pointer receiver methods of `T`
+
+```go
+type Thing struct{}
+
+func (t Thing) ValMethod() {}
+func (t *Thing) PointerMethod() {}
+
+type IVal interface { ValMethod() }
+type IPtr interface { PointerMethod() }
+
+func main() {
+  var t Thing
+
+  var iVal IVal
+  var iPtr IPtr
+
+  iVal = t  // Valid
+  iVal = &t // Valid
+
+  iPtr = t  // Not valid, since the value t doesn't have the pointer method PointerMethod in it's method set
+  iPtr = &t // Valid
+}
+```
