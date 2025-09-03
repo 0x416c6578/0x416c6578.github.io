@@ -42,6 +42,10 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [Composition with Sorting Example](#composition-with-sorting-example)
     - [Making Nil Useful](#making-nil-useful)
     - [Exploring Value / Pointer Method Semantics](#exploring-value--pointer-method-semantics)
+  - [More on Interfaces](#more-on-interfaces)
+    - [The Error Interface](#the-error-interface)
+    - [More on Pointer vs Value Receivers from Matt Holiday Vid](#more-on-pointer-vs-value-receivers-from-matt-holiday-vid)
+    - [Revisiting *Understanding nil*](#revisiting-understanding-nil)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -858,6 +862,25 @@ func (s *StringStack) Pop() string {
 ```
 
 - In the above example, the zero value of StringStack is directly usable
+- This is also a good example of encapsulating the `data` field inside the `StringStack` struct so that a client can't see the implementation details
+- Another example of making nil useful is a recursive linked list traversal:
+
+```go
+type IntList struct {
+  Value int
+  Tail *IntList
+}
+
+func (list *IntList) Sum() int {
+  if list == nil {
+    return 0
+  }
+  
+  return list.Value + list.Tail.Sum()
+}
+```
+
+- See how the base case is elegantly handled by the nil receiver 
 
 ### Exploring Value / Pointer Method Semantics
 - Go performs some implicit addition of things when calling value / pointer receivers on values / pointers
@@ -889,3 +912,70 @@ func main() {
   iPtr = &t // Valid
 }
 ```
+
+## More on Interfaces
+- Interface variables are `nil` until initialised
+- Nil interfaces have a slightly more complex structure than nil structs and values
+- Nil interfaces have two parts
+  - A value or pointer of some concrete type
+  - A pointer to type information so the correct concrete implementation of the method can be identified
+- We can picture this as `(type, ptr)`
+- An interface is only `nil` when it's value is `(nil, nil)`
+
+```go
+var r io.Reader // nil interface here
+var b *bytes.Buffer // nil value here
+
+r = b // at this point r is no longer nil itself, but it has a nil pointer to a buffer
+```
+
+- When we assign `r = b` the new value of r is `(bytes.Buffer, nil)`
+
+### The Error Interface
+
+```go
+type error interface {
+  func Error() string
+}
+```
+
+- `error` is an interface that has one method `Error()`
+- Therefore we can if `err == nil` to see if the err return value was assigned - this is the idiomatic error checking mechanism in Go
+- Because of this nil behaviour, we must NEVER RETURN A CONCRETE ERROR TYPE FROM A FUNCTION OR METHOD:
+
+```go
+type someErr struct {
+  err error
+  someField string
+}
+
+func (e someErr) Error() string {
+  return "this is some error"
+}
+
+func someFunc(a int) *someErr { // We should NEVER return a concrete error type
+  return nil
+}
+
+func main() {
+  var err error = someFunc(123456)
+
+  if err != nil {
+    // Even though we logically didn't want to throw an error, returning a concrete error type 
+    // meant that the err variable was initialised and looks like (*someErr, nil) which in the
+    // semantics of interfaces ISN'T NIL
+    fmt.Println("Oops")
+  } else {
+    // If we'd done err := someFunc(123456), the above check would have worked although again we 
+    // should never return a concrete error implementation from a function
+  }
+}
+```
+
+- Again we should **never return a concrete error type from a function**
+- In the above case, someFunc returns a nil pointer to a concrete value which gets copied into an interface, making the check `err != nil` return true which is logically incorrect
+
+### More on Pointer vs Value Receivers from Matt Holiday Vid
+
+### Revisiting [*Understanding nil*](https://www.youtube.com/watch?v=ynoY2xz-F8s)
+
