@@ -45,7 +45,17 @@ Notes from learning the fundamentals of the Go programming language from [this a
   - [More on Interfaces](#more-on-interfaces)
     - [The Error Interface](#the-error-interface)
     - [More on Pointer vs Value Receivers from Matt Holiday Vid](#more-on-pointer-vs-value-receivers-from-matt-holiday-vid)
-    - [Revisiting *Understanding nil*](#revisiting-understanding-nil)
+  - [Revisiting *Understanding nil*](#revisiting-understanding-nil)
+    - [Zero Values](#zero-values)
+    - [Nil](#nil)
+    - [Understanding the Different Types of `nil`](#understanding-the-different-types-of-nil)
+    - [Nil Interfaces](#nil-interfaces-1)
+    - [How is Nil Useful](#how-is-nil-useful)
+      - [Nil Pointers](#nil-pointers)
+      - [Nil Slices](#nil-slices)
+      - [Nil Slices](#nil-slices-1)
+  - [Function Currying](#function-currying)
+    - [Method Values](#method-values)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -976,6 +986,113 @@ func main() {
 - In the above case, someFunc returns a nil pointer to a concrete value which gets copied into an interface, making the check `err != nil` return true which is logically incorrect
 
 ### More on Pointer vs Value Receivers from Matt Holiday Vid
+- In general if one method of a type takes a pointer receiver, then _all_ it's methods should take pointer receivers
+- This isn't enforced by the compiler but it should always be the case
+- Having a pointer receiver implies the values of that type aren't safe to copy, e.g. `Buffer` which has an embedded `[]byte` which isn't safe to copy since the underlying array is shared, and any type that embeds any sort of mutex or other synchronisation primitives that should never be copied
 
-### Revisiting [*Understanding nil*](https://www.youtube.com/watch?v=ynoY2xz-F8s)
+## Revisiting [*Understanding nil*](https://www.youtube.com/watch?v=ynoY2xz-F8s)
+- Now that I've watched the Matt Holiday videos on these concepts I revisited this good conference talk on *understanding nil* to understand it with added context and knowledge
+
+### Zero Values
+- In Go, all types have a zero value
+- For bools this is false, numbers is 0 and strings is the empty string
+  - For structs, the zero value is just a struct with all of it's fields set to their zero values
+- `nil` is the zero value for pointers, slices, maps, channels, functions and interfaces
+
+### Nil
+- Nil has no value!!!
+- `nil` is **not a keyword in Go**, it is a predeclared identifier
+
+### Understanding the Different Types of `nil`
+**Pointers**
+- The nil value of pointers is basically just a pointer that points to nothing
+
+**Slices**
+- Internally slices have a pointer to the underlying array, a length and a capacity
+- The nil value of slices is basically a slice with no backing array; with a length and capacity of 0
+
+**Maps, Channels and Functions**
+- These are all pointers under the hood that points to the concrete implementation of these things
+- Therefore the nil value of these is just a nil pointer
+
+### Nil Interfaces
+- Nil interfaces are the most interesting concept of `nil` in Go
+- Interfaces internally are a tuple consisting of `(Concrete Type, Value)`
+- The nil value of interfaces is `(nil, nil)`
+- The subtlety of this comes in when we assign a nil value to an interface - at that point we have `(some concrete type, nil)` internally for whatever the assigned type is, and this is no longer `==nil`
+
+```go
+func bad1() error {
+  var err *someConcreteError
+  return err // We are returning (*someConcreteError, nil) which !=nil
+}
+
+func bad2() *someConcreteError {
+  // We are returning a concrete pointer to an error which will pass ==nil, however
+  // it is very bad practice because the second you wrap this pointer in the error
+  // interface you will have the same problem as above
+  return nil
+}
+```
+
+- Basically you should **never return concrete error types**
+
+### How is Nil Useful
+#### Nil Pointers
+- We can make a nil *pointer* useful, see the linked list sum example above (also applies to trees and other more complex data structures)
+
+#### Nil Slices
+- Nil *slices* are useful, their length and capacity will be 0 and we can range over one without any issues
+  - The only (expected) exceptional behaviour is indexing a nil slice, which would expectedly panic
+  - Importantly you can also append to a nil slice without issues, this is a useful property
+
+#### Nil Slices
+- Nil *maps* are useful, you can get their length, range over them without issues, and you can check if something is in a map (`v, ok := map[i]` -> `zeroVal(type of map value), false` for any key `i`). That means nil maps are perfectly valid read only empty maps
+  - Again similar to slices the only exceptional behaviour occurs when trying to assign to a nil map
+- Nil *channels* are also useful
+  - Nil channels will block indefinitely on send and receive, this is a useful behaviour. For context the behaviour is the opposite on a *closed* channel - a closed channel will return `zero(t), false` with that false `ok` flag indicating the channel is closed
+- Nil channels can be used to *switch off* a select case:
+
+<figure>
+<img loading="lazy" width="500" src="../Images/go-tutorial/channelmerge.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">Nil channels example</figcaption>
+</figure>
+
+- This function merges two channels into one. When a channel closes, ok will be false and we set that channel to nil
+  - This will effectively disable that select case since it will be blocking indefinitely
+  - Of course when both are nil (after both are closed), the function will close the output channel and return
+
+## Function Currying
+- Since functions are first class in Go, you can curry functions as you'd expect
+
+```go
+func Add(a, b int) {
+  return a+b
+}
+
+func main() {
+  var addTo5 func(int) int = func (a int) int {
+    return Add(5, a)
+  }
+}
+```
+
+### Method Values
+- Since methods are just syntactic sugar for a function with an additional receiver parameter, we can close a method over a receiver value:
+
+```go
+func (p Point) Distance(q Point) float64 {
+  return math.Hypot(q.X-p.X, q.Y-p.Y)
+}
+
+func main() {
+  p := Point{1,2}
+  q := Point{4,6}
+
+  distanceFromP := p.Distance // Here we close over the receiver value p, returning a curried function
+}
+```
+
+- Yay for first class functions 😁
+
 
