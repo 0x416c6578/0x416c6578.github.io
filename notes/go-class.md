@@ -45,6 +45,9 @@ Notes from learning the fundamentals of the Go programming language from [this a
   - [More on Interfaces](#more-on-interfaces)
     - [The Error Interface](#the-error-interface)
     - [More on Pointer vs Value Receivers from Matt Holiday Vid](#more-on-pointer-vs-value-receivers-from-matt-holiday-vid)
+    - [Interfaces in Practice](#interfaces-in-practice)
+    - [_Be liberal in what you accept, be conservative in what you return_](#be-liberal-in-what-you-accept-be-conservative-in-what-you-return)
+    - [Empty Interfaces](#empty-interfaces)
   - [Revisiting *Understanding nil*](#revisiting-understanding-nil)
     - [Zero Values](#zero-values)
     - [Nil](#nil)
@@ -990,6 +993,28 @@ func main() {
 - This isn't enforced by the compiler but it should always be the case
 - Having a pointer receiver implies the values of that type aren't safe to copy, e.g. `Buffer` which has an embedded `[]byte` which isn't safe to copy since the underlying array is shared, and any type that embeds any sort of mutex or other synchronisation primitives that should never be copied
 
+### Interfaces in Practice
+1. Let _consumers_ define the interfaces; what minimal set of behaviours do they require
+  - This lets the caller have maximum freedom to pass in whatever it wants so long as the interface contract is adhered to
+2. Reuse standard interfaces wherever possible
+3. Keep interface declarations as small as possible - bigger interfaces have weaker abstractions
+  - The Unix file API is simple for a reason
+4. Compose one method interfaces into larger interfaces (if needed)
+5. Avoid coupling interfaces to particular types or implementations; interfaces should define abstract behaviour
+6. Accept interfaces but return concrete types
+
+### _Be liberal in what you accept, be conservative in what you return_
+- This is the idea that you should put the least restriction on what parameters you accept; the minimal interface
+- But you should avoid restricting the use of your return type
+- Returning `*os.File` is less restrictive than `io.ReadWriteCloser` because files have other useful methods that a caller would want access to
+- Returning the `error` interface however is an exception to this rule
+
+### Empty Interfaces
+- `interface{}` has no methods, therefore it is satisfied by anything
+  - In newer versions of Go the type alias `type any interface{}` is defined by the standard library for ease of use
+- This is used commonly by `fmt` for printing any type, and by other packages requiring similar behaviour
+  - They will use reflection to determine the runtime type of the thing being passed into it
+
 ## Revisiting [*Understanding nil*](https://www.youtube.com/watch?v=ynoY2xz-F8s)
 - Now that I've watched the Matt Holiday videos on these concepts I revisited this good conference talk on *understanding nil* to understand it with added context and knowledge
 
@@ -1093,6 +1118,6 @@ func main() {
 }
 ```
 
-- Yay for first class functions 😁
-
+- Because `Distance` is a value receiver method, the value of p is closed over when defining `distanceFromP`; this means that if you update `p`, these changes _won't_ be reflected in the `distanceFromP` calls; it will always return the distance to the point (1,2) because that value was captured when the method value was created
+- If we change `Distance` to be a pointer receiver method, any changes to `p` _will_ be reflected in the method
 
