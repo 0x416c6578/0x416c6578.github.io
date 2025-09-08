@@ -58,7 +58,7 @@ Using a higher order (degree 3) polynomial to better model the specular reflecti
   - Focus on AVR hardware, scheduling, MMIO, security of embedded hardware
   - LCD graphics library project can be found [here](https://github.com/0x416c6578/lafortuna-lcd-mirror)
 
-## Core University Modules
+## Other University Modules
 - Programming I (intro to OOP)
 - Foundations of Computer Science (mathematical fundamentals to an array of CS topics)
 - Computer Systems I (high level overview of CPU architecture, bits and bytes, electronics basics)
