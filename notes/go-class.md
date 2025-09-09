@@ -59,6 +59,11 @@ Notes from learning the fundamentals of the Go programming language from [this a
       - [Nil Slices](#nil-slices-1)
   - [Function Currying](#function-currying)
     - [Method Values](#method-values)
+  - [Notes From Homework #4](#notes-from-homework-4)
+  - [Concurrency (Finally!)](#concurrency-finally)
+    - [Defining Concurrency](#defining-concurrency)
+    - [Concurrency vs Parallelism](#concurrency-vs-parallelism)
+    - [Race Conditions](#race-conditions)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -1121,3 +1126,67 @@ func main() {
 - Because `Distance` is a value receiver method, the value of p is closed over when defining `distanceFromP`; this means that if you update `p`, these changes _won't_ be reflected in the `distanceFromP` calls; it will always return the distance to the point (1,2) because that value was captured when the method value was created
 - If we change `Distance` to be a pointer receiver method, any changes to `p` _will_ be reflected in the method
 
+## Notes From Homework #4
+```go
+type dollars float32
+
+func (d dollars) String() string {
+	return fmt.Sprintf("$%.2f", d)
+}
+
+type database map[string]dollars
+
+func (db database) list(w http.ResponseWriter, req *http.Request) {
+	for item, price := range db {
+		fmt.Fprintf(w, "%s: %s\n", item, price)
+	}
+}
+
+func main() {
+	db := database{
+		"shoes": 50,
+		"socks": 5,
+	}
+	http.HandleFunc("/list", db.list)
+	log.Fatal(http.ListenAndServe("localhost:8080", nil))
+}
+```
+
+- The list handler is a method value that closes over the db
+  - We are allowed to close over the value here because db is a map, and even though we'll copy the map descriptor here the underlying hashmap will be the same in the copy
+- This code has race conditions that must be fixed; concurrency is the next class (:
+
+## Concurrency (Finally!)
+### Defining Concurrency
+- A key idea in concurrent programming is the idea of a partial order
+- In the example below, there is a partial ordering shown; parts of 2 and 3 have no direct ordering between each other (but they do have an ordering among themselves), however there is an _overall_ requirement that parts 2 and 3 complete before part 4
+  
+<figure>
+<img loading="lazy" width="500" src="../Images/go-tutorial/partialOrder.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+Reproduced from <a href="https://www.youtube.com/watch?v=A3R-4ZYBqvE">https://www.youtube.com/watch?v=A3R-4ZYBqvE</a>
+</figcaption>
+</figure>
+
+- Therefore this can execute in many different ways:
+
+```
+{1,2a,2b,3a,3b,4}
+{1,2a,3a,2b,3b,4}
+{1,2a,3a,3b,2b,4}
+{1,3a,3b,2a,2b,4}
+{1,3a,2a,2b,3b,4}
+{1,3a,2a,3b,2b,4}
+```
+
+- None of these orders are wrong, it just means that the program behaves differently on different runs even with the same input
+
+### Concurrency vs Parallelism
+- We can define concurrency as: *Parts of the program may execute independently in some non-deterministic (partial) order*
+  - Note this **does not** imply parallelism; concurrent programs can run on a single CPU (using task scheduling/interrupts), however modern day CPUs tend to have more than one core so most concurrent programs are inherently parallel if required
+- Concurrency importantly doesn't necessarily make the program faster; parallelism does
+  - Although interrupts can speed up programs because the main task can continue running whilst waiting for some external IO for example
+- Concurrency is an aspect of how the software is written and put together, parallelism is something that happens at runtime for a concurrent program that can run across multiple cores
+
+### Race Conditions
+- Race conditions are bugs. They occur when the out of order non deterministic computations of a concurrent program might produce invalid results; one of the possible orders of execution may be wrong
