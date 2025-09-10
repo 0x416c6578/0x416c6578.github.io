@@ -64,6 +64,9 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [Defining Concurrency](#defining-concurrency)
     - [Concurrency vs Parallelism](#concurrency-vs-parallelism)
     - [Race Conditions](#race-conditions)
+  - [Concurrency In Go](#concurrency-in-go)
+    - [Channels Overview](#channels-overview)
+    - [Goroutines Overview](#goroutines-overview)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -1190,3 +1193,20 @@ Reproduced from <a href="https://www.youtube.com/watch?v=A3R-4ZYBqvE">https://ww
 
 ### Race Conditions
 - Race conditions are bugs. They occur when the out of order non deterministic computations of a concurrent program might produce invalid results; one of the possible orders of execution may be wrong
+  - They occur when concurrent operations change shared things
+- For example if you are concurrently updating a balance on a bank account, you must make sure the read-modify-write operation is atomic, either through a data type that supports this or through mechanisms like mutexes
+
+## Concurrency In Go
+### Channels Overview
+- Channels are one-way communication pipes where writers write values in and readers read values out
+- They are thread safe data structures, meaning multiple writers and readers can share it safely
+- Channels act as a synchronisation point that allows multiple independent processes to communicate safely
+  - The idea of channels and Goroutines in Go is based off Hoare's _Communicating Sequential Processes_
+
+### Goroutines Overview
+- Goroutines are the unit of independent execution in Go. They are started by putting the `go` keyword in front of a function call
+- Goroutines **aren't OS threads**, they are lightweight userspace threads that are scheduled onto a number of real OS threads. This lightweight design means Go can schedule thousands of Goroutines with little overhead
+- Channels are used to synchronise Goroutines. We know that a send (write) to a channel always _happens before_ a receive (read)
+- Channels will block if you attempt to read from an empty channel
+  - Channels will also block if you attempt to read from a nil channel
+  - Channels will instantly return `(zeroVal, nok)` if they are closed and you try to read
