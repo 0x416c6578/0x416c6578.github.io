@@ -69,6 +69,7 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [Goroutines Overview](#goroutines-overview)
     - [`http.HandlerFunc` Channel Pattern](#httphandlerfunc-channel-pattern)
     - [Prime Sieve Example](#prime-sieve-example)
+  - [Select](#select)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -1221,7 +1222,7 @@ Reproduced from <a href="https://www.youtube.com/watch?v=A3R-4ZYBqvE">https://ww
 type intCh chan int
 
 func (ch intCh) handler(w http.ResponseWriter, r *http.Request) {
-  fmt.Fprintf(w, "Received %d from channel", <-ch) // TODO: Figure out escaping triangle brackets in markdown
+  fmt.Fprintf(w, "Received %d from channel", <-ch)
 }
 ```
 
@@ -1229,3 +1230,61 @@ func (ch intCh) handler(w http.ResponseWriter, r *http.Request) {
 - Isn't Go neat?!
 
 ### Prime Sieve Example
+
+<figure>
+<img loading="lazy" width="500" src="../Images/go-tutorial/primeSieve.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+Reproduced from <a href="https://www.youtube.com/watch?v=zJd7Dvg3XCk">https://www.youtube.com/watch?v=zJd7Dvg3XCk</a>
+</figcaption>
+</figure>
+
+```go
+// generates numbers up to the given limit and writes them to a channel, closing the channel when finished
+func generate(limit int, ch chan<- int) {
+	defer close(ch)
+	for i := 2; i < limit; i++ {
+		ch <- i
+	}
+}
+
+// receives numbers from a channel and filters for only those not divisible by the given 
+// divisor, writing to a destination channel and closing the destination when the src is closed
+func filter(src <-chan int, dst chan<- int, divisor int) {
+	defer close(dst)
+	for i := range src { // Will block until a value is added to src, and break when src is closed
+		if i%divisor != 0 {
+			dst <- i
+		}
+	}
+}
+
+// prime sieving function
+func sieve(limit int) {
+	ch := make(chan int)
+	go generate(limit, ch) // kicks off generator
+
+	for {
+		prime, ok := <-ch
+		if !ok {
+			break // we are done
+		}
+
+    // makes a new filter for the prime that was just seen, then adds it to the chain of running filters
+		newFilterChan := make(chan int)
+		go filter(ch, newFilterChan, prime)
+		ch = newFilterChan
+
+		fmt.Print(prime, " ")
+	}
+}
+
+func main() {
+	sieve(1000)
+}
+```
+
+- Above is an example of the prime sieve algorithm, which will construct new prime filters when a prime is seen, adding it to a chain of filters
+  - When the generator stops generating the channel closing will cascade through the filters stopping their goroutines before finally causing the sieve function to complete
+  - This is a very inefficient algorithm but it is a good example of using channels
+
+## Select
