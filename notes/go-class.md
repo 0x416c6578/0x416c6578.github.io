@@ -67,6 +67,8 @@ Notes from learning the fundamentals of the Go programming language from [this a
   - [Concurrency In Go](#concurrency-in-go)
     - [Channels Overview](#channels-overview)
     - [Goroutines Overview](#goroutines-overview)
+    - [`http.HandlerFunc` Channel Pattern](#httphandlerfunc-channel-pattern)
+    - [Prime Sieve Example](#prime-sieve-example)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -1210,3 +1212,20 @@ Reproduced from <a href="https://www.youtube.com/watch?v=A3R-4ZYBqvE">https://ww
 - Channels will block if you attempt to read from an empty channel
   - Channels will also block if you attempt to read from a nil channel
   - Channels will instantly return `(zeroVal, nok)` if they are closed and you try to read
+
+### `http.HandlerFunc` Channel Pattern
+- An interesting pattern can be established using channels in a method receiver. If we wanted to have a channel that is directly used by a handler that conforms to `http.HandlerFunc`'s signature, we _could_ use a global variable, however this isn't a great idea since global variables aren't great
+- So instead we can create a named type for the channel, then attach a method to the channel that has the correct signature:
+
+```go
+type intCh chan int
+
+func (ch intCh) handler(w http.ResponseWriter, r *http.Request) {
+  fmt.Fprintf(w, "Received %d from channel", <-ch) // TODO: Figure out escaping triangle brackets in markdown
+}
+```
+
+- Now instead of having the channel as a global variable, we can instead use a method value: `http.HandleFunc("/", someIntCh.handler)`
+- Isn't Go neat?!
+
+### Prime Sieve Example
