@@ -1269,7 +1269,7 @@ func sieve(limit int) {
 			break // we are done
 		}
 
-    // makes a new filter for the prime that was just seen, then adds it to the chain of running filters
+		// makes a new filter for the prime that was just seen, then adds it to the chain of running filters
 		newFilterChan := make(chan int)
 		go filter(ch, newFilterChan, prime)
 		ch = newFilterChan
