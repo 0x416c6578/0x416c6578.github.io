@@ -72,6 +72,7 @@ Notes from learning the fundamentals of the Go programming language from [this a
   - [Select](#select)
     - [Default Case](#default-case)
   - [Context](#context)
+    - [The Context Tree](#the-context-tree)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -1354,3 +1355,29 @@ func sendOrDrop(data []byte) {
 - In the case that the channel can't receive data, the default case is run and a log message is sent
 
 ## Context
+- The context package allows you to tie together some related work, allowing a common method to cancel some work either explicitly or implicitly with a timeout or deadline
+- Contexts can also carry request specific values like key trace IDs
+- A context offers two controls:
+  - A `Done` channel that closes when the cancellation occurs
+  - An error that is readable once the channel closes
+- The error value will tell you whether the request was cancelled or timed out
+- This `Done()` channel is often used in select blocks
+
+### The Context Tree
+- Contexts form an **immutable** tree structure
+- Cancellation or timeout applies to the current context and its subtree (and the same for values assigned in a context)
+- For example with timeouts, the thing doing the work will look up from the bottom of the tree (up towards the empty `context.Background` top level context) for any timeout contexts
+  - Subtrees may be created with a shorter timeout, but not longer
+
+```go
+ctx := context.Background()
+ctx = context.WithValue(ctx, "traceId", "abc123")
+ctx, cancel := context.WithTimeout(ctx, 3 * time.Second)
+defer cancel() // it is common to defer cancel
+
+req, _ := http.NewRequest(http.MethodGet, url, nil)
+req = req.WithContext(ctx)
+resp, err := http.DefaultClient.Do(req)
+```
+
+- Above is an example of setting up a context with a value and a timeout for an HTTP request
