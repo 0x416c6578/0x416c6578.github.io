@@ -28,11 +28,12 @@ For my day to day work I use Obsidian for note taking and organisation. My proce
 ___
 ___
 
-##### Notes from Yesterday *Update at EoD*
+### Notes from Yesterday *Update at EoD*
 - ~~Spoke to person about thing~~ *These are any non-todo notes from the day before that are copied over and struckthrough at the end of the day*
 - Prioritise #211 testing notes 
 - Monitor flickering getting worse *These are notes for tomorrow that aren't necessarily TODOs*
-##### TODOs *Updated throughout the day*
+
+### TODOs *Updated throughout the day*
 - [x] Finish #344
 - [ ] Finish #211 *I will link to the ticket note page here if required*
 
@@ -41,6 +42,7 @@ ___
 
 - At the end of the day I will add any non-todo notes into the "Notes from Yesterday" section, then copy over the full contents to tomorrows note
 - I will remove any completed TODOs
+
 ### Key Benefits
 - I wanted this process to be as simple and idiot proof as possible - I often have to keep track of multiple streams of work and having this structure makes it easy to do so
 - Uses Obsidian native features like links
