@@ -24,8 +24,10 @@ For my day to day work I use Obsidian for note taking and organisation. My proce
     └ 18th Thursday
 ```
 - A day note looks like:
+  
 ___
 ___
+
 ##### Notes from Yesterday *Update at EoD*
 - ~~Spoke to person about thing~~ *These are any non-todo notes from the day before that are copied over and struckthrough at the end of the day*
 - Prioritise #211 testing notes 
@@ -33,8 +35,10 @@ ___
 ##### TODOs *Updated throughout the day*
 - [x] Finish #344
 - [ ] Finish #211 *I will link to the ticket note page here if required*
+
 ___
 ___
+
 - At the end of the day I will add any non-todo notes into the "Notes from Yesterday" section, then copy over the full contents to tomorrows note
 - I will remove any completed TODOs
 ### Key Benefits

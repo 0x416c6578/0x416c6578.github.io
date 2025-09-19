@@ -19,7 +19,7 @@ Various notes from my reading and watching
 
 ## Posts
 ### Technical
-- [How I Use Obsidian](posts/018-How-I-Use-Obsidian.md)
+- [How I Use Obsidian](posts/018-How-I-Use-Obsidian.md) (**19/09/25**)
 - [Go 1.22 Loop Semantics Change](posts/017-Go-For-Loop-Caveat.md) (**12/08/25**)  
 - [Kia Rio Headunit Passcode Reverse Engineering](posts/015-Kia-Headunit-RE.md) (**19/07/24**)  
 - [LineageOS Hosts File Editing Without Root](posts/013-Lineageos-Hosts.md) (**08/10/23**)  
