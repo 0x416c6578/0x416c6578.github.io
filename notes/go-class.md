@@ -687,9 +687,7 @@ var form = `
 - Go also allows any *object* to implement the methods of an interface, not just a *subclass*
 
 ### Methods and Interfaces
-*"An interface, which is something that can do something. Including the empty interface,
-which is something that can do nothing, which is everything, because everything can do
-nothing, or at least nothing."* - Brad Fitzpatrick
+*"An interface, which is something that can do something. Including the empty interface, which is something that can do nothing, which is everything, because everything can do nothing, or at least nothing."* - Brad Fitzpatrick
 
 - Interfaces specify abstract behaviour - one or more methods that a concrete implementation must satisfy
 - Interface satisfaction in Go is implicit - if a type implements the methods of an interface it automatically satisfies that interface, no _implements_ like keyword required
