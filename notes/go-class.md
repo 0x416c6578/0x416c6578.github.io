@@ -687,6 +687,10 @@ var form = `
 - Go also allows any *object* to implement the methods of an interface, not just a *subclass*
 
 ### Methods and Interfaces
+*"An interface, which is something that can do something. Including the empty interface,
+which is something that can do nothing, which is everything, because everything can do
+nothing, or at least nothing."* - Brad Fitzpatrick
+
 - Interfaces specify abstract behaviour - one or more methods that a concrete implementation must satisfy
 - Interface satisfaction in Go is implicit - if a type implements the methods of an interface it automatically satisfies that interface, no _implements_ like keyword required
 - A method is a special type of function that has a receiver parameter before the function name
@@ -1381,3 +1385,5 @@ resp, err := http.DefaultClient.Do(req)
 ```
 
 - Above is an example of setting up a context with a value and a timeout for an HTTP request
+- The HTTP client will manage the timeout, and will return an error if a timeout occurs before the request completes
+- There are two different mechanisms for timing out - a timeout (e.g. timeout in 5 seconds) and a deadline (e.g. timeout at 15:00pm)
