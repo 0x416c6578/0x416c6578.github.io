@@ -73,6 +73,7 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [Default Case](#default-case)
   - [Context](#context)
     - [The Context Tree](#the-context-tree)
+    - [Context With Values](#context-with-values)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -1385,3 +1386,57 @@ resp, err := http.DefaultClient.Do(req)
 - Above is an example of setting up a context with a value and a timeout for an HTTP request
 - The HTTP client will manage the timeout, and will return an error if a timeout occurs before the request completes
 - There are two different mechanisms for timing out - a timeout (e.g. timeout in 5 seconds) and a deadline (e.g. timeout at 15:00pm)
+- An example in the video outlined using a context for requesting a number of URLs
+- It outlined an important aspect of using channels - we need to make sure that we have mechanisms in place to prevent Goroutines from hanging indefinitely
+  - In the example, an unbuffered channel was used in a set of running Goroutines that all send a result
+  - This meant that one Goroutine would write to the channel successfully, but the others would be blocked
+  - A way of solving this is to close the channel, or to use a buffered channel that allows all the Goroutines to send successfully
+- It also raised another issue of, if we are passed in a context into a function that we are writing, we need to ensure we handle the case of a parent caller issuing a cancel (the context becoming `Done()`)
+  - This can be done in your `select`, then you can see the error in `ctx.Err()`
+
+### Context With Values
+- Contexts can be used to pass around values, e.g. trace IDs or start times (for latency calculation), or security or auth data
+- Context values have keys - to ensure the keys don't clash we can define a package specific private context key type (not string) to avoid collisions:
+
+```go
+type contextKey int
+
+// Make sure the keys are exported (but not the type itself), then clients have a single source of truth for requesting context values without the risk of collision
+const (
+  TraceIdContextKey contextKey = iota
+  StartTimeContextKey contextKey
+  AuthContextKey contextKey
+)
+```
+
+- Below is an example of some HTTP middleware to add a trace ID
+
+```go
+func AddTrace(next http.Handler) http.Handler {
+  return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+    ctx := r.Context()
+
+    if traceID := r.Header.Get("X-Trace-Context"); traceID != "" {
+      ctx = context.WithValue(ctx, TraceIdContextKey, traceID)
+    }
+
+    next.ServeHTTP(w, r.WithContext(ctx))
+  })
+}
+
+func LogWithContext(ctx context.Context, f string, args ...any) {
+   // reflection is required because the context values "map" can contain any. We need
+   // to downcast the any to a string (this two argument cast will return ok=true if
+   // the conversion was a success). More on reflection later ;)
+  traceID, ok := ctx.Value(TraceIdContextKey).(string)
+
+  // adding the trace ID to the log message if it is in the context
+  if ok && traceID != "" {
+    f = traceID + ": " + f
+  }
+
+  log.Printf(f, args...)
+}
+```
+
+- One of Go's philosophies is to make everything as explicit as possible, so it's important not to abuse the context value tree too much
