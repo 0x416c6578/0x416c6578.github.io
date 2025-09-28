@@ -60,20 +60,28 @@ Notes from learning the fundamentals of the Go programming language from [this a
   - [Function Currying](#function-currying)
     - [Method Values](#method-values)
   - [Notes From Homework #4](#notes-from-homework-4)
-  - [Concurrency (Finally!)](#concurrency-finally)
+  - [Concurrency (Finally!) (Video 22)](#concurrency-finally-video-22)
     - [Defining Concurrency](#defining-concurrency)
     - [Concurrency vs Parallelism](#concurrency-vs-parallelism)
     - [Race Conditions](#race-conditions)
-  - [Concurrency In Go](#concurrency-in-go)
+  - [Concurrency In Go (Video 23)](#concurrency-in-go-video-23)
     - [Channels Overview](#channels-overview)
     - [Goroutines Overview](#goroutines-overview)
     - [`http.HandlerFunc` Channel Pattern](#httphandlerfunc-channel-pattern)
     - [Prime Sieve Example](#prime-sieve-example)
-  - [Select](#select)
+  - [Select (Video 24)](#select-video-24)
     - [Default Case](#default-case)
-  - [Context](#context)
+  - [Context (Video 25)](#context-video-25)
     - [The Context Tree](#the-context-tree)
     - [Context With Values](#context-with-values)
+  - [More on Channels (Video 26)](#more-on-channels-video-26)
+    - [Closed Channels](#closed-channels)
+    - [Nil Channels](#nil-channels)
+    - [Rendezvous Model](#rendezvous-model)
+    - [Buffering](#buffering)
+    - [Important Note](#important-note)
+    - [Why Buffering](#why-buffering)
+  - [Concurrent File Processing Example (Video 27)](#concurrent-file-processing-example-video-27)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -1168,7 +1176,7 @@ func main() {
   - We are allowed to close over the value here because db is a map, and even though we'll copy the map descriptor here the underlying hashmap will be the same in the copy
 - This code has race conditions that must be fixed; concurrency is the next class (:
 
-## Concurrency (Finally!)
+## Concurrency (Finally!) (Video 22)
 ### Defining Concurrency
 - A key idea in concurrent programming is the idea of a partial order
 - In the example below, there is a partial ordering shown; parts of 2 and 3 have no direct ordering between each other (but they do have an ordering among themselves), however there is an _overall_ requirement that parts 2 and 3 complete before part 4
@@ -1205,7 +1213,7 @@ Reproduced from <a href="https://www.youtube.com/watch?v=A3R-4ZYBqvE">https://ww
   - They occur when concurrent operations change shared things
 - For example if you are concurrently updating a balance on a bank account, you must make sure the read-modify-write operation is atomic, either through a data type that supports this or through mechanisms like mutexes
 
-## Concurrency In Go
+## Concurrency In Go (Video 23)
 ### Channels Overview
 - Channels are one-way communication pipes where writers write values in and readers read values out
 - They are thread safe data structures, meaning multiple writers and readers can share it safely
@@ -1293,7 +1301,7 @@ func main() {
   - When the generator stops generating the channel closing will cascade through the filters stopping their goroutines before finally causing the sieve function to complete
   - This is a very inefficient algorithm but it is a good example of using channels
 
-## Select
+## Select (Video 24)
 - The `select` statement is used to multiplex channels, allowing any *ready* alternative to proceed among:
   - A channel we can read from
   - A channel we can write to
@@ -1357,7 +1365,7 @@ func sendOrDrop(data []byte) {
 - In this example if the channel is ready to receive data, it will send the data as expected
 - In the case that the channel can't receive data, the default case is run and a log message is sent
 
-## Context
+## Context (Video 25)
 - The context package allows you to tie together some related work, allowing a common method to cancel some work either explicitly or implicitly with a timeout or deadline
 - Contexts can also carry request specific values like key trace IDs
 - A context offers two controls:
@@ -1440,3 +1448,106 @@ func LogWithContext(ctx context.Context, f string, args ...any) {
 ```
 
 - One of Go's philosophies is to make everything as explicit as possible, so it's important not to abuse the context value tree too much
+
+## More on Channels (Video 26)
+- Channels will block unless ready to read or write
+  - For writing, channels block unless they have buffer space or there is at least one reader ready to read (called rendezvous)
+  - For reading, channels block unless they have unread data in their buffer or at least one writer is ready to write. Closed channels always read instantly (zero value and a nok open flag)
+    - Nil channels block indefinitely - this can be useful behaviour for disabling select cases
+- You can constrain channels in arguments to read / write:
+
+```go
+func get(url string, ch chan<- result) { }
+func collect(ch <-chan result) map[string]int { }
+```
+
+### Closed Channels
+- Closing a channel is often a signal that work is done
+- Channels can only be closed once (or else panic)
+- As mentioned, closed channels become readable with the default value
+- Coordinating closing of channels is another problem in itself
+- Importantly, a buffered channel will not indicate it is closed until all values buffered are read out of it
+
+### Nil Channels
+- As mentioned, nil channels always block so in a select they are effectively ignored
+- They also block indefinitely when writing to
+- This is useful because you can *suspend* a channel by changing it to nil, then unsuspend it by reassigning
+- But it is important to always close a channel when there is logically no more input, e.g. EOF
+
+<figure>
+<img loading="lazy" width="500" src="../Images/go-tutorial/channels states.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+Reproduced from <a href="https://www.youtube.com/watch?v=fCkxKGd6CVQ">https://www.youtube.com/watch?v=fCkxKGd6CVQ</a>
+</figcaption>
+</figure>
+
+- The above is a useful table of different channel states and their corresponding behaviour
+  - The bottom two rows are for the static read only / write only channels outlined previously
+
+### Rendezvous Model
+- By default channels are unbuffered
+- This creates a rendezvous model where goroutines will synchronise on a write / read
+  - Since reading / writing blocks until a writer / reader is ready to write / read
+
+<figure>
+<img loading="lazy" width="500" src="../Images/go-tutorial/channel sync.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+Reproduced from <a href="https://www.youtube.com/watch?v=fCkxKGd6CVQ">https://www.youtube.com/watch?v=fCkxKGd6CVQ</a>
+</figcaption>
+</figure>
+
+- The above diagram shows this synchronisation
+  - See how the sender doesn't return (unblock) until the receiver is finished receiving
+  - This causes a nice two way synchronisation where both the sender and receiver know that the other has received / sent
+- Remember this is just for unbuffered channels, where the channel is used as a synchronisation tool
+
+### Buffering
+- Buffering works a bit differently, the buffer allows a sender to send without waiting (until the buffer is full)
+- The sender and receiver can run independently; no synchronisation point occurs
+
+### Important Note
+- It is important to never modify things after you have written them to a channel
+
+```go
+type T struct {
+  i byte
+  b bool
+}
+
+func send(i int, ch chan<- *T) {
+  t := &T{i: byte(i)}
+  ch<- t
+  t.b = true // NEVER DO THIS
+}
+
+func main() {
+  vs := make([]T, 5)
+  ch := make(chan *T)
+  for i := range vs {
+    go send(i, ch)
+  }
+
+  time.Sleep(1*time.Second)
+
+  // This quick copy will read and copy the values written into the channel by
+  // the 5 running goroutines. But there is a race condition so the value of t.b
+  // for all the values is false since it is likely (but not guaranteed) that this
+  // read and copy will finish before the t.b is updated in the goroutine. If the
+  // channel was buffered, it would be likely (but again not a guarantee) that 
+  // the value is true for all. The time.Sleep() will almost guarantee that this
+  // is the case but again this is a race condition so it should never be relied upon
+  for i := range vs {
+    vs[i] = *<-ch
+  }
+
+  for _,v :+ range vs {
+    fmt.Println(v)
+  }
+}
+```
+
+### Why Buffering
+- Buffering is useful to avoid leaked goroutines (since all channels have a space to write to) and also it avoids the rendezvous pauses when buffered channels synchronise
+- However buffering can hide race conditions so it is important to consider buffering use until it is required
+
+## Concurrent File Processing Example (Video 27)
