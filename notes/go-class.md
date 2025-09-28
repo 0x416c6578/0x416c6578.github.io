@@ -14,27 +14,27 @@ Notes from learning the fundamentals of the Go programming language from [this a
   - [Imports](#imports)
   - [Variable Declarations](#variable-declarations)
     - [Short Declaration Operator `:=`](#short-declaration-operator-)
-  - [Typing](#typing)
-    - [Structural and Named Typing](#structural-and-named-typing)
-  - [Functions](#functions)
+    - [Typing](#typing)
+      - [Structural and Named Typing](#structural-and-named-typing)
+  - [Functions (Video 8)](#functions-video-8)
     - [Parameter Passing](#parameter-passing)
     - [Multiple Return Values](#multiple-return-values)
     - [Naked Return Values](#naked-return-values)
     - [Defer](#defer)
-  - [Closures](#closures)
-  - [More on Slices](#more-on-slices)
+  - [Closures (Video 9)](#closures-video-9)
+  - [More on Slices (Video 10)](#more-on-slices-video-10)
     - [The Slice Operator](#the-slice-operator)
       - [The Slice Capacity Issue](#the-slice-capacity-issue)
     - [Array and Slice APIs From Here](#array-and-slice-apis-from-here)
-  - [Structs and JSON](#structs-and-json)
+  - [Structs and JSON (Video 12)](#structs-and-json-video-12)
     - [Maps of Structs](#maps-of-structs)
     - [Structure \& Name Compatibility of Structs](#structure--name-compatibility-of-structs)
     - [JSON with Structs](#json-with-structs)
-  - [Reference and Value Semantics](#reference-and-value-semantics)
+  - [Reference and Value Semantics (Video 14)](#reference-and-value-semantics-video-14)
     - [More on Copying](#more-on-copying)
     - [Stack Usage and Escaping](#stack-usage-and-escaping)
-  - [HTTP and Networking in Go](#http-and-networking-in-go)
-  - [OOP Concepts in Go](#oop-concepts-in-go)
+  - [HTTP and Networking in Go (Video 15)](#http-and-networking-in-go-video-15)
+  - [OOP Concepts in Go (Videos 17-20)](#oop-concepts-in-go-videos-17-20)
     - [An Overview](#an-overview)
     - [Methods and Interfaces](#methods-and-interfaces)
     - [Interface Declarations](#interface-declarations)
@@ -42,7 +42,7 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [Composition with Sorting Example](#composition-with-sorting-example)
     - [Making Nil Useful](#making-nil-useful)
     - [Exploring Value / Pointer Method Semantics](#exploring-value--pointer-method-semantics)
-  - [More on Interfaces](#more-on-interfaces)
+  - [More on Interfaces (Video 20)](#more-on-interfaces-video-20)
     - [The Error Interface](#the-error-interface)
     - [More on Pointer vs Value Receivers from Matt Holiday Vid](#more-on-pointer-vs-value-receivers-from-matt-holiday-vid)
     - [Interfaces in Practice](#interfaces-in-practice)
@@ -348,8 +348,8 @@ func do() error {
 
 - The mistake here is that the err in the for loop is of an inner scope, it shadows the one defined in the function scope above, and is lost when the for loop exits. Thus returning the err in the last line will _always be nil_ 
 
-## Typing
-### Structural and Named Typing
+### Typing
+#### Structural and Named Typing
 - Structural typing is based on the structure of a variable. Some examples of things with the same type:
   - Arrays with the same base type _and_ size
   - Slices with the same base type
@@ -361,7 +361,7 @@ func do() error {
 - Integer literals are untyped - they can assign to any size integer without conversion, and can be assigned to floats, complex etc.
 - The only overloaded operator in Go is the + operator to concatenate strings
 
-## Functions
+## Functions (Video 8)
 - Functions in Go are first class objects
 - Almost anything can be defined in a function, except (understandably) methods
 - The signature of a function is the order and type of its parameters and return values. Functions are always typed with structural typing rather than named typing
@@ -413,7 +413,7 @@ func thing() {
 }
 ```
 
-## Closures
+## Closures (Video 9)
 - Scope is static - based on the structure of the source code
 - Lifetime depends on the program execution (e.g. returning a reference from a function makes that value live outside of the function scope)
   - The variable will exist so long as a part of the program keeps a pointer to it
@@ -445,7 +445,7 @@ func main() {
 - The actual _closure_ is the concrete thing returned by calling `thing()` above - it is a function that returns an int alongside the environment containing references to the values a and b
 - See [this post](../posts/017-Go-For-Loop-Caveat.md) for information on an important change in Go 1.22 that changes the semantics of for loops that differs from the information shown in the tutorial video
 
-## More on Slices
+## More on Slices (Video 10)
 ```go
 // The following shows some different slices, with information on them given below
 
@@ -526,7 +526,7 @@ func filter(s []int, fn func(int) bool) {
 - One gotcha with slices is re-slicing doesn't make a copy of the underlying array, so you could accidentally keep the underlying array around when only a small piece of the data is actually needed
   - To remedy this, make a new slice and copy only the useful data into it and the garbage collector will sort out the rest
  
-## Structs and JSON
+## Structs and JSON (Video 12)
 - Structs are an aggregate of multiple types of named fields
 
 ```go
@@ -597,7 +597,7 @@ func main() {
 }
 ```
 
-## Reference and Value Semantics
+## Reference and Value Semantics (Video 14)
 - Value semantics (copying) lead to higher integrity, especially in concurrent programs
 - Pointer semantics tend to be more efficient
 - Pointers are used when
@@ -645,7 +645,7 @@ func update(things []thing) []thing {
   - Any object whose size is variable at runtime (e.g. slices)
 - Run `go build -gcflags -m=2` to see the results of escape analysis
 
-## HTTP and Networking in Go
+## HTTP and Networking in Go (Video 15)
 - `net/http` is the standard library package for HTTP networking
 - The core interface in this library for handling requests is 
 
@@ -684,7 +684,7 @@ var form = `
 - Above is an example of a template string for the `http.Template` library to populate. It uses double bracket syntax for templating and has directives like `printf` to do formatting. It will pull values from the fields specified in the template, e.g. pulling the ID from the `.ID` field of some struct
 - More reading / work on HTTP bits will be done in the future
 
-## OOP Concepts in Go
+## OOP Concepts in Go (Videos 17-20)
 ### An Overview
 - Go offers OO programming concepts
   - Encapsulation using packages for visibility control
@@ -951,7 +951,7 @@ func main() {
 }
 ```
 
-## More on Interfaces
+## More on Interfaces (Video 20)
 - Interface variables are `nil` until initialised
 - Nil interfaces have a slightly more complex structure than nil structs and values
 - Nil interfaces have two parts
