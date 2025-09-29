@@ -82,6 +82,9 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [Important Note](#important-note)
     - [Why Buffering](#why-buffering)
   - [Concurrent File Processing Example (Video 27)](#concurrent-file-processing-example-video-27)
+    - [Concurrent Approaches](#concurrent-approaches)
+      - [Worker Pool](#worker-pool)
+      - [Goroutine for Each Directory in the Tree Approach](#goroutine-for-each-directory-in-the-tree-approach)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -1551,3 +1554,129 @@ func main() {
 - However buffering can hide race conditions so it is important to consider buffering use until it is required
 
 ## Concurrent File Processing Example (Video 27)
+- This example walks through a CSP style concurrent program for finding duplicate files based on their content
+- This first example is a simple sequential implementation with no concurrency:
+
+```go
+type pair struct {
+  hash, path string
+}
+type fileList []string
+type results map[string]fileList
+
+// calculate the hash of a specific file path, returning a pair of
+// (hash, path)
+func hashFile(path string) pair {
+  file, err := os.Open(path)
+  if err != nil {
+    log.Fatal(err)
+  }
+  defer file.Close()
+
+  hash := md5.New()
+  if _, err := io.Copy(hash, file); err != nil {
+    log.Fatal(err)
+  }
+
+  return pair{fmt.Sprintf("%x", hash.Sum(nil)), path}
+}
+
+// this is a sequential implementation, could be quite slow on a large directory
+func walk(dir string) (results, error) {
+  hashes := make(results)
+  err := filepath.Walk(dir, func(path string, fi os.FileInfo, err error) error {
+    if fi.Mode().IsRegular() && fi.Size() > 0 {
+      h := hashFile(path)
+      hashes[h.hash] = append(hashes[h.hash], h.path) // add the new file path to it's corresponding hash entry in the map
+    }
+    return nil
+  })
+  return hashes, er r
+}
+```
+
+### Concurrent Approaches
+- All of the examples shown below are generically called map-reduce
+
+#### Worker Pool
+
+<figure>
+<img loading="lazy" width="500" src="../Images/go-tutorial/worker pool.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+Reproduced from <a href="https://www.youtube.com/watch?v=SPD7TykYy5w">https://www.youtube.com/watch?v=SPD7TykYy5w</a>
+</figcaption>
+</figure>
+
+- The above diagram shows the model for the worker pool implementation
+- The main method will feed N workers with paths to process, then will watch for the workers being done
+  - This is so that the pairs channel can be closed when the workers are finished, since we can't delegate that work to the workers since they can't coordinate who's finished last
+- The workers will run in independent goroutines
+- A collector will watch the output pairs from the workers and return them to the main method on a results channel
+- We tell the workers we are done by closing the paths channel
+  - They will stop working once they've processed their last file(s)
+
+```go
+func collector(pairs <-chan pair, result chan<- results) {
+  hashes := make(results)
+
+  // loop will only stop when the channel closes
+  for p := range pairs {
+    hashes[p.hash] = append(hashes[p.hash], p.path)
+  }
+  result <- hashes
+}
+
+func worker(paths <-chan string, pairs chan<- pair, done chan<- bool) {
+  // process files until the paths channel is closed
+  for path := range paths {
+    pairs <- hashFile(path)
+  }
+  done <- true
+}
+
+func main() {
+  numWorkers := 2 * runtime.GOMAXPROCS(0)
+
+  // the first model has unbuffered channels
+  paths := make(chan string)
+  pairs := make(chan pair)
+  done := make(chan bool)
+  result := make(chan results)
+
+  for i := 0; i < numWorkers; i++ {
+    go processFiles(paths, pairs, done)
+  }
+
+  go collectHashes(pairs, result)
+
+  err := filePath.Walk(fir, func(path string, fi os.FileInfo, err error) error {
+    if fi.Mode().IsRegular() && fi.Size() > 0 {
+      paths <- p
+    }
+    return nil
+  })
+
+  if err != nil {
+    log.Fatal(err)
+  }
+
+  // so the workers stop
+  close(paths)
+  
+  for i := 0; i < numWorkers; i++ {
+    // we then read from the done channel until all workers are done
+    <-done
+  }
+
+  // after all the workers are done we can close the pairs channel
+  close(pairs)
+
+  // finally we can read the hashes from the result channel
+  hashes := <-result
+
+  fmt.Println(hashes)
+}
+```
+
+#### Goroutine for Each Directory in the Tree Approach
+- Instead of a worker pool, we start a goroutine for each directory in the tree

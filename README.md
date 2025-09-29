@@ -1,8 +1,9 @@
 <center>
 <font size="10"> 👽 </font>
+<br>
+Hi! 👋 I'm Alex - sometimes going by the memorable name of <tt>0x416c6578</tt> online
 </center>
 
-<center>Hi! 👋 I'm Alex - sometimes going by the memorable name of <tt>0x416c6578</tt> online</center>
 
 ## About
 - [Github](https://github.com/0x416c6578)
