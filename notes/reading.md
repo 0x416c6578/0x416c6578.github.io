@@ -2,10 +2,11 @@
 A log of books I'm reading / have read. Currently only 2025 but history will be added in the future based on what I can remember (:
 
 ## Currently Reading
-- Yellowface - R.F. Kuang (~Sept/Oct 25)
+- Children of Ruin - Adrian Tchaikovsky (Oct 25)
 - To Mock a Mockingbird - Raymond Smullyan (~Winter 25 Casual)
 
 ## Read (2025)
+- Yellowface - R.F. Kuang (~Sept/Oct 25)
 - Children of Time - Adrian Tchaikovsky (~Aug 25)
   - Took a while to get into it but the world building and scale is great, and a very nice ending
 - Why Can't I Just Enjoy Things - Pierre Novellie (~July 25, multiple rereads)
