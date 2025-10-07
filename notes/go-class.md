@@ -94,6 +94,13 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [`sync.Once`](#synconce)
     - [`sync.Pool`](#syncpool)
   - [Homework (Video 29)](#homework-video-29)
+  - [Concurrency Gotchas (Video 30)](#concurrency-gotchas-video-30)
+    - [Race Conditions](#race-conditions-1)
+    - [Deadlock](#deadlock)
+    - [Goroutine Leaks](#goroutine-leaks)
+    - [Channel Errors](#channel-errors)
+    - [Other Misc Errors](#other-misc-errors)
+    - [Dining Philosophers](#dining-philosophers)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -2007,3 +2014,34 @@ ___
 - There are some other synchronisation primitives available
 
 ## Homework (Video 29)
+- This video explains a race condition in an HTTP server and how to go about fixing it
+- One of the ways you can detect races in Go is using the race detector (`go run -race .`)
+- The race condition was caused by unsafe concurrent use of the Go map
+- To fix the race condition, a mutex was used to make concurrent use of the map safe
+
+## Concurrency Gotchas (Video 30)
+
+### Race Conditions
+- Where unprotected reads and writes overlap
+
+### Deadlock
+- When no goroutine can make progress
+  - E.g. all goroutines are blocked on empty channels
+  - Or all goroutines could be blocked waiting on a mutex
+  - Or GC could be prevented from running (busy loop)
+- Go can detect *some* deadlocks automatically, and can detect *some* data races with `-race`
+
+### Goroutine Leaks
+- When a goroutine hangs on an empty or blocked channel but there isn't deadlock; other goroutines can still make progress
+- Can be found by looking at `pprof` output
+- It is important to always know how / when a goroutine will end when you write it
+
+### Channel Errors
+- E.g. sending on a closed channel, sending or receiving on a nil channel, closing a nil channel or closing a channel twice
+
+### Other Misc Errors
+- Closure variable capture
+- Misuse of `Mutex`, `WaitGroup` or `select`
+- There is a good overview of Go concurrency errors that can be found at [https://cseweb.ucsd.edu/~yiying/GoStudy-ASPLOS19.pdf](https://cseweb.ucsd.edu/~yiying/GoStudy-ASPLOS19.pdf)
+
+### Dining Philosophers
