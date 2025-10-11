@@ -104,6 +104,7 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [Incorrect Use of Waitgroup](#incorrect-use-of-waitgroup)
     - [A Bit More on Select](#a-bit-more-on-select)
     - [Useful Takeaways](#useful-takeaways)
+  - [Odds \& Ends (Video 31)](#odds--ends-video-31)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -2088,4 +2089,5 @@ func main() {
 - Don't start goroutines without knowing how they will stop
 - Acquire locks / semaphores as late as possible, releasing them in the reverse order of obtaining (which is the semantics of `defer`)
 - Don't wait for non-parallel work you can do yourself
- 
+
+## Odds & Ends (Video 31)

@@ -1,7 +1,8 @@
 <center>
-<font size="10"> 👽 </font>
+<img loading="lazy" width="300" src="Images/Baby_rock_2.jpeg" alt="" style=""/>
+
 <br>
-Hi! 👋 I'm Alex - sometimes going by the memorable name of <tt>0x416c6578</tt> online
+Hi! 👋 I'm Alex - sometimes going by the memorable name of <tt>0x416c6578</tt> online. Never mind the rock above, he's just minding his business
 </center>
 
 
