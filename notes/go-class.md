@@ -110,6 +110,8 @@ Notes from learning the fundamentals of the Go programming language from [this a
     - [Sized Integers](#sized-integers)
     - [Goto](#goto)
   - [Error Handling (Video 32)](#error-handling-video-32)
+    - [Overview of Errors](#overview-of-errors)
+    - [Wrapped Errors](#wrapped-errors)
 
 ## Variables
 - Variables are defined with the `var` keyword or the shorthand `:=` (only inside of functions / methods to simplify parsing!).
@@ -2158,3 +2160,61 @@ complex64 complex128
 - Go has a `goto` statement, use with caution!
 
 ## Error Handling (Video 32)
+### Overview of Errors
+- Most of the times, errors are just strings
+- The error interface is the base interface for all errors
+
+```go
+type error interface {
+  Error() string
+}
+```
+
+- We can create some other types with the `Error()` method if we want to
+
+```go
+type errType int
+const (
+  _ errType = iota
+  noHeader
+  invalidBody
+)
+type SomeError struct {
+  kind errType
+  pos int
+  err error // some other underlying error
+}
+
+// implement the Error method for our new error
+func (e SomeError) Error() {
+  switch e.kind {
+  case noHeader {
+    return "No header"
+  }
+  case invalidBody {
+    return "Invalid body"
+  }
+  }
+}
+
+// we can define our own methods on our custom error, e.g. building an error with value
+func (e SomeError) with(pos int) SomeError {
+  e1 = e
+  e1.pos = pos
+  return e1
+}
+
+// a useful pattern is to define "prototype" errors that we can then adapt using methods like above, e.g.
+var (
+  HeaderMissing = SomeError{kind: noHeader}
+  BodyMissing = SomeError{kind: invalidBody}
+)
+
+// then if we have an invalid body we can specify a position for the error using the adapter:
+BodyMissing.with(105)
+```
+
+- These prototype errors and adapter methods are a bit cleaner than one large constructor
+
+### Wrapped Errors
+- It is useful to have wrapped errors
