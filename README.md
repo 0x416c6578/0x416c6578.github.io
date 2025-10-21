@@ -2,7 +2,7 @@
 <img loading="lazy" width="300" src="Images/Baby_rock_2.jpeg" alt="" style=""/>
 
 <br>
-Hi! 👋 I'm Alex - sometimes going by the memorable name of <tt>0x416c6578</tt> online. Never mind the rock above, he's just minding his business
+Hi! 👋 I'm Alex - sometimes going by the memorable name of <tt>0x416c6578</tt> online
 </center>
 
 
@@ -13,15 +13,23 @@ Hi! 👋 I'm Alex - sometimes going by the memorable name of <tt>0x416c6578</tt>
 ## Current Interests
 - [My Reading](notes/reading.md)
 - The Go programming language
-- Category Theory  
 
-## Learning Notes
-Various notes from my reading and watching  
+### Future Learning Plan
+- Category theory
+- Array programming
+- Swift (at some point in the future)
+
+## Notes
+Various notes from my learning, reading and watching:
 - [Learning the Go Programming Language](notes/go.md)
+  - [Comprehensive Notes from Matt Holiday Go Tutorial (**actively updating**)](notes/go-class/README.md)
 - [Go Conference Talk Notes](notes/go-conference-talks.md)
 - [Pro Git Book Notes](notes/git-book.md)
 
 ## Posts
+### Non Technical
+- [Three Peaks Challenge 2025](posts/016-Three-Peaks.md) (**24/06/25**)
+
 ### Technical
 - [How I Use Obsidian](posts/018-How-I-Use-Obsidian.md) (**19/09/25**)
 - [Go 1.22 Loop Semantics Change](posts/017-Go-For-Loop-Caveat.md) (**12/08/25**)
@@ -38,12 +46,8 @@ Various notes from my reading and watching
 - [Various Snippets of Info From p8-firmware Sources](posts/002-P8-firmware-info.md) (**21/08/20**)
 - [A Deep Dive into LVGL Fonts](posts/001-LVGL-fonts.md) (**25/07/20**)
 
-### Non Technical
-- [Three Peaks 2025](posts/016-Three-Peaks.md) (**24/06/25**)
-
-
 ## Projects
 - [LDS-006 LIDAR Research](lds-006/overview.md)
 - [P8 Smartwatch Firmware](p8-firmware/p8-firmware.md)
 - [SAP-1 8 Bit CPU](sap-1/overview.md)
-- [Other Crap](random-projects/readme.md)
+- [Other Stuff](random-projects/readme.md)

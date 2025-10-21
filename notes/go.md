@@ -1,7 +1,7 @@
 # Go Learning
 This page covers my notes on Golang, tutorials, conference talks and blog posts etc.
 
-[Matt Holiday Go Tutorial](go-class.md) - A very comprehensive and interesting series of YouTube videos talking through the core concepts in Go
+[Matt Holiday Go Tutorial](go-class/README.md) - A very comprehensive and interesting series of YouTube videos talking through the core concepts in Go
 
 ## References
 - [Alex's Golang Playlist](https://www.youtube.com/playlist?list=PLq1stbyQkY4i7CYhpQKr65AzS04kU_MtM)
