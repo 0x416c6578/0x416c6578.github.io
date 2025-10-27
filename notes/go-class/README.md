@@ -22,3 +22,4 @@ Notes from learning the fundamentals of the Go programming language from [this a
 - [Odds & Ends (Video 31)](./17-odds-and-ends.md)
 - [Error Handling (Video 32)](./18-error-handling.md)
 - [Reflection (Video 33)](./19-reflection.md)
+- [Mechanical Sympathy (Video 34)](./20-mechanical-sympathy.md)

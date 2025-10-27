@@ -23,7 +23,7 @@ c, ok := w.(*bytes.Buffer)
 ```go
 func Println(args ...interface{}) {
     // ...
-    for arg := range args {
+    for _, arg := range args {
         switch a := arg.(type) {
             case string: // concrete type
                 // do something with the string
@@ -51,3 +51,66 @@ if !reflect.DeepEqual(got, want) {
     fmt.Println("failed equality check")
 }
 ```
+
+### Reflection in JSON Unmarshalling
+- The Go JSON library uses reflection extensively to deserialise (unmarshal in Go terminology) JSON
+- For example we can define custom unmarshallers that will unmarshal some messy badly designed JSON like
+
+```json
+{
+    "item": "album",
+    "album": {"title": "Quality Over Opinion"}
+}
+{
+    "item": "song",
+    "song": {"title": "Shallow Laughter", "artist": "Louis Cole"}
+}
+```
+
+- Into a struct like
+
+```go
+type Response struct {
+    Item string
+    Album string
+    Title string
+    Artist string
+}
+```
+
+- Code isn't here but we'd define a custom unmarshaller that would first unmarshal into a `map[string]any` then have logic for extracting the fields conditionally as required
+
+#### Custom Unmarshaller Caveat
+- When defining a custom unmarshaller for a custom struct (e.g. for adding in additional logic that default unmarshalling can't do), you need to make sure to define a wrapper type for your incoming type so that recursive unmarshalling doesn't happen: 
+
+```go
+type Person struct {
+    Name string `json:"name"`
+}
+
+func (p *Person) UnmarshalJSON(data []byte) error {
+    // uh oh stinky, this will recursively unmarshal
+    return json.Unmarshal(data, p)
+}
+
+func (p *Person) UnmarshalJSON(data []byte) error {
+    type wrapper Person
+    // we make a new variable aux which is a wrapper type. The pointer points to the same underlying memory
+    // of p, however in the type system the UnmarshalJSON method isn't defined for the wrapper type
+    // and so we can call json.Unmarshal without issues. Then we can do any custom validation we want to
+    aux := (*wrapper)(p)
+
+    if err := json.Unmarshal(data, aux); err != nil {
+        return err
+    }
+
+    // custom validation / logic
+    if p.Name == "" {
+        return errors.New("missing name")
+    }
+
+    return nil
+}
+```
+
+- The above example shows the issue of recursive unmarshalling and how to fix it (very easy really just an interesting caveat to know of)
