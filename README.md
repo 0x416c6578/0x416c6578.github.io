@@ -1,9 +1,11 @@
+<div>
 <center>
-<br>
-Hi! I'm Alex - sometimes going by the memorable name of <tt>0x416c6578</tt> online. I'm a (predominantly backend) software engineer working in finance, specifically payments (Open Banking). I have a small collection of things below, of varying utility and interest. See my work on <a href=https://github.com/0x416c6578>Github</a>.
+Hi! I'm Alex - sometimes going by the memorable name of <tt>0x416c6578</tt> online. I'm a (predominantly backend) software engineer working in finance, specifically payments (Open Banking). I have a small collection of things below, of varying utility and interest.
 </center>
+</div>
 
 ## Posts
+See my work on [Github](https://github.com/0x416c6578)
 ### Technical
 - [How I Use Obsidian for Taking Notes and Planning my Day](posts/018-How-I-Use-Obsidian.md) (**19/09/25**)
 - [Go 1.22 Loop Semantics Change Note](posts/017-Go-For-Loop-Caveat.md) (**12/08/25**)
