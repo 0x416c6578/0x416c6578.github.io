@@ -1,38 +1,12 @@
 <center>
-<img loading="lazy" width="300" src="Images/Baby_rock_2.jpeg" alt="" style=""/>
-
 <br>
-Hi! 👋 I'm Alex - sometimes going by the memorable name of <tt>0x416c6578</tt> online
+Hi! I'm Alex - sometimes going by the memorable name of <tt>0x416c6578</tt> online. I'm a (predominantly backend) software engineer working in finance, specifically payments (Open Banking). I have a small collection of things below, of varying utility and interest. See my work on <a href=https://github.com/0x416c6578>Github</a>.
 </center>
 
-
-## About
-- [Github](https://github.com/0x416c6578)
-- [Education](other/education.md)
-
-## Current Interests
-- [My Reading](notes/reading.md)
-- The Go programming language
-
-### Future Learning Plan
-- Category theory
-- Array programming
-- Swift (at some point in the future)
-
-## Notes
-Various notes from my learning, reading and watching:
-- [Learning the Go Programming Language](notes/go.md)
-  - [Comprehensive Notes from Matt Holiday Go Tutorial (**actively updating**)](notes/go-class/README.md)
-- [Go Conference Talk Notes](notes/go-conference-talks.md)
-- [Pro Git Book Notes](notes/git-book.md)
-
 ## Posts
-### Non Technical
-- [Three Peaks Challenge 2025](posts/016-Three-Peaks.md) (**24/06/25**)
-
 ### Technical
-- [How I Use Obsidian](posts/018-How-I-Use-Obsidian.md) (**19/09/25**)
-- [Go 1.22 Loop Semantics Change](posts/017-Go-For-Loop-Caveat.md) (**12/08/25**)
+- [How I Use Obsidian for Taking Notes and Planning my Day](posts/018-How-I-Use-Obsidian.md) (**19/09/25**)
+- [Go 1.22 Loop Semantics Change Note](posts/017-Go-For-Loop-Caveat.md) (**12/08/25**)
 - [Kia Rio Headunit Passcode Reverse Engineering](posts/015-Kia-Headunit-RE.md) (**19/07/24**)
 - [LineageOS Hosts File Editing Without Root](posts/013-Lineageos-Hosts.md) (**08/10/23**)
 - [Messing with the LDS-006 Laser Assembly](posts/011-Attempts-Serial-Stuff.md) (**06/10/21**)
@@ -45,6 +19,21 @@ Various notes from my learning, reading and watching:
 - [XFCE4 Automatic Theme Switching](posts/003-Auto-Dark-Mode-XFCE.md) (**25/08/20**)
 - [Various Snippets of Info From p8-firmware Sources](posts/002-P8-firmware-info.md) (**21/08/20**)
 - [A Deep Dive into LVGL Fonts](posts/001-LVGL-fonts.md) (**25/07/20**)
+
+### Non Technical
+- [Three Peaks Challenge 2025](posts/016-Three-Peaks.md) (**24/06/25**)
+
+___
+
+- [My Education](other/education.md)
+- [My Reading](notes/reading.md)
+
+## Notes
+Various notes from my learning, reading and watching:
+- [Learning the Go Programming Language](notes/go.md)
+- [Notes from Matt Holiday Go Tutorial (**actively updating**)](notes/go-class/README.md)
+- [Pro Git Book Notes](notes/git-book.md)
+- [Go Conference Talk Notes](notes/go-conference-talks.md)
 
 ## Projects
 - [LDS-006 LIDAR Research](lds-006/overview.md)

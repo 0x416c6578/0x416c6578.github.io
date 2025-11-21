@@ -1,11 +1,12 @@
 # Reading
-A log of books I'm reading / have read. Currently only 2025 but history will be added in the future based on what I can remember (:
+A log of books I'm reading / have read.
 
 ## Currently Reading
-- Children of Ruin - Adrian Tchaikovsky (Oct 25)
-- To Mock a Mockingbird - Raymond Smullyan (~Winter 25 Casual)
+- To Mock a Mockingbird - Raymond Smullyan (Oct 25)
 
 ## Read (2025)
+- Children of Ruin - Adrian Tchaikovsky (Oct 25)
+  - Kinda similar to it's predecessor
 - Yellowface - R.F. Kuang (~Sept/Oct 25)
 - Children of Time - Adrian Tchaikovsky (~Aug 25)
   - Took a while to get into it but the world building and scale is great, and a very nice ending
