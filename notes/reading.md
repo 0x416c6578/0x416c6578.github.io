@@ -5,6 +5,7 @@ A log of books I'm reading / have read.
 - To Mock a Mockingbird - Raymond Smullyan (Oct 25)
 
 ## Read (2025)
+- Never Let Me Go - Kazuo Ishiguro
 - Children of Ruin - Adrian Tchaikovsky (Oct 25)
   - Kinda similar to it's predecessor
 - Yellowface - R.F. Kuang (~Sept/Oct 25)
