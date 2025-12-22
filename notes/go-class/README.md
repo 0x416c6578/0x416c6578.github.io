@@ -25,3 +25,4 @@ Notes from learning the fundamentals of the Go programming language from [this a
 - [Mechanical Sympathy (Video 34)](./20-mechanical-sympathy.md)
 - [Benchmarking (Video 35)](./21-benchmarking.md)
 - [Profiling (Video 36)](./22-profiling.md)
+- [Static Analysis Tools (Video 37)](./23-static-analysis.md)
