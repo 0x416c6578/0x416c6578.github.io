@@ -106,3 +106,46 @@ func TestSomeFunctionToTest(t *testing.T) {
 - Super neat pattern!!!
 
 #### Checker Refactoring for Subtests
+- We can also parameterise how we check results using a checker interface:
+
+```go
+type checker interface {
+  check(*testing.T, string, string) bool
+}
+
+type subTest struct {
+  name string
+  shouldFail bool
+  checker checker
+}
+
+type checkGolden struct { /*...*/ }
+
+func (c checkGolden) check(t *testing.T, got, want string) bool {
+  // implement checking logic here
+}
+```
+
+### Mocking / Faking
+- We can define mocks / fakes for things like database interfaces
+
+```go
+type DB interface {
+  GetThing(string) (string, error)
+}
+
+var errShouldFail = errors.New("db should fail")
+type mockDB struct {
+  shouldFail bool // our mock DB can have forced fail scenarios for testing
+}
+
+func (m mockDB) GetThing(key string) (string, error) {
+  // mockDB now conforms to the DB interface
+  if m.shouldFail {
+    // we can force an error case when the flag is set
+    return thing{}, fmt.Errorf("%s: %w", key, errShouldFail)
+  }
+}
+```
+
+- We can use things like in-memory Redis things for testing, whereas for things like Postgres it's less easy to have an in-memory version because of the complexity of the implementations
