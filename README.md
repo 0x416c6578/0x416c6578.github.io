@@ -4,7 +4,13 @@ Hi! I'm Alex - sometimes going by the memorable name of <tt>0x416c6578</tt> onli
 </center>
 </div>
 
-## Posts
+## Current
+- [Learning Go](notes/go.md)
+  - [Matt Holiday Go Video Series](notes/go-class/README.md)
+- [CSC4700 Lecture Videos - Parallel C++ for Scientific Applications (Imminent)](notes/csc4700/README.md)
+- [My Reading](notes/reading.md)
+
+## Random Bits
 See my work on [Github](https://github.com/0x416c6578)
 ### Technical
 - [How I Use Obsidian for Taking Notes and Planning my Day](posts/018-How-I-Use-Obsidian.md) (**19/09/25**)
@@ -25,20 +31,13 @@ See my work on [Github](https://github.com/0x416c6578)
 ### Non Technical
 - [Three Peaks Challenge 2025](posts/016-Three-Peaks.md) (**24/06/25**)
 
-___
-
-- [My Education](other/education.md)
-- [My Reading](notes/reading.md)
-
-## Notes
-Various notes from my learning, reading and watching:
-- [Learning the Go Programming Language](notes/go.md)
-- [Notes from Matt Holiday Go Tutorial (**actively updating**)](notes/go-class/README.md)
+## Other Stuff
 - [Pro Git Book Notes](notes/git-book.md)
-- [Go Conference Talk Notes](notes/go-conference-talks.md)
+- [My Education](other/education.md)
+<!-- - [Go Conference Talk Notes](notes/go-conference-talks.md) -->
 
 ## Projects
-- [LDS-006 LIDAR Research](lds-006/overview.md)
+- [LDS-006 LIDAR Research and Experiments](lds-006/overview.md)
 - [P8 Smartwatch Firmware](p8-firmware/p8-firmware.md)
 - [SAP-1 8 Bit CPU](sap-1/overview.md)
 - [Other Stuff](random-projects/readme.md)

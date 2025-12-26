@@ -27,3 +27,5 @@ Notes from learning the fundamentals of the Go programming language from [this a
 - [Profiling (Video 36)](./22-profiling.md)
 - [Static Analysis Tools (Video 37)](./23-static-analysis.md)
 - [Testing (Video 38)](./24-testing.md)
+- [Coverage (Video 39)](./25-code-coverage.md)
+- [Modules (Video 40)](./26-go-modules.md)
