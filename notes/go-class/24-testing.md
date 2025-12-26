@@ -149,3 +149,83 @@ func (m mockDB) GetThing(key string) (string, error) {
 ```
 
 - We can use things like in-memory Redis things for testing, whereas for things like Postgres it's less easy to have an in-memory version because of the complexity of the implementations
+
+### `TestMain`
+- `TestMain` and `testing.M` is a way of doing initialisation before running tests, e.g. spinning up a database
+
+```go
+func TestMain(m *testing.M) {
+  // setup
+  setupDatabase()
+
+  // run tests
+  rc := m.Run()
+
+  // teardown
+  teardownDatabase()
+
+  os.Exit(rc)
+}
+```
+
+- Tests will be run when `m.Run()` is explicitly invoked
+- Make sure to perform teardown explicitly before calling `os.Exit()`, don't `defer` since defers don't run after `os.Exit()` is called
+
+### `t.Cleanup`
+- `t.Cleanup` is a function used to unregister resources created for a test, an alternative to tearing down in `TestMain`
+
+```go
+func TestSomething(t *testing.T) {
+  dir := os.MkdirTemp("", "x")
+  t.Cleanup(func() { os.RemoveAll(dir) }) // register cleanup function
+  // test uses dir...
+}
+```
+
+- Semantically `t.Cleanup` registrations are similar to `defer` except they are preferred since from inside helper functions, a `defer` would run after the helper is called rather than after the test has completed:
+
+```go
+func newServer(t *testing.T) *Server {
+  s := startServer()
+  t.Cleanup(func(){ s.Close() }) // register cleanup in helper
+  return s
+}
+
+func TestDoStuff(t *testing.T) {
+  s := newServer(t)
+  // use s - cleanup happens after test completes
+}
+```
+
+### Test-only Packages
+- Sometimes we want to test a package only from an external interface standpoint; for opaque or *black-box* tests
+- Normally tests will run inside the same package as what they are testing, meaning they get access to internal names
+- Creating a separate test package that ends in `_test` will mean you only have access to exported names (functions, constants, structs etc.) from your package
+  - This means you can do black-box testing
+
+### Philosophy of Testing
+
+<figure>
+<img loading="lazy" width="500" src="../../Images/go-tutorial/testing-philosophy.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+Reproduced from <a href="https://www.youtube.com/watch?v=PIPfNIWVbc8">https://www.youtube.com/watch?v=PIPfNIWVbc8</a>
+</figcaption>
+</figure>
+
+- Unit tests are about defining the behaviour of a package's API; they define a contract for behaviour concretely rather than potentially incorrectly like documentation
+- Well written tests will allow for a high degree of confidence that an API's behaviour is still correct after some change
+- Assume code doesn't work unless:
+  - You have tests (unit, integration etc.)
+  - They work correctly
+  - You run them
+  - They pass
+- This is just basic code hygiene; start clean - stay clean
+- Developer testing is necessary and important - developers should aim for 75%+ coverage, through unit tests, integration tests and post-deployment sanity checks
+- Tests can also be part of your documentation if written well
+
+<figure>
+<img loading="lazy" width="500" src="../../Images/go-tutorial/testing mental model.png" alt="" style="border:1px solid black;"/>
+<figcaption style="font-style: italic;">
+Reproduced from <a href="https://www.youtube.com/watch?v=PIPfNIWVbc8">https://www.youtube.com/watch?v=PIPfNIWVbc8</a>
+</figcaption>
+</figure>
