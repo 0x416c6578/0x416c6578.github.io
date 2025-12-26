@@ -8,7 +8,6 @@ Hi! I'm Alex - sometimes going by the memorable name of <tt>0x416c6578</tt> onli
 - [Learning Go](notes/go.md)
   - [Matt Holiday Go Video Series](notes/go-class/README.md)
 - [CSC4700 Lecture Videos - Parallel C++ for Scientific Applications (Imminent)](notes/csc4700/README.md)
-- [My Reading](notes/reading.md)
 
 ## Random Bits
 See my work on [Github](https://github.com/0x416c6578)
