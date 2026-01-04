@@ -31,3 +31,4 @@ Notes from learning the fundamentals of the Go programming language from Matt Ho
 - [Testing (Video 38)](./24-testing.md)
 - [Coverage (Video 39)](./25-code-coverage.md)
 - [Modules (Video 40)](./26-go-modules.md)
+- [Building Go Programs (Video 41)](./27-building-go-programs.md)
