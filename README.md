@@ -1,16 +1,16 @@
-<div>
-<center>
-Hi! I'm Alex - sometimes going by the memorable name of <tt>0x416c6578</tt> online. I'm a (predominantly backend) software engineer working in finance, specifically payments (Open Banking). I have a small collection of things below, of varying utility and interest.
-</center>
-</div>
+Hi! I'm Alex - sometimes going by the memorable name of `0x416c6578` online. I'm a (predominantly backend) software engineer working in finance, specifically payments (Open Banking).
 
-## Current
+I have interests in the Go programming language, algorithms, embedded / hardware hacking and in my free time I like to play board games, bouldering, running and badminton.
+
+## Learning
+- [My Education](other/education.md)
 - [Learning Go](notes/go.md)
-  - [Matt Holiday Go Video Series](notes/go-class/README.md)
-- [CSC4700 Lecture Videos - Parallel C++ for Scientific Applications (Imminent)](notes/csc4700/README.md)
+  - [Matt Holiday Go Tutorial](notes/go-class/README.md)
+- [CSC4700 - Parallel C++ for Scientific Applications](notes/csc4700/README.md)
 
-## Random Bits
+## Writing / Work
 See my work on [Github](https://github.com/0x416c6578)
+
 ### Technical
 - [How I Use Obsidian for Taking Notes and Planning my Day](posts/018-How-I-Use-Obsidian.md) (**19/09/25**)
 - [Go 1.22 Loop Semantics Change Note](posts/017-Go-For-Loop-Caveat.md) (**12/08/25**)
@@ -27,16 +27,10 @@ See my work on [Github](https://github.com/0x416c6578)
 - [Various Snippets of Info From p8-firmware Sources](posts/002-P8-firmware-info.md) (**21/08/20**)
 - [A Deep Dive into LVGL Fonts](posts/001-LVGL-fonts.md) (**25/07/20**)
 
-### Non Technical
+### Other
+- [SAP-1 8 Bit CPU](sap-1/overview.md)
 - [Three Peaks Challenge 2025](posts/016-Three-Peaks.md) (**24/06/25**)
-
-## Other Stuff
-- [Pro Git Book Notes](notes/git-book.md)
-- [My Education](other/education.md)
-<!-- - [Go Conference Talk Notes](notes/go-conference-talks.md) -->
-
-## Projects
 - [LDS-006 LIDAR Research and Experiments](lds-006/overview.md)
 - [P8 Smartwatch Firmware](p8-firmware/p8-firmware.md)
-- [SAP-1 8 Bit CPU](sap-1/overview.md)
+- [Pro Git Book Notes](notes/git-book.md)
 - [Other Stuff](random-projects/readme.md)
