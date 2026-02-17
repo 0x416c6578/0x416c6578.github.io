@@ -50,6 +50,8 @@
   - Transitive
   - Anti-symmetric; if `a<b` then `b` can never be `<` `a`
   - If `a!=b` then `a<b` or `a>b`
+- The semantics of `<` are bound to the sematics of equality and related operations; e.g. if `a >= b` then `a` cannot be `<` `b`
+- `<=>` is a helper operator that returns <0 if `a<b`, >0 if `a>b` and returns 0 when `a==b`. We can define this one function and the compiler will auto generate all the other functions for us
 
 ### Destructors
 - Are called by the compiler automatically when an object falls out of scope; they end the lifetime of an object
@@ -63,3 +65,58 @@
 
 ### C++ Classes
 - Classes and structs in C++ are basically identical except classes have default private visibility and structs have default public
+
+### Singleton
+- In this example a singeton is just a one element container; like a pair but with only one guy
+- It uses templates which are losely equivalent to generics in other languages
+- A template is a type function
+
+```cpp
+template <typename T>
+struct singleton
+{
+    T value;
+}
+```
+
+#### Compiler Generated Functions
+- The compiler generates 6 functions for you when you make a user defined type
+  1. Default constructor
+    - Constructor for a type with no additional arguments (e.g. `singleton<int> s;`)
+    - 
+  2. Destructor
+    - When an object goes out of scope
+  3. Copy constructor
+    - E.g. `singleton<int> s1 = s`
+  4. Copy assignment
+    - Used whenever an existing instance of a user defined type is assigned to another instance of that type; e.g. `singleton<int> s2; s2 = s1`
+  5. Move constructor
+  6. Move assignment
+- These functions are defined recursively; e.g. the copy constructor will call the copy constructor on each member field
+
+### Semi-regular singleton
+- Remember semi regularity has a copy constructor and copy assignment
+
+```cpp
+struct singleton {
+    T value;
+    
+    singleton() {}
+    ~singleton() {}
+    
+    // copy constructor
+    singleton(singleton const& x) 
+        : value(x.value) {
+          
+    }
+    
+    // copy assignment
+    singleton& operator=(singleton const& x) {
+        value = x.value;
+        return *this;
+    }
+}
+```
+
+- We could just do `= default;` for these function definitions to use the compiler generated functions (which would have the same semantics as above)
+- **Important** - the default constructor is always synthesised **only if** you haven't defined any other constructors; it won't be constructed if you have any other constructors defined
