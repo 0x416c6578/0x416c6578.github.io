@@ -105,8 +105,8 @@ struct singleton {
     ~singleton() {}
     
     // copy constructor
-    singleton(singleton const& x) 
-        : value(x.value) {
+    singleton(singleton const& x)
+        : value(x.value) { // this syntax is member initialisation syntax, which reduces unnecessary copying
           
     }
     
@@ -120,3 +120,44 @@ struct singleton {
 
 - We could just do `= default;` for these function definitions to use the compiler generated functions (which would have the same semantics as above)
 - **Important** - the default constructor is always synthesised **only if** you haven't defined any other constructors; it won't be constructed if you have any other constructors defined
+  - It is therefore always recommended to explicitly define a default constructor
+
+### Making Singleton Regular
+```cpp
+friend bool operator==(singleton const& x, singleton const& y) {
+    return x.value == y.value
+}
+friend bool operator!=(singleton const& x, singleton const& y) {
+    return !(x==y)
+}
+```
+
+- Friend functions that live inside a class declaration are not member functions; but they still have access to all the member fields (including private ones)
+  - This allows the function to be nicely symmetric rather than doing something like `x.equals(y)`
+
+### Reasoning about Equality
+- Law of identity; `a` is always `==a`
+- Law of non-contradiction; you can't have a predicate P be true and !P be true at the same time
+- Law of excluded middle; things must either be equal or not
+- Most builtin types follow these laws except floating points
+  - This is because NaN has the property `x==x -> false` and `x!=x -> false`
+
+### Totally Ordered Singleton
+- We can define `operator<` and we can then trivially derive all other orderings from this
+- Alternatively as mentioned we can define the spaceship operator
+
+### Concepts (Parametric Polymorphism)
+- If we create a generic singleton, then it will be semi regular if the type parameter is semi regular, and likewise for regular and totally ordered
+
+```cpp
+template <typename T>
+    requires(std::regular<T> || std::semiregular<T> || std::totally_ordered<T>)
+struct singleton final {
+    //...
+}
+```
+
+- The above uses concepts to constrain what `T` we can use with singleton
+- So our singleton will only work with one of those three classes of types
+- If you plug in a semi regular `T`, then C++ templates ensures that `singleton<T>` will only have a copy constructor and assignment, no equality
+- Then adding regularity to `T` will add regularity to `singleton` etc.
