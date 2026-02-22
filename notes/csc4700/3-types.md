@@ -161,3 +161,14 @@ struct singleton final {
 - So our singleton will only work with one of those three classes of types
 - If you plug in a semi regular `T`, then C++ templates ensures that `singleton<T>` will only have a copy constructor and assignment, no equality
 - Then adding regularity to `T` will add regularity to `singleton` etc.
+
+### Instrumented Type
+- We can write an adapter / decorator for a class which will take a type `T` and behave exactly like a `T` but will allow us to count operations applied to it
+- It's relatively trivial; just redefine all operations with some additional code to count operations
+- Going back to comparing `std::set` vs `std::sort` and `std::unique` for finding the number of unique elements in a collection; instrumented classes can be used to count the #operations taken in each case
+  - It is shown that the latter is 10x faster and has many fewer operations
+  - This is partly because a set uses a binary tree and has to reorder / restructure the tree more often, but most importantly because `std::vector` is contiguous in memory meaning it is much friendlier on caches
+    - **It is almost always recommended to use `std::vector` as a container, this memory locality is critical to performance**
+
+### Summary
+- All standard algorithms and containers expect the type requirements of regular and totally ordered; this means that any type implementing those concepts can be used in those containers and algorithms
