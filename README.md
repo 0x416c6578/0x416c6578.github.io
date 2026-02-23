@@ -1,6 +1,10 @@
-Hi! I'm Alex - sometimes going by the memorable name of `0x416c6578` online. I'm a (predominantly backend) software engineer working in finance, specifically payments (Open Banking).
+Hi! I'm Alex - sometimes going by the memorable name of `0x416c6578` online. I'm a (predominantly backend) software engineer currently working in finance, specifically payments (Open Banking).
 
 I have interests in the Go programming language, algorithms, embedded / hardware hacking and in my free time I like to play board games, bouldering, running and badminton.
+
+**Everything on this blog and my website is 100% AI free, whilst I appreciate the power and utility of these tools, I like to spend my free time on learning that *challenges* and expands my horizons.**
+
+*As our island of knowledge grows, so does the shore of our ignorance.* - John Archibald Wheeler
 
 ## Learning
 - [My Education](other/education.md)
@@ -28,8 +32,8 @@ See my work on [Github](https://github.com/0x416c6578)
 - [A Deep Dive into LVGL Fonts](posts/001-LVGL-fonts.md) (**25/07/20**)
 
 ### Other
-- [SAP-1 8 Bit CPU](sap-1/overview.md)
 - [Three Peaks Challenge 2025](posts/016-Three-Peaks.md) (**24/06/25**)
+- [SAP-1 8 Bit CPU](sap-1/overview.md)
 - [LDS-006 LIDAR Research and Experiments](lds-006/overview.md)
 - [P8 Smartwatch Firmware](p8-firmware/p8-firmware.md)
 - [Pro Git Book Notes](notes/git-book.md)
