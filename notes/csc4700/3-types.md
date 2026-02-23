@@ -172,3 +172,4 @@ struct singleton final {
 
 ### Summary
 - All standard algorithms and containers expect the type requirements of regular and totally ordered; this means that any type implementing those concepts can be used in those containers and algorithms
+- Semi-regular types need a copy constructor, copy assignment and a destructor, regular types need equality and totally ordered types need a total ordering defined
