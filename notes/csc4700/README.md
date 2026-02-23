@@ -10,3 +10,4 @@ ___
 - [Lecture 1 - Introduction](./1-introduction.md)
 - [Lecture 2 - Dev Environment and C++ Basics](./2-development-env.md)
 - [Lecture 3 - Types](./3-types.md)
+- [Lecture 4 - Monte Carlo Methods](./4-monte-carlo-methods.md)
