@@ -118,3 +118,91 @@ for (int max_attempts = 17; max_attempts < 21; ++max_attempts) {
 
 plt::save("random_numbers.png")
 ```
+
+### Onto Monte Carlo Methods
+- They are used when it is not feasible to compute an analytical or numerical solution to a problem, e.g. systems with a large number of coupled DoF or high uncertainty in inputs
+- They rely on random sampling
+
+### Simple Example - Line Length
+- Calculating the average line length between two points in the unit square
+
+```cpp
+#include <print>
+#include <random>
+
+std::random_device rd;
+std::mt19937 gen(rd())
+
+double get_random_number() {
+    std::uniform_real_distribution<double> dis(0.0,1.0);
+    return dis(gen);
+}
+
+double sqr(double x) {
+    return x*x;
+}
+
+int main() {
+    int const n_total = 10000;
+    double acc_length = 0.0;
+    
+    for (int n = 0; n < n_total; ++n) {
+        double x1 = get_random_number();
+        double x2 = get_random_number();
+        double y1 = get_random_number();
+        double y2 = get_random_number();
+        acc_length += std::sqrt(sqr(x2-x1) + sqr(y2-y1));
+    }
+    
+    double lenght = acc_length / n_total;
+    std::println("{},{}", n_total, length);
+    
+    return 0;
+}
+```
+
+- See above for the simple example using the random number generator we explored earlier
+
+### Calculating Pi
+- We can use Monte Carlo methods for a number of problems, for example dice rolls or finding the area of Pi by firing points into a unit square containing a unit circle
+- We know that the area of the inscribed circle `Ac` is Pi/4, the area of the square `As` is 1
+- So we can say `Pi = 4Ac/As`, and we can use N random samples (x,y) and count the points that fall inside the circle (`Nc`), then we know `Pi ~= 4Nc/N`
+
+```cpp
+int main() {
+    int N = 10000
+    
+    int nc = 0;
+    for (int n = 0; n < N; ++n) {
+        double x = get_random_number();
+        double y = get_random_number();
+        if (sqr(x) + sqr(y) <= 1.0) { // point falls in the circle
+            ++nc;
+        }
+    }
+    
+    std::println("approximation of Pi: {}", (4.0*nc)/N)
+}
+```
+
+#### Parallelising Pi
+- We can see that the loop body is trivially parallelisable
+- This can be done with `hpx`
+- A naive approach is outlined:
+
+```cpp
+// ...
+hpx::experimental::for_loop(0, n_total,
+    [&nc](int n) {
+        double x = get_random_number();
+        double y = get_random_number();
+        if (sqr(x) + sqr(y) <= 1.0)
+            ++nc;
+    })
+// ...
+```
+
+- This is by default sequential, however it can be parallelised by passing `hpx::execution::par` as an additional first argument to `for_loop`
+- There are a few errors with this, most importantly is this isn't threadsafe but also because it has a lot of cache invalidation when a core pulls in `nc` from memory and updates, thus invalidating the other cores' cache
+
+### Thread Safety
