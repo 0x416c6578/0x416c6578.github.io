@@ -8,9 +8,12 @@ I have interests in the Go programming language, algorithms, embedded / hardware
 
 ## Learning
 - [My Education](other/education.md)
-- [Learning Go](notes/go.md)
-  - [Matt Holiday Go Tutorial](notes/go-class/README.md)
-- [CSC4700 - Parallel C++ for Scientific Applications](notes/csc4700/README.md)
+
+### Current Interests
+- [Learning the Go Programming Language](notes/go.md)
+  - [Matt Holiday Go Tutorial (YouTube)](notes/go-class/README.md) (complete)
+- [CSC4700 - Parallel C++ for Scientific Applications](notes/csc4700/README.md) (in progress)
+- [Crafting Interpreters](notes/crafting-interpreters/README.md) (in progress)
 
 ## Writing / Work
 See my work on [Github](https://github.com/0x416c6578)
