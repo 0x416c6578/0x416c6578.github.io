@@ -203,6 +203,63 @@ hpx::experimental::for_loop(0, n_total,
 ```
 
 - This is by default sequential, however it can be parallelised by passing `hpx::execution::par` as an additional first argument to `for_loop`
-- There are a few errors with this, most importantly is this isn't threadsafe but also because it has a lot of cache invalidation when a core pulls in `nc` from memory and updates, thus invalidating the other cores' cache
+- There are a few errors with this, most importantly is this isn't threadsafe (incrementing `nc`)  but also because it has a lot of cache invalidation when a core pulls in `nc` from memory and updates, thus invalidating the other cores' cache
 
 ### Thread Safety
+- Similar to other languages thread safety is a concern in C++. Some relevant definitions:
+  - Synchronisation - coordination amongst threads
+  - Mutual exclusion - ensuring only one thread can do a particular thing at a time
+    - Type of synchronisation
+  - Critical section - code exactly one thread can execute at once
+    - Result of mutex
+  - Lock - an object only one thread can hold at a time
+    - Provides mutual exclusion
+- C++ has a standard mutex primitive, it has `acquire()` and `release()` atomic operations - `acquire()` will block until the mutex is free
+- Locks are implemented based on the C++ RAII paradigm; constructors acquire the mutex and desctructors release
+
+#### `std::lock_guard`
+- Initialised from a mutex, it will attempt to acquire the mutex in it's constructor, and will automatically release the mutex when it goes out of scope
+
+```cpp
+void safe_increment() {
+    std::lock_guard lock(some_global_mutex);
+    ++some_global;
+} // mutex is automatically released here
+```
+
+- We can use a lock guard in our critical section:
+
+```cpp
+// ...
+if (sqr(x) + sqr(y) <= 1.0) {
+    std::unique_lock l(mtx);
+    ++nc;
+}
+// ...
+```
+
+___
+
+- This implementation still is slow though, in fact slower than sequential - this is because execution is basically sequentialised by using this lock; it is a synchronisation point that really isn't necessary
+  - The amount of code we are protecting here is so small that the overhead of the mutex just blows up the computation time
+
+### Atomic
+- We can use an `std::atomic<int>` for `nc` here, this will ensure operations are threadsafe but not needing a lock
+- Now we have some speedup but we still run into false sharing issues, we break the memory heirarchy and so don't actually get that much speedup
+
+### Parallelised Reduction Approach
+- To get our promised speedup we can use a reduction (+) which will maintain it's own local counter for each thread, which isn't shared, then will accumulate the result at the end
+
+```cpp
+// ...
+hpx::experimental::reduction_plus(nc), 
+[&](int n, int& nc_local) {
+    double x = get_random_number();
+    double y = get_random_number();
+    if (sqr(x) + sqr(y) <= 1.0) nc_local++;
+}
+// ...
+```
+
+- `nc_local` must be a reference since it is created as part of the algorithm body and so we want our lambda to increment that variable, not a newly created one (since the algorithm won't be able to see this and won't be able to accumulate it)
+- Finally we get the proper speedup we were requiring
