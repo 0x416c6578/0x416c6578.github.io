@@ -19,6 +19,7 @@ I have interests in the Go programming language, algorithms, embedded / hardware
 See my work on [Github](https://github.com/0x416c6578)
 
 ### Technical
+- [Java == Haskell?? - Messing with ADTs in a Scanner](posts/019-Java-ADTs-In-Scanner.md) (**28/02/2026**)
 - [How I Use Obsidian for Taking Notes and Planning my Day](posts/018-How-I-Use-Obsidian.md) (**19/09/25**)
 - [Go 1.22 Loop Semantics Change Note](posts/017-Go-For-Loop-Caveat.md) (**12/08/25**)
 - [Kia Rio Headunit Passcode Reverse Engineering](posts/015-Kia-Headunit-RE.md) (**19/07/24**)
