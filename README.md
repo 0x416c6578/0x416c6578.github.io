@@ -1,27 +1,33 @@
-Hi! I'm Alex - sometimes going by the memorable name of `0x416c6578` online. I'm a (predominantly backend) software engineer currently working in finance, specifically payments (Open Banking).
+Hi 👋! I'm Alex - sometimes going by the memorable name of `0x416c6578` online. I'm a backend software engineer working in financial technology (specifically Open Banking payments).
 
 I have interests in the Go programming language, algorithms, embedded / hardware hacking and in my free time I like to play board games, bouldering, running and badminton.
 
-**Everything on this blog and my website is 100% AI free, whilst I appreciate the power and utility of these tools, I like to spend my free time on learning that *challenges* and expands my horizons.**
+**In general, the content on this website and my Github page is created without the aid of LLMs. Whilst I appreciate the power of these tools for generating code - and I do absolutely use them as a learning aid - I believe it a better use of my free time to truly understanding the things I am working on.**
 
 *As our island of knowledge grows, so does the shore of our ignorance.* - John Archibald Wheeler
 
-## Learning
-- [My Education](other/education.md)
+## Current Work
+- See my work on [Github](https://github.com/0x416c6578)
 
-### Current Interests
+___
+
 - [Learning the Go Programming Language](notes/go.md)
-  - [Matt Holiday Go Tutorial (YouTube)](notes/go-class/README.md) (complete)
-- [CSC4700 - Parallel C++ for Scientific Applications](notes/csc4700/README.md) (in progress)
-- [Crafting Interpreters](notes/crafting-interpreters/README.md) (in progress)
+  - [Matt Holiday Go Tutorial (YouTube)](notes/go-class/README.md) (**complete**)
+- [CSC4700 - Parallel C++ for Scientific Applications](notes/csc4700/README.md) (**in progress**)
+- [Crafting Interpreters](notes/crafting-interpreters/README.md) (**in progress**)
 
-## Writing / Work
-See my work on [Github](https://github.com/0x416c6578)
+___
+
+- [My Formal Education](other/education.md)
+
+## Blog Posts
 
 ### Technical
-- [Java == Haskell?? - Messing with ADTs in a Scanner](posts/019-Java-ADTs-In-Scanner.md) (**28/02/2026**)
+<!--- [My Thoughts on LLMs](posts/020-llms.md) (**03/03/2026**)-->
+- [Algebraic Data Types in Java](posts/019-Java-ADTs-In-Scanner.md) (**28/02/2026**)
 - [How I Use Obsidian for Taking Notes and Planning my Day](posts/018-How-I-Use-Obsidian.md) (**19/09/25**)
 - [Go 1.22 Loop Semantics Change Note](posts/017-Go-For-Loop-Caveat.md) (**12/08/25**)
+- [Three Peaks Challenge](posts/016-Three-Peaks.md) (**24/06/25**)
 - [Kia Rio Headunit Passcode Reverse Engineering](posts/015-Kia-Headunit-RE.md) (**19/07/24**)
 - [LineageOS Hosts File Editing Without Root](posts/013-Lineageos-Hosts.md) (**08/10/23**)
 - [Messing with the LDS-006 Laser Assembly](posts/011-Attempts-Serial-Stuff.md) (**06/10/21**)
@@ -36,7 +42,6 @@ See my work on [Github](https://github.com/0x416c6578)
 - [A Deep Dive into LVGL Fonts](posts/001-LVGL-fonts.md) (**25/07/20**)
 
 ### Other
-- [Three Peaks Challenge 2025](posts/016-Three-Peaks.md) (**24/06/25**)
 - [SAP-1 8 Bit CPU](sap-1/overview.md)
 - [LDS-006 LIDAR Research and Experiments](lds-006/overview.md)
 - [P8 Smartwatch Firmware](p8-firmware/p8-firmware.md)
