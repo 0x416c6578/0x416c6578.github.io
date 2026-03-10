@@ -58,3 +58,49 @@ double fixed_point(double f(double), int max_it, double init, double epsilon = 1
 
 - We introduce a new parameter `epsilon` which measures the difference between the last and current iteration, breaking when this gets small enough
 - C++ has default arguments!
+- If we want to get more accuracy in our calculation, we can't rely on `double`, hence there are libraries like Boost that offer replacement types with higher accuracy, e.g. `boost::multiprecision::cpp_bin_float_100`
+  - This requires a template function
+
+### Template Functions
+- Template classes were discussed in the previous lecture, now we have templated (generic) functions
+
+```cpp
+template <typename Float>
+Float fixed_point(Float f(Float), int max_it, Float init, Float epsilon = 1e-10) {
+    Float x = init;
+    for (int i = 0; i < max_it; i++) {
+        Float x1 = f(x);
+        if (fabs(x1-x) < epsilon) break;
+        x = x1; 
+    }
+    return x;
+}
+```
+
+- This uses a generic type variable Float
+
+```cpp
+template <typename Data>
+std::pair<Data, int> fixed_point(Data f(Data), bool cond(Data, Data), int n, Data init) {
+    Data x = init;
+    for (int i = 0; i < n; i++) {
+        Data x1 = f(x);
+        if (cond(x, x1)) return {x1, i}; // we also generalise the break condition for flexibility
+        x1 = x;
+    }
+    return {x, n};
+}
+
+// example of using this final fixed point function
+using float_type = double;
+fixed_point(
+    [](float_type x) { return cbrt(sin(x)); },
+    [](float_type prev, float_type curr) { return fabs(curr - prev) < 1e-10; },
+    1000,
+    float_type(1.0)
+)
+```
+
+- We can improve further by generalising the convergence condition and returning the number of iterations run
+
+### Finding Square Roots
