@@ -104,3 +104,19 @@ fixed_point(
 - We can improve further by generalising the convergence condition and returning the number of iterations run
 
 ### Finding Square Roots
+- The square root of a number `a` can be found by iteratively averaging the current value and `a/current val`; `0.5(xn+a/xn)`
+- When `xn=a^0.5`, we have `0.5(a^0.5+a/a^0.5)` = `0.5(2a^0.5)` = `a^0.5` = `sqrt(a)`
+- This can be calculated using the fixed point algorithm
+
+```cpp
+template <typename Float>
+
+Float sqrt(Float a, int n, Float init) {
+    return fixed_point([a](Float x) { return average(x,a/x); }, n, init);
+}
+```
+
+### Other Methods for Finding Roots
+- There are also some other methods for finding roots of equations other than the iterative approach outlined above
+- These are:
+  - Newton Rhapson
