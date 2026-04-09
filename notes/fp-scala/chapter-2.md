@@ -36,4 +36,60 @@ def factorial(n: Int): Int =
 - Above is a tail recursive factorial implementation; since there is no additional work to do after the recursive call, this can be optimised into a simple loop
   - More formally, a call is said to be in tail position if the caller does nothing other than return the value of the recursive call
 - We can use `@annotation.tailrec` to verify that a recursive function is eliminated to a loop
-- 
+
+```scala
+def fib(n: Int): Int =
+  if n == 0 then return 0
+  if n == 1 then return 1
+  
+  @tailrec
+  def go(n: Int, prev: Int, curr: Int): Int =
+    if n == 2 then prev + curr
+    else go(n - 1, curr, prev + curr)
+
+  go(n, 0, 1)
+```
+
+- The above code is a tail recursive implementation of the nth fibonacci number
+
+### Higher Order Functions
+- Functions in Scala are properly first class (unlike Java)
+
+```scala
+def formatResult(name: String, n: Int, f: Int => Int) =
+  val msg = "The %s of %d is %d."
+  msg.format(name, n, f(n))
+```
+
+- Here we see the syntax
+
+### Polymorphic Functions
+```scala
+def findFirst[A](as: Array[A], p: A => Boolean): Int =
+  @tailrec
+  def loop(n: Int): Int =
+    if n >= as.length then -1
+    else if p(as(n)) then n
+    else loop(n+1)
+```
+
+- The above function is polymorphic; generic over any type A with a predicate p used to determine which element to search for
+- The type parameters introduce type variables that we can reference in the rest of the function signature
+
+### Anonymous Functions (Lambdas, Function Literals)
+- When using higher order functions, function literals are often used
+
+```scala
+findFirst(
+  Array(7,9,13),
+  (x: Int): Boolean => x == 9 // the : Boolean here is optional - Scala can infer this
+)
+```
+
+- Also see the array literal syntax used here
+- When the type of the function’s inputs can be inferred, the type annotations on the function’s arguments may be omitted
+  - For example, `(x,y) => x < y`
+
+```scala
+
+```

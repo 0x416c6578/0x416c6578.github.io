@@ -1,2 +1,4 @@
 # Functional Programming in Scala
 - Various notes through working through "Functional Programming in Scala" (the red book)
+- [Chapter 1](./chapter-1.md)
+- [Chapter 2](./chapter-2.md)
