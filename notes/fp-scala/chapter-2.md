@@ -91,5 +91,23 @@ findFirst(
   - For example, `(x,y) => x < y`
 
 ```scala
+def isSorted[A](as: Array[A], gt: (A, A) => Boolean): Boolean = {
+  @tailrec
+  def go(i: Int): Boolean =
+    if i >= as.length - 1 then true
+    else if gt(as(i), as(i + 1)) then false
+    else go(i + 1)
 
+  if as.length <= 1 then true else go(0)
+}
+
+println(isSorted(Array(1,2,3), _ > _))
+```
+
+- Above is a generic definition of isSorted that recursively loops over an array and checks whether it is sorted
+- There is interesting syntactic sugar where something like `_ * _` translates to `(a, b) => a * b`
+
+```scala
+def partial1[A,B,C](a: A, f: (A,B) => C): B => C = 
+  (b: B) => f(a, b)
 ```
