@@ -48,6 +48,14 @@ def fib(n: Int): Int =
     else go(n - 1, curr, prev + curr)
 
   go(n, 0, 1)
+
+// book implementation is simpler: 
+def fib(n: Int): Int =
+  @tailrec
+  def go(n: Int, current: Int, next: Int): Int =
+    if n <= 0 then current
+    else go(n - 1, next, current + next)
+  go(n, 0, 1)
 ```
 
 - The above code is a tail recursive implementation of the nth fibonacci number
@@ -110,4 +118,25 @@ println(isSorted(Array(1,2,3), _ > _))
 ```scala
 def partial1[A,B,C](a: A, f: (A,B) => C): B => C = 
   (b: B) => f(a, b)
+
+def curry[A, B, C](f: (A, B) => C): A => (B => C) =
+  (a: A) => (b: B) => f(a,b)
+
+// => is right associative so A=>B=>C is equivalent to A=>(B=>C)
+def uncurry[A, B, C](f: A => B => C): (A, B) => C =
+  (a: A, b: B) => f(a)(b)
 ```
+
+- Above are various function definitions of partial application, currying and uncurrying
+
+```scala
+def compose[A, B, C](f: B => C, g: A => B): A => C = 
+  (a: A) => f(g(a))
+```
+
+- Above is the definition for compose; this is part of the standard library; `f compose g`
+  - There is also `andThen` where `f andThen g` is `g compose f`
+
+### Summary
+- Scala is mixed paradigm; combining functional and object-oriented
+- 
