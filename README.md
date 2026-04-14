@@ -2,28 +2,17 @@ Hi 👋! I'm Alex - sometimes going by the memorable name of `0x416c6578` online
 
 I am currently interested in:
 - Scala
-- Go
-
-___
-
-**In general, the content on this website and my Github page is created without the aid of LLMs. Whilst I appreciate the power of these tools for generating code - and I do absolutely use them as a learning aid - I believe it a better use of my free time to truly understanding the things I am working on.**
-
-*As our island of knowledge grows, so does the shore of our ignorance.* - John Archibald Wheeler
+- Golang
 
 ## Work
-- See my stuff on [Github](https://github.com/0x416c6578)
+See my [Github](https://github.com/0x416c6578), and read about [my education](other/education.md).
 
-___
-
+### Current Learning
+- [Functional Programming in Scala (The Red Book)](notes/fp-scala/README.md) (**in progress**)
 - [Learning the Go Programming Language](notes/go.md)
   - [Matt Holiday Go Tutorial (YouTube)](notes/go-class/README.md) (**complete**)
-- [Functional Programming in Scala (The Red Book)](notes/fp-scala/README.md) (**in progress**)
 - [Crafting Interpreters](notes/crafting-interpreters/README.md) (**in progress**)
-- [CSC4700 - Parallel C++ for Scientific Applications](notes/csc4700/README.md) (**on hold - lower priority**)
-
-___
-
-- [My Formal Education](other/education.md)
+<!-- - [CSC4700 - Parallel C++ for Scientific Applications](notes/csc4700/README.md) (**on hold - lower priority**) -->
 
 ## Blog Posts
 ### Technical
@@ -51,3 +40,11 @@ ___
 - [P8 Smartwatch Firmware](p8-firmware/p8-firmware.md)
 - [Pro Git Book Notes](notes/git-book.md)
 - [Other Stuff](random-projects/readme.md)
+
+___
+
+## LLMs
+
+**In general, the content on this website and my Github page is created without the aid of LLMs. Whilst I appreciate the power of these tools for prototyping and building - and I do absolutely use them as a learning aid - I prefer to spend my free time learning about what I'm interested in rather than outsourcing my thinking to an LLM.**
+
+*As our island of knowledge grows, so does the shore of our ignorance.* - John Archibald Wheeler
