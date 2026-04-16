@@ -101,3 +101,9 @@ def foldRight[A, B](as: List[A], acc: B, f: (A, B) => B): B =
 ```
 
 - And so `sum` would be `foldRight(ns, 0, _ + _)` and `product` would be `foldRight(ns, 1.0, _ * _)`
+- We can see how `foldRight` is it replaces the `Nil` and `Cons` in `List` with `acc` and `f`
+  - Where `Cons(1, Cons(2, Nil))` => `f(1, f(2, acc))`
+  - We can look at this as an identity
+- `foldRight` must traverse all the way to the end of the list before it can collapsing it; it's why it's called `foldRight` since it begins at the rightmost end of the list and works back to the start
+  - Hence we can't short circuit something like `product`
+- 

@@ -8,10 +8,10 @@ I am currently interested in:
 See my [Github](https://github.com/0x416c6578), and read about [my education](other/education.md).
 
 ### Current Learning
-- [Functional Programming in Scala (The Red Book)](notes/fp-scala/README.md) (**in progress**)
+- [*Functional Programming in Scala* (The Red Book)](notes/fp-scala/README.md) (**in progress**)
 - [Learning the Go Programming Language](notes/go.md)
   - [Matt Holiday Go Tutorial (YouTube)](notes/go-class/README.md) (**complete**)
-- [Crafting Interpreters](notes/crafting-interpreters/README.md) (**in progress**)
+- [*Crafting Interpreters*](notes/crafting-interpreters/README.md) (**in progress**)
 <!-- - [CSC4700 - Parallel C++ for Scientific Applications](notes/csc4700/README.md) (**on hold - lower priority**) -->
 
 ## Blog Posts
@@ -40,8 +40,6 @@ See my [Github](https://github.com/0x416c6578), and read about [my education](ot
 - [P8 Smartwatch Firmware](p8-firmware/p8-firmware.md)
 - [Pro Git Book Notes](notes/git-book.md)
 - [Other Stuff](random-projects/readme.md)
-
-___
 
 ## LLMs
 
