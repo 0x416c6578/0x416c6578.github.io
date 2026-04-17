@@ -106,4 +106,16 @@ def foldRight[A, B](as: List[A], acc: B, f: (A, B) => B): B =
   - We can look at this as an identity
 - `foldRight` must traverse all the way to the end of the list before it can collapsing it; it's why it's called `foldRight` since it begins at the rightmost end of the list and works back to the start
   - Hence we can't short circuit something like `product`
-- 
+
+### Exercises and Notes From These
+```scala
+// length of a list is pretty trivial
+def length[A](as: MyList[A]) = foldRight(as, 0, (_, acc) => acc + 1)
+
+// foldLeft can be tail recursive
+@tailrec
+def foldLeft[A, B](as: MyList[A], acc: B, f: (B, A) => B): B = as match {
+  case Nil => acc
+  case Cons(a, as) => foldLeft(as, f(acc, a), f)
+}
+```
