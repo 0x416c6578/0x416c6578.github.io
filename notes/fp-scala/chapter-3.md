@@ -118,4 +118,48 @@ def foldLeft[A, B](as: MyList[A], acc: B, f: (B, A) => B): B = as match {
   case Nil => acc
   case Cons(a, as) => foldLeft(as, f(acc, a), f)
 }
+
+def sum(xs: MyList[Int]) = foldLeft(xs, 0, _+_)
+def product(xs: MyList[Int]) = foldLeft(xs, 1.0, _*_)
+
+// we can define a reversal by foldLeft with Cons, since we work from the left hand side we can build up the
+// list in reverse order
+def reverse[A](xs: MyList[A]) = foldLeft(xs, Nil, (xs: MyList[A], x: A) => Cons(x, xs))
+
+// we can write foldRight in terms of foldLeft by reversing the list first
+def foldRight'[A, B](as: List[A], acc: B, f: (A, B) => B): B = foldLeft(reverse(as), acc, (b, a) => f(a, b))
 ```
+
+### Intuition of FoldLeft and FoldRight
+- Left and right folds are a fundamental idea in functional programming
+- Left fold intuitively works from the left, since it immediately calls `f` on every recurse
+- Right fold intuitively works from the right, since it has to unroll on the whole list before calling `f`
+
+### Right Fold via Left Fold -> Uh Oh
+- Although we can define foldRight in terms of foldLeft using reversal, this is a bit of a hack
+- There is another way, slightly trickier but quite elegant
+- The accumulator is now of type `B->B` rather than just `B`, and looking at foldLeft we know the combining function must be of type `(B->B, A) -> B->B`
+- Now we can introduce a lambda on the RHS, leaving us with the signature `(g: B=>B, a: A) => (b: B) => ???` where `???` is of type `B`
+- And we know we have an `a:A`, a `b:B`, a function `g: B=>B` and a function `f: (A,B)=>B`, and it falls out of this that we can just apply `g(f(a,b))` to get our type `B`
+
+```scala
+// so we now have this abomination:
+def foldRight'[A, B](as: List[A], acc: B, f: (A, B) => B): B =
+  foldLeft(as, (b: B) => b, (g, a) => b => g(f(a, b)))(acc)
+```
+
+- Everything before `(acc)` gives us a function of type `B=>B`, which we apply to `acc` to get our final `B`
+- This is intuitively not stack safe since function composition is stack safe, our accumulator grows by one anonymous function each call, which is not stack safe
+- The inverse can be applied to define right fold via left fold
+
+### More Exercises
+```scala
+def append[A](a1: MyList[A], a2: MyList[A]): MyList[A] =
+  foldRight(a1, a2, Cons(_, _))
+
+// we can just use our append function to concatenate a list of lists together
+def concat[A](as: MyList[MyList[A]]): MyList[A] =
+  foldRight(as, Nil, append)
+```
+
+### Other Functions on Lists
