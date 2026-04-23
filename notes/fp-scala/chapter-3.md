@@ -181,4 +181,60 @@ def filter[A](as: MyList[A], f: A => Boolean): MyList[A] =
 // we can then define flatMap by calling our expanding function `f` on each element and appending the resulting list to the accumulator
 def flatMap[A, B](as: MyList[A], f: A => MyList[B]): MyList[B] =
   foldRight(as, Nil, (a, acc) => append(f(a), acc))
+
+// using flatMap to implement filter
+def filterPrime[A](as: MyList[A], f: A => Boolean): MyList[A] =
+  flatMap(as, a => if f(a) then MyList(a) else Nil)
+
+def addLists(xs: MyList[Int], ys: MyList[Int]): MyList[Int] = (xs, ys) match {
+  case (xs, Nil) => Nil
+  case (Nil, ys) => Nil
+  case (Cons(x, xs), Cons(y, ys)) => Cons(x + y, addLists(xs, ys))
+}
+
+// we can generalise addLists to take an arbitrary function
+def combine[A, B, C](as: MyList[A], bs: MyList[B], f: (a: A, b: B) => C): MyList[C] = (as, bs) match {
+  case (as, Nil) => Nil
+  case (Nil, bs) => Nil
+  case (Cons(a, as), Cons(b, bs)) => Cons(f(a, b), combine(as, bs, f))
+}
 ```
+
+- The `combine` function above is normally called `zipWith`
+- It currently isn't tail recursive but we can make it so:
+
+```scala
+// we build an accumulator up in a tail recursive fashion 
+def zipWithTailRec[A, B, C](a: MyList[A], b: MyList[B], f: (A, B) => C): MyList[C] =
+  @tailrec
+  def loop(a: MyList[A], b: MyList[B], acc: MyList[C]): MyList[C] =
+    (a, b) match
+      case (Nil, _) => acc
+      case (_, Nil) => acc
+      case (Cons(h1, t1), Cons(h2, t2)) => loop(t1, t2, Cons(f(h1, h2), acc))
+  reverse(loop(a, b, Nil))
+```
+
+- The reverse is needed because the accumulator fills up backwards
+
+### Standard Library `List`
+- There are many useful methods defined on `List`, for example scans `List(1,2,3).scanLeft(0)((acc, a) => a + acc)`
+
+```scala
+@tailrec
+def hasSubsequence[A](sup: MyList[A], sub: MyList[A]): Boolean =
+  // we define a helper function to determine whether a list starts with a given prefix
+  @tailrec
+  def startsWith(l: MyList[A], prefix: MyList[A]): Boolean = (l, prefix) match
+    case (_, Nil) => true
+    case (Cons(h, t), Cons(h2, t2)) if h == h2 => startsWith(t, t2)
+    case _ => false
+
+  // then we just wander down the sup list until we hit various conditions (startsWith is true, Nil, otherwise check for tail subsequence)
+  sup match
+    case Nil => sub == Nil
+    case _ if startsWith(sup, sub) => true // guard condition
+    case Cons(h, t) => hasSubsequence(t, sub)
+```
+
+### ADTs and Trees
