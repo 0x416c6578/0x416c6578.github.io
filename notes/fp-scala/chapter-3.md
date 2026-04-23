@@ -163,3 +163,22 @@ def concat[A](as: MyList[MyList[A]]): MyList[A] =
 ```
 
 ### Other Functions on Lists
+```scala
+def addOne(xs: MyList[Int]): MyList[Int] =
+  foldRight(xs, Nil: MyList[Int], (i, acc) => Cons(i + 1, acc))
+
+def convertToString(ds: MyList[Double]): MyList[String] =
+  foldRight(xs, Nil: MyList[String], (d, acc) => Cons(d.toString, acc))
+
+// we can generalise the logic in the two functions above into `map`
+def map[A, B](as: MyList[A], f: A => B): MyList[B] =
+  foldRight(as, Nil, (a, acc) => Cons(f(a), acc))
+
+// we can define filter similarly to map except we drop the element if the predicate doesn't match
+def filter[A](as: MyList[A], f: A => Boolean): MyList[A] =
+  foldRight(as, Nil: MyList[A], (a, acc) => if f(a) then Cons(a, acc) else acc)
+
+// we can then define flatMap by calling our expanding function `f` on each element and appending the resulting list to the accumulator
+def flatMap[A, B](as: MyList[A], f: A => MyList[B]): MyList[B] =
+  foldRight(as, Nil, (a, acc) => append(f(a), acc))
+```
