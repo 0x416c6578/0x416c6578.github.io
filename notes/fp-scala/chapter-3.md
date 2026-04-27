@@ -238,3 +238,42 @@ def hasSubsequence[A](sup: MyList[A], sub: MyList[A]): Boolean =
 ```
 
 ### ADTs and Trees
+- Algebraic data types are defined by one or more data constructors - each data type is the _sum_ (union) of it's data constructors, and each data constructor is the _product_ of it's arguments
+  - The cardinality of a data constructor (e.g. `Square int int`) is `|int|*|int|`, and the cardinality of the data type `Shape = Square int int | Circle radius` is `|Shape|+|Circle|`
+- Tuples in Scala are given some syntactic sugar
+  - Construction via `(a,b)`
+  - Selection using `t(1)`
+  - Destruction / pattern matching via `t match (a,b) => a`
+
+#### Binary Tree
+- We can define a simple binary tree data structure using case classes:
+
+```scala
+enum Tree[+A]:
+  case Leaf(value: A)
+  case Branch(left: Tree[A], right: Tree[A])
+```
+
+- We can define the method size on `Tree` to count the number of nodes (branch and leaf nodes)
+
+```scala
+def size: Int = this match {
+  case Leaf(_) => 1
+  case Branch(l, r) => 1 + l.size + r.size
+}
+```
+
+#### Extension Methods
+- Say we want to define a method to find the first positive value in a `Tree[Int]`, we can't define this as a method on `Tree[A]`
+- Instead we can define an extension method on `Tree[Int]`
+
+```scala
+extension (t: Tree[Int]) def firstPositive: Int = t match
+  case Leaf(i) => i
+  case Branch(l,r) =>
+    val lpos = l.firstPositive
+    if lpos > 0 then lpos else r.firstPositive
+```
+
+- This works like a method (where `t` is equivalent to `this`), however we can define it on the non parameterised type `Tree[Int]`, and it will only be available for trees of that type
+- Extension methods should be defined int he companion object for `Tree`, there are other places it can be stored but this is the most common
