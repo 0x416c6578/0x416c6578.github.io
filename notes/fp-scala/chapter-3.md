@@ -277,3 +277,26 @@ extension (t: Tree[Int]) def firstPositive: Int = t match
 
 - This works like a method (where `t` is equivalent to `this`), however we can define it on the non parameterised type `Tree[Int]`, and it will only be available for trees of that type
 - Extension methods should be defined int he companion object for `Tree`, there are other places it can be stored but this is the most common
+
+### Tree Functions
+```scala
+def fold[A, B](t: Tree[A], acc: B, f: (A, B) => B): B = t match {
+  case Leaf(v) => f(v, acc)
+  case Tree.Branch(l, r) => ???
+}
+
+def map[A, B](f: A => B, t: Tree[A]): Tree[B] = t match {
+  case Leaf(x) => Leaf(f(x))
+  case Branch(l, r) => Branch(map(f, l), map(f, r))
+}
+
+def depth[A](t: Tree[A]): Int = t match {
+  case Leaf(v) => 1
+  case Branch(l, r) => 1 + depth(l).max(depth(r))
+}
+
+def maximum(t: Tree[Int]): Int = t match {
+  case Leaf(v) => v
+  case Branch(l, r) => maximum(l).max(maximum(r))
+}
+```
