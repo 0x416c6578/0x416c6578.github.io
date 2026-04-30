@@ -278,16 +278,11 @@ extension (t: Tree[Int]) def firstPositive: Int = t match
 - This works like a method (where `t` is equivalent to `this`), however we can define it on the non parameterised type `Tree[Int]`, and it will only be available for trees of that type
 - Extension methods should be defined int he companion object for `Tree`, there are other places it can be stored but this is the most common
 
-### Tree Functions
+### Tree Functions Exercises
 ```scala
-def fold[A, B](t: Tree[A], acc: B, f: (A, B) => B): B = t match {
-  case Leaf(v) => f(v, acc)
-  case Tree.Branch(l, r) => ???
-}
-
-def map[A, B](f: A => B, t: Tree[A]): Tree[B] = t match {
-  case Leaf(x) => Leaf(f(x))
-  case Branch(l, r) => Branch(map(f, l), map(f, r))
+def maximum(t: Tree[Int]): Int = t match {
+  case Leaf(v) => v
+  case Branch(l, r) => maximum(l).max(maximum(r))
 }
 
 def depth[A](t: Tree[A]): Int = t match {
@@ -295,8 +290,48 @@ def depth[A](t: Tree[A]): Int = t match {
   case Branch(l, r) => 1 + depth(l).max(depth(r))
 }
 
-def maximum(t: Tree[Int]): Int = t match {
-  case Leaf(v) => v
-  case Branch(l, r) => maximum(l).max(maximum(r))
+def map[A, B](f: A => B, t: Tree[A]): Tree[B] = t match {
+  case Leaf(x) => Leaf(f(x))
+  case Branch(l, r) => Branch(map(f, l), map(f, r))
 }
+
+// we can define a fold algorithm that generalises the logic in the above functions
+def fold[A, B](t: Tree[A], f: A => B, g: (B, B) => B): B = t match {
+  case Leaf(v) => f(v)
+  case Branch(l, r) => g(fold(l, f, g), fold(r, f, g))
+}
+
+def foldSize[A](t: Tree[A]): Int = fold(t, _ => 1, 1 + _ + _)
+
+def foldMaximum(t: Tree[Int]): Int = fold(t, a => a, _.max(_))
+
+def foldDepth[A](t: Tree[A]): Int = fold(t, _ => 1, 1 + _.max(_))
+
+def foldMap[A, B](t: Tree[A], f: A => B): Tree[B] = 
+  fold(t, Leaf(f(_)), Branch(_, _))
 ```
+
+- The above could all equally be defined as methods, should one desire
+
+#### Aside - Enums vs Sealed Traits
+- Enums of case classes are a Scala 3 thing, and make writing ADTs a bit less verbose
+- Traits define abstract interfaces of common methods (they can't be instantiated directly, rather are introduced via subtypes)
+- Defining an ADT as a sealed trait involves enumerating data constructors as case objects defined in the companion object of the trait
+  - Remember a case class in Scala is just like a data class in Kotlin
+  - `sealed` is the same as Java - all subclasses must be defined in teh same source file as the defining type
+
+```scala
+// we can define our List as a sealed trait rather than an enum:
+sealed trait List[+A]:
+  import List.{Cons, Nil}
+
+  def size: Int = this match
+    case Cons(_, t1) => 1 + t1.size
+    case Nil => 0
+
+object List:
+  case class Cons[+A](head: A, tail: List[A]) extends List[A]
+  case object Nil extends List[Nothing]
+```
+
+### Conclusion
