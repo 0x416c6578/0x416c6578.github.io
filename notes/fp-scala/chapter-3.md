@@ -333,5 +333,3 @@ object List:
   case class Cons[+A](head: A, tail: List[A]) extends List[A]
   case object Nil extends List[Nothing]
 ```
-
-### Conclusion
