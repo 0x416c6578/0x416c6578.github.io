@@ -47,3 +47,16 @@ enum Option[+A]:
   def getOrElse[B >: A](default: => B): B // get option, or default value (which must be a supertype of A)
   def orElse[B >: A](ob: => Option[B]): Option[B] // get option, or 
 ```
+
+- The option type is covariant in `A`, this means that for some `B` which is a subtype of `A`, an `Option[B]` is a subtype of `Option[A]`
+  - This is because the `Option` can be seen as a _producer_ of values of type `A`
+  - If we had something that accepts `Option[Animal]`, we can safely pass in an `Option[Dog]` because `Dog` is _at least_ an `Animal` (if of course `Dog < Animal`!)
+  - There's no way to accidentally put a non-`Dog` `Animal` into an `Option[Dog]` through type-safe means, so the substitution is sound
+
+#### Aside - By-name Parameters
+- The parameters in `getOrElse` and `orElse` in the `Option` data type above are denoted like `=> B`, this means this is a by-name parameter
+- The Scala compiler will wrap the parameter in a function that is only called when it is needed in the function implementation
+  - Therefore, unlike normal parameters which are eagerly, by-name parameters are evaluated lazily
+- It can be thought of as similar to the supplier function in Java Map's `computeIfAbsent` method, and under the hood works roughly the same way!
+
+#### Aside - More on Variance
