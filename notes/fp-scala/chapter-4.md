@@ -48,11 +48,6 @@ enum Option[+A]:
   def orElse[B >: A](ob: => Option[B]): Option[B] // get option, or 
 ```
 
-- The option type is covariant in `A`, this means that for some `B` which is a subtype of `A`, an `Option[B]` is a subtype of `Option[A]`
-  - This is because the `Option` can be seen as a _producer_ of values of type `A`
-  - If we had something that accepts `Option[Animal]`, we can safely pass in an `Option[Dog]` because `Dog` is _at least_ an `Animal` (if of course `Dog < Animal`!)
-  - There's no way to accidentally put a non-`Dog` `Animal` into an `Option[Dog]` through type-safe means, so the substitution is sound
-
 #### Aside - By-name Parameters
 - The parameters in `getOrElse` and `orElse` in the `Option` data type above are denoted like `=> B`, this means this is a by-name parameter
 - The Scala compiler will wrap the parameter in a function that is only called when it is needed in the function implementation
@@ -60,3 +55,16 @@ enum Option[+A]:
 - It can be thought of as similar to the supplier function in Java Map's `computeIfAbsent` method, and under the hood works roughly the same way!
 
 #### Aside - More on Variance
+- The option type is **covariant** in `A`, this means that for some `B` which is a subtype of `A`, an `Option[B]` is a subtype of `Option[A]`
+  - This is because the `Option` can be seen as a _producer_ of values of type `A`
+  - If we had something that accepts `Option[Animal]`, we can safely pass in an `Option[Dog]` because `Dog` is _at least_ an `Animal` (if of course `Dog < Animal`!)
+  - There's no way to accidentally put a non-`Dog` `Animal` into an `Option[Dog]` through type-safe means, so the substitution is sound
+- In Java variance is done through generic wildcards, with the rule PECS - Producer Extends, Consumer Super
+  - The _PE_ is equivalent to the covariance of `A` in `Option`, since it can be seen as a producer of values of type `A`
+- The flip side is **contravariance** for consumer, a function that accepts a type can also accept any supertype of it
+  - Because it can guarantee that any behaviour it might need of the type exists in the super types as well (at least at the type level)
+  - E.g. `trait SomeFunc[-A, +B]: def apply(a: A): B`
+- And finally there is **invariance** where you can't assume any behaviour
+  - This could be some *mutable* box type with a `var` variable in it
+  - In general immutable data types can be covariant, whereas mutable ones must be invariant
+  - `List` in Scala is covariant on its type since it is immutable
