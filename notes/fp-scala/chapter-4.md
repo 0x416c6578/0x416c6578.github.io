@@ -67,4 +67,34 @@ enum Option[+A]:
 - And finally there is **invariance** where you can't assume any behaviour
   - This could be some *mutable* box type with a `var` variable in it
   - In general immutable data types can be covariant, whereas mutable ones must be invariant
-  - `List` in Scala is covariant on its type since it is immutable
+  - `List` in Scala is covariant on its type since it is immutable (similar to `Option`)
+
+### Implementing the Option Methods
+
+```scala
+enum MyOption[+A]:
+  case Some(get: A)
+  case None
+
+  def map[B](f: A => B): MyOption[B] = this match {
+    case Some(a) => Some(f(a))
+    case None => None
+  }
+
+  def getOrElse[B >: A](default: => B): B = this match {
+    case Some(a) => a
+    case None => default
+  }
+
+  def flatMap[B](f: A => MyOption[B]): MyOption[B] = map(f).getOrElse(None)
+
+  // first map will make Some(Some(a)) | None; then getOrElse will extract some(a) or ob if None
+  def orElse[B >: A](ob: => MyOption[B]): MyOption[B] = map(Some(_)).getOrElse(ob)
+
+  // this could also just be done with a match
+  def filter(f: A => Boolean): MyOption[A] = flatMap(a => if f(a) then Some(a) else None)
+```
+
+- We can think of the map function as transforming the result inside an option if it exists; proceeding a computation on the assumption that the error hasn't occurred
+  - It can defer error handling code to later
+  - `flatMap` is similar except the function used to transform can itself fail
