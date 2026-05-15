@@ -129,3 +129,56 @@ def variance(xs: Seq[Double]): MyOption[Double] =
   - This should **ONLY** be done in the cases where no reasonable program would catch the exception, e.g. if for some callers the exception is actually a recoverable error you should always use values like `Option` or `Either` rather than throwing an exception
 
 ### Option Composition and Lifting
+- Using `Option` might imply it has to be used consistently across an entire codebase (similar to function colouring), but this isn't the case since we can `lift` ordinary functions to become functions that operate on `Option`:
+
+```scala
+def lift[A, B](f: A => B): Option[A] => Option[B] =
+  a => a.map(f)
+
+lift(math.abs) // returns lifted abs function
+```
+
+```scala
+// this could be done with pattern matching but we can map/flatmap for nicer implementation
+def map2[A, B, C](a: MyOption[A], b: MyOption[B])(f: (A, B) => C): MyOption[C] =
+  a.flatMap(_a => b.map(_b => f(_a, _b)))
+```
+
+- Notice the pattern above of calling map then flatmap; we could do map then map and end up with an `Option[Option[C]]` then use `getOrElse`, but this is basically the definition of `flatMap` anyway (`map(g).getOrElse(None)`)
+
+#### Aside on Parameter Lists
+- This function has two parameter lists; `(a: MyOption[A], b: MyOption[B])` and `(f: (A, B) => C)`
+- To call the function, we supply values for each parameter list like `map2(oa, ob)(_ + _)`
+- It is common practice to use two parameter lists when a function takes multiple parameters and the last parameter is a function
+
+```scala
+map2(oa, ob): (a, b) =>
+  a + b
+
+// or 
+
+map2(oa, ob) { (a, b) =>
+  a + b
+  }
+
+// are both valid usages and can only be done with multiple parameter lists
+```
+
+#### Exercise 4.4
+```scala
+def sequence[A](as: MyList[MyOption[A]]): MyOption[MyList[A]] =
+  foldRight(as, Some(Nil), (a, acc) => map2(a, acc)(Cons(_,_)))
+```
+
+- This is the implementation of `sequence` using `foldRight` and `map2`
+
+#### Exercise 4.5
+```scala
+// naive implementation - uses sequence then map which loops over the list twice
+def traverse[A, B](as: MyList[A])(f: A => MyOption[B]): MyOption[MyList[B]] =
+  sequence(map(as, f))
+
+// but we can do better, using a similar strategy as with sequence itself
+def _traverse[A, B](as: MyList[A])(f: A => MyOption[B]): MyOption[MyList[B]] =
+  foldRight(as, Some(Nil), (a: A, acc) => map2(f(a), acc)(Cons(_,_)))
+```
