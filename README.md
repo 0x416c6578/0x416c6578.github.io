@@ -9,10 +9,11 @@ See my [Github](https://github.com/0x416c6578), and read about [my education](ot
 
 ### Current Learning
 - [*Functional Programming in Scala* (The Red Book)](notes/fp-scala/README.md) (**in progress**)
+  - I'm working through this book, writing notes and working through exercises
+  - See [0x416c6578/fp-in-scala-scratchpad](https://github.com/0x416c6578/fp-in-scala-scratchpad) for random scratchpad work based on this book
 - [Learning the Go Programming Language](notes/go.md)
   - [Matt Holiday Go Tutorial (YouTube)](notes/go-class/README.md) (**complete**)
-- [*Crafting Interpreters*](notes/crafting-interpreters/README.md) (**in progress**)
-<!-- - [CSC4700 - Parallel C++ for Scientific Applications](notes/csc4700/README.md) (**on hold - lower priority**) -->
+- [*Crafting Interpreters*](notes/crafting-interpreters/README.md) (**on hold, will continue in Scala when ready**)
 
 ## Blog Posts
 ### Technical
