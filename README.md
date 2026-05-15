@@ -1,19 +1,14 @@
-Hi 👋! I'm Alex - sometimes going by the memorable name of `0x416c6578` online. I'm a backend software engineer working in financial technology (specifically Open Banking payments).
+Hi 👋! I'm Alex - sometimes going by the memorable name of `0x416c6578` online. I'm a backend software engineer working in financial technology (specifically Open Banking payments), where I predominantly work in Java and Kotlin.
 
-I am currently interested in:
-- Scala
-- Golang
-
-## Work
+## Projects and Learning
 See my [Github](https://github.com/0x416c6578), and read about [my education](other/education.md).
 
-### Current Learning
-- [*Functional Programming in Scala* (The Red Book)](notes/fp-scala/README.md) (**in progress**)
-  - I'm working through this book, writing notes and working through exercises
+I'm currently working on building a depth of skills in different programming languages and paradigms
+- _Functional Programming in Scala_ - [book notes here](notes/fp-scala/README.md) (**in progress**)
   - See [0x416c6578/fp-in-scala-scratchpad](https://github.com/0x416c6578/fp-in-scala-scratchpad) for random scratchpad work based on this book
-- [Learning the Go Programming Language](notes/go.md)
-  - [Matt Holiday Go Tutorial (YouTube)](notes/go-class/README.md) (**complete**)
-- [*Crafting Interpreters*](notes/crafting-interpreters/README.md) (**on hold, will continue in Scala when ready**)
+- Golang - [main page here](notes/go.md)
+  - Most significantly, Matt Holiday's Golang tutorial on YouTube - [video notes here](notes/go-class/README.md) (**complete**)
+- _Crafting Interpreters_ - [old jlox implementation here](notes/crafting-interpreters/README.md) (**on hold, will continue in Scala when ready**)
 
 ## Blog Posts
 ### Technical
@@ -44,6 +39,6 @@ See my [Github](https://github.com/0x416c6578), and read about [my education](ot
 
 ## LLMs
 
-**In general, the content on this website and my Github page is created without the aid of LLMs. Whilst I appreciate the power of these tools for prototyping and building - and I do absolutely use them as a learning aid - I prefer to spend my free time learning about what I'm interested in rather than outsourcing my thinking to an LLM.**
+**In general, the content on this website and my Github page is written without the aid of LLMs. Whilst I appreciate the power of these tools for prototyping and building - and I do absolutely use them as a learning aid - I prefer to spend my free time learning about what I'm interested in rather than outsourcing my thinking to an LLM.**
 
 *As our island of knowledge grows, so does the shore of our ignorance.* - John Archibald Wheeler
