@@ -97,4 +97,35 @@ enum MyOption[+A]:
 
 - We can think of the map function as transforming the result inside an option if it exists; proceeding a computation on the assumption that the error hasn't occurred
   - It can defer error handling code to later
-  - `flatMap` is similar except the function used to transform can itself fail
+- `flatMap` is similar except the function used to transform can itself fail
+- E.g:
+
+```scala
+case class Employee(
+  name: String,
+  department: String,
+  manager: Option[Employee])
+def lookupByName(name: String): Option[Employee] = ...
+
+lookupByName("Joe").map(_.department) // will return joe's department if joe is listed as an employee (from lookupByName), else None. Map is used since an employee will always have a department
+
+lookupByName("Joe").flatMap(_.manager) // will return joe's managed if Joe has a manager, else None if Joe is not an employee or doesn't have a manager. FlatMap is used since an employee doesn't always have a manager
+```
+
+#### Exercise
+```scala
+def mean(xs: Seq[Double]): MyOption[Double] =
+  if xs.isEmpty then None
+  else Some(xs.sum / xs.length)
+
+// we use flatmap to short circuit the computation if the mean is None
+def variance(xs: Seq[Double]): MyOption[Double] =
+  val m = mean(xs)
+  m.flatMap(m => mean(xs.map(x => math.pow(x-m, 2))))
+```
+
+- A common pattern is to transform an `Option` using calls to `Map`, `FlatMap` and/or `Filter`, then using `getOrElse` to do error handling at the end
+- Another common idiom is to do `o.getOrElse(throw Exception("Uh oh"))`, to convert the `None` case back to an `Exception`
+  - This should **ONLY** be done in the cases where no reasonable program would catch the exception, e.g. if for some callers the exception is actually a recoverable error you should always use values like `Option` or `Either` rather than throwing an exception
+
+### Option Composition and Lifting
