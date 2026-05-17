@@ -182,3 +182,23 @@ def traverse[A, B](as: MyList[A])(f: A => MyOption[B]): MyOption[MyList[B]] =
 def _traverse[A, B](as: MyList[A])(f: A => MyOption[B]): MyOption[MyList[B]] =
   foldRight(as, Some(Nil), (a: A, acc) => map2(f(a), acc)(Cons(_,_)))
 ```
+
+### For Comprehensions
+- The pattern of lifting functions with `map` and `flatMap` is so common that there is syntactic sugar with the `for` comprehension
+  - This is basically identical to Haskell's `do` notation, although with slightly different syntax
+
+```scala
+def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
+  a.flatMap: aa =>
+    b.map: bb =>
+      f(aa, bb)
+
+// can be converted to:
+def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
+  for
+    aa <- a
+    bb <- b
+  yield f(aa, bb)
+```
+
+- The bindings `<-` are desugared to `flatMap`, except  the final binding and `yield` is converted to a call to `map`
