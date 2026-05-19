@@ -202,3 +202,30 @@ def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] =
 ```
 
 - The bindings `<-` are desugared to `flatMap`, except  the final binding and `yield` is converted to a call to `map`
+- The for comprehension stops the nesting from moving right which is nicer syntactically
+
+### Either
+- The `Either` data type is used to store more information on a failure rather than just `None` that `Option` holds
+
+```scala
+enum Either[+E, +A]:
+  case Left(value: E)
+  case Right(value: A)
+```
+
+- The `Either` data type has two data constructors, `Left` and `Right`
+- The `Left` state represents failure; some error, and the `Right` represents the result of a successful computation
+  - It is a disjoint union; a sum type
+
+```scala
+def safeDiv(x: Int, y: Int): Either[Throwable, Int] =
+  try Right(x / y)
+  catch case NonFatal(t) => Left(t)
+
+// we can extract this logic into a function itself:
+def catchNonFatal(a: => A): Either[Throwable, A] =
+  try Right(a) // uses lazy evaluation; a will not be evaluated as an argument and so the exception will be thrown in this function 
+  catch case NonFatal(t) => Left(t)
+```
+
+- Above is a safe division implementation that catches any non fatal exception and returns it in the error state, should one occur
