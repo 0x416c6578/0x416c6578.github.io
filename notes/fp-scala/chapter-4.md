@@ -232,12 +232,39 @@ def catchNonFatal(a: => A): Either[Throwable, A] =
 
 #### Either Methods (Exercise 4.6)
 ```scala
-enum Either[+E, +A]:
+enum MyEither[+E, +A]:
   case Left(value: E)
   case Right(value: A)
 
-def map[B](f: A => B): Either[E, B]
-def flatMap[EE >: E, B](f: A => Either[EE, B]): Either[EE, B]
-def orElse[EE >: E,B >: A](b: => Either[EE, B]): Either[EE, B]
-def map2[EE >: E, B, C](that: Either[EE, B])(f: (A, B) => C): Either[EE, C]
+  def map[B](f: A => B): MyEither[E, B] = this match {
+    case Right(value) => Right(f(value))
+    case Left(value) => Left(value)
+  }
+
+  def flatMap[EE >: E, B](f: A => MyEither[EE, B]): MyEither[EE, B] = this match {
+    case Left(value) => Left(value)
+    case Right(value) => f(value)
+  }
+
+  def orElse[EE >: E,B >: A](b: => MyEither[EE, B]): MyEither[EE, B] = this match {
+    case Left(_) => b
+    case Right(value) => Right(value)
+  }
+
+  // this could equally be done with a for comprehension
+  def map2[EE >: E, B, C](that: MyEither[EE, B])(f: (A, B) => C): MyEither[EE, C] =
+    this.flatMap(_this => that.map(_that => f(_this, _that)))
 ```
+
+- Either is useful since we get information about what part of the computation failed (should we design our usage to reflect that)
+
+#### Either Sequence and Traverse
+```scala
+def sequence[E, A](as: MyList[MyEither[E, A]]): MyEither[E, MyList[A]] =
+  foldRight(as, MyEither.Right(Nil): MyEither[E, MyList[A]], (a: MyEither[E, A], acc) => a.map2(acc)(Cons(_, _)))
+
+def traverse[E, A, B](as: MyList[A])(f: A => MyEither[E, B]): MyEither[E, MyList[B]] =
+  foldRight(as, MyEither.Right(Nil), (a: A, acc) => f(a).map2(acc)(Cons(_, _)))
+```
+
+- Above is sequence and traverse implemented for `MyEither` - it's similar to the `Option` ones
