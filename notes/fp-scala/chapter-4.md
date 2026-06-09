@@ -264,7 +264,39 @@ def sequence[E, A](as: MyList[MyEither[E, A]]): MyEither[E, MyList[A]] =
   foldRight(as, MyEither.Right(Nil): MyEither[E, MyList[A]], (a: MyEither[E, A], acc) => a.map2(acc)(Cons(_, _)))
 
 def traverse[E, A, B](as: MyList[A])(f: A => MyEither[E, B]): MyEither[E, MyList[B]] =
-  foldRight(as, MyEither.Right(Nil), (a: A, acc) => f(a).map2(acc)(Cons(_, _)))
+  foldRight(as, MyEither.Right(Nil), (a: A, acc: MyEither[E, MyList[B]]) => f(a).map2(acc)(Cons(_, _)))
 ```
 
 - Above is sequence and traverse implemented for `MyEither` - it's similar to the `Option` ones
+
+### Accumulating Errors
+- `map2` cannot accumulate errors if `this` or `that` both have errors
+
+```scala
+MyEither.Left("Uh oh").map2(MyEither.Left("Stinky"))((_,_)) // will return only Left("Uh oh"), ignoring the stinky error
+```
+
+- This is potentially an issue if for example we are validating some fields to construct some sort of composite object from `this` and `that`, we lose important error information coming from the arguments
+- Therefore intuitively we can have the error be a `List[E]` rather than just `E` to model multiple errors
+
+```scala
+def map2Both[E, A, B, C](
+    a: MyEither[E, A],
+    b: MyEither[E, B],
+    f: (A, B) => C): MyEither[MyList[E], C] =
+  (a, b) match {
+    // it's a bit verbose but we handle every possible combination of values and errors:
+    case (MyEither.Right(aa), MyEither.Right(bb)) => MyEither.Right(f(aa, bb))
+    case (MyEither.Left(e), MyEither.Right(_)) => MyEither.Left(MyList(e))
+    case (MyEither.Right(_), MyEither.Left(e)) => MyEither.Left(MyList(e))
+    case (MyEither.Left(e1), MyEither.Left(e2)) => MyEither.Left(MyList(e1, e2))
+  }
+```
+
+- So now we'd get `Left([Uh oh, Stinky])` for our example above, properly encapsulating all errors in the computation
+- However an issue arises when we want to combine multiple calls to `map2Both` -> we will get the `Left` case being a `List[List[E]]` which compounds with more calls ):
+- To remedy this we can assume that the inputs already have `List[E]` on the `Left` meaning that we can just concatenate errors together keeping the resulting list flat:
+
+```scala
+
+```
